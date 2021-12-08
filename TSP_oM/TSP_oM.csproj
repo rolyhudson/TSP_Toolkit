@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Version>5.0.0</Version>
+    <Authors>BHoM</Authors>
+    <Copyright>Copyright © https://github.com/BHoM</Copyright>
+    <RootNamespace>BH.oM.TSP</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>..\Build\</OutputPath>
+  </PropertyGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="xcopy &quot;$(TargetDir)$(TargetFileName)&quot;  &quot;C:\ProgramData\BHoM\Assemblies&quot; /Y" />
+  </Target>
+
+<ItemGroup>
+  <Reference Include="BHoM">
+    <HintPath>C:\ProgramData\BHoM\Assemblies\BHoM.dll</HintPath>
+  </Reference>
+  <Reference Include="Data_oM">
+    <HintPath>C:\ProgramData\BHoM\Assemblies\Data_oM.dll</HintPath>
+  </Reference>
+  <Reference Include="Geometry_Engine">
+    <HintPath>C:\ProgramData\BHoM\Assemblies\Geometry_Engine.dll</HintPath>
+  </Reference>
+  <Reference Include="Geometry_oM">
+    <HintPath>C:\ProgramData\BHoM\Assemblies\Geometry_oM.dll</HintPath>
+  </Reference>
+  <Reference Include="Reflection_Engine">
+    <HintPath>C:\ProgramData\BHoM\Assemblies\Reflection_Engine.dll</HintPath>
+  </Reference>
+  <Reference Include="Reflection_oM">
+    <HintPath>C:\ProgramData\BHoM\Assemblies\Reflection_oM.dll</HintPath>
+  </Reference>
+</ItemGroup>
+</Project>
