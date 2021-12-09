@@ -10,6 +10,8 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <OutputPath>..\Build\</OutputPath>
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
@@ -45,10 +47,5 @@
   <Reference Include="Reflection_oM">
     <HintPath>C:\ProgramData\BHoM\Assemblies\Reflection_oM.dll</HintPath>
   </Reference>
-</ItemGroup>
-
-<ItemGroup>
-  <Folder Include="Compute\" />
-  <Folder Include="Modify\" />
 </ItemGroup>
 </Project>

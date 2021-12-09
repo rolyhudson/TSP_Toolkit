@@ -2,8 +2,7 @@
   "profiles": {
     "TSP_Engine": {
       "commandName": "Executable",
-      "executablePath": "C:\\Program Files\\Rhino 7\\System\\Rhino.exe",
-      "nativeDebugging": true
+      "executablePath": "C:\\Program Files\\Rhino 7\\System\\Rhino.exe"
     }
   }
 }

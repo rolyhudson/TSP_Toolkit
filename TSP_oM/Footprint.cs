@@ -9,11 +9,13 @@ namespace BH.oM.TSP
 {
     public class Footprint : BHoMObject
     {
-        public virtual bool Occupied { get; set; } = false;
-        public virtual int Levels { get; set; } = 0;
-        public List<Footprint> Neighbours { get; set; } = new List<Footprint>();
-
+        public virtual int Levels { get; set; } = 1;
+        public List<Footprint> FourNeighbourhood { get; set; } = new List<Footprint>();
+        public List<Footprint> EightNeighbourhood { get; set; } = new List<Footprint>();
         public Polyline Boundary { get; set; } = new Polyline();
         public virtual Cartesian CoordinateSystem { get; set; } = new Cartesian();
+        public virtual Use Use { get; set; } = Use.Unoccupied;
+
+        public virtual Point Centre { get; set; } = new Point();
     }
 }

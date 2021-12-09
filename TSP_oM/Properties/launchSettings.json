@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "TSP_oM": {
-      "commandName": "Project",
-      "nativeDebugging": true
-    }
-  }
-}

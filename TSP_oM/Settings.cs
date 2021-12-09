@@ -5,7 +5,7 @@ using System.Text;
 
 namespace BH.oM.TSP
 {
-    public class BarSettings : BHoMObject
+    public class Settings : BHoMObject
     {
         public virtual double MinimumUnits { get; set; } = 1;
 
@@ -14,6 +14,10 @@ namespace BH.oM.TSP
         public virtual int MaximumLevel { get; set; } = 10;
 
         public virtual double GapToHeightRatio { get; set; } = 1.0;
+
+        public virtual double MinimumUnitsSpace { get; set; } = 2;
+
+        public virtual int MaximumPlacementAttempts{ get; set; } = 10;
 
     }
 }

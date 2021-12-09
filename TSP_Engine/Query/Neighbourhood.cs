@@ -11,8 +11,7 @@ namespace BH.Engine.TSP
     {
         public static List<Footprint> Neighbourhood(this Footprint footprint, List<Footprint> footprints, int num)
         {
-            List<Footprint> ordered = footprints.OrderBy(p => p.Boundary.Centroid().SquareDistance(footprint.Boundary.Centroid())).ToList();
-            ordered = ordered.Take(num+1).ToList();
+            List<Footprint> ordered = footprints.OrderBy(p => p.Centre.SquareDistance(footprint.Centre)).Take(num + 1).ToList();
             ordered.RemoveAt(0);
             return ordered;
         }

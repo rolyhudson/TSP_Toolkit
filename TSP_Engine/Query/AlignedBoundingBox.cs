@@ -28,7 +28,7 @@ namespace BH.Engine.TSP
                 new Point() { X = boundingBox.Max.X, Y = boundingBox.Min.Y, Z = 0 },
                 boundingBox.Min
             };
-            Polyline boxOutline = Geometry.Create.Polyline(points);
+            Polyline boxOutline = BH.Engine.Geometry.Create.Polyline(points);
 
             //rotate back
             boxOutline = boxOutline.Rotate(boundaryCopy.ControlPoints[0], Vector.ZAxis, -angle);

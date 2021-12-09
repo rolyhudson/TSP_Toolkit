@@ -13,7 +13,7 @@ namespace BH.Engine.TSP
         public static Cartesian GridCartesian(Vector principleDirection, Polyline siteBoundary)
         {
             Polyline box = Query.AlignedBoundingBox(principleDirection, siteBoundary);
-            Cartesian origin = Geometry.Create.CartesianCoordinateSystem(box.ControlPoints[0], box.ControlPoints[1] - box.ControlPoints[0], box.ControlPoints[3] - box.ControlPoints[0]);
+            Cartesian origin = BH.Engine.Geometry.Create.CartesianCoordinateSystem(box.ControlPoints[0], box.ControlPoints[3] - box.ControlPoints[0], box.ControlPoints[1] - box.ControlPoints[0]);
             return origin;
         }
     }
