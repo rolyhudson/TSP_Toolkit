@@ -24,9 +24,9 @@ namespace BH.Engine.TSP
         }
         public static Bar Massing(this Bar bar, Field field, Unit prototypeUnit)
         {
-            foreach (Guid f in bar.Footprints)
+            foreach (Guid f in bar.Cells)
             {
-                var refFootprint = field.Footprints.Find(x => x.BHoM_Guid.Equals(f));
+                var refFootprint = field.Cells.Find(x => x.BHoM_Guid.Equals(f));
                 List<Cartesian> cartesians = new List<Cartesian>();
                 for(int i = 0;i< refFootprint.Levels;i++)
                 {

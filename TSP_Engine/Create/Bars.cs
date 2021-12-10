@@ -19,10 +19,10 @@ namespace BH.Engine.TSP
             int fails = 0;
             while(fails < maxFails)
             {
-                int occupied = fieldCopy.Footprints.FindAll(x => x.Use == Use.Occupied).Count;
-                int open= fieldCopy.Footprints.FindAll(x => x.Use == Use.Open).Count;
+                int occupied = fieldCopy.Cells.FindAll(x => x.Use == Use.Occupied).Count;
+                int open= fieldCopy.Cells.FindAll(x => x.Use == Use.Open).Count;
                 Bar bar = Create.Bar(ref fieldCopy, settings);
-                if (bar.Footprints.Count == 0)
+                if (bar.Cells.Count == 0)
                     fails++;
                 else
                     bars.Add(bar);

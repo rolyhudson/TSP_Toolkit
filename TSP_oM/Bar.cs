@@ -8,6 +8,6 @@ namespace BH.oM.TSP
     public class Bar : BHoMObject
     {
         public virtual List<Unit> Units { get; set; } = new List<Unit>();
-        public virtual List<Guid> Footprints { get; set; } = new List<Guid>();
+        public virtual List<Guid> Cells { get; set; } = new List<Guid>();
     }
 }

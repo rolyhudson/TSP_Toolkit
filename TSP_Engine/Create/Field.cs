@@ -51,15 +51,15 @@ namespace BH.Engine.TSP
                     copy.CoordinateSystem = cartesian.Translate(v);
                     copy.Centre = Geometry.Query.Average(copy.Boundary.ControlPoints);
                     copy.BHoM_Guid = Guid.NewGuid();
-                    field.Footprints.Add(copy);
+                    field.Cells.Add(copy);
                 }
             }
             //check for site containment
-            Parallel.ForEach(field.Footprints, f =>
+            Parallel.ForEach(field.Cells, f =>
             {
                 f.Neighbourhoods(field);
             });
-            foreach (Cell f in field.Footprints)
+            foreach (Cell f in field.Cells)
             {
                 if (!siteBoundary.IIsContaining(f.Boundary))
                     f.Use = Use.OutsideBoundary;

@@ -9,8 +9,8 @@ namespace BH.Engine.TSP
     {
         public static Cell Neighbourhoods(this Cell footprint, Field field)
         {
-            footprint.FourNeighbourhood = footprint.Neighbourhood(field.Footprints, 4);
-            footprint.EightNeighbourhood = footprint.Neighbourhood(field.Footprints, 8);
+            footprint.FourNeighbourhood = footprint.Neighbourhood(field.Cells, 4);
+            footprint.EightNeighbourhood = footprint.Neighbourhood(field.Cells, 8);
             return footprint;
         }
     }

@@ -12,10 +12,10 @@ namespace BH.Engine.TSP
         {
             Statistics statistics = new Statistics();
             double unitArea = prototypeUnit.X * prototypeUnit.Y;
-            statistics.TotalStudyArea = field.Footprints.FindAll(x => x.Use != Use.OutsideBoundary).Count * unitArea;
-            statistics.OpenSpaceArea = field.Footprints.FindAll(x => x.Use == Use.Open).Count * unitArea;
-            statistics.BuiltArea = field.Footprints.FindAll(x => x.Use == Use.Occupied).Count * unitArea;
-            statistics.CirculationSpaceArea = field.Footprints.FindAll(x => x.Use == Use.Circulation).Count * unitArea;
+            statistics.TotalStudyArea = field.Cells.FindAll(x => x.Use != Use.OutsideBoundary).Count * unitArea;
+            statistics.OpenSpaceArea = field.Cells.FindAll(x => x.Use == Use.Open).Count * unitArea;
+            statistics.BuiltArea = field.Cells.FindAll(x => x.Use == Use.Occupied).Count * unitArea;
+            statistics.CirculationSpaceArea = field.Cells.FindAll(x => x.Use == Use.Circulation).Count * unitArea;
             statistics.NumberOfUnits = bars.SelectMany(x => x.Units).Count();
             statistics.FloorArea = statistics.NumberOfUnits * unitArea;
             statistics.PercentBuiltSpace = Math.Round(statistics.BuiltArea / statistics.TotalStudyArea * 100);

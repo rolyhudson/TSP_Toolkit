@@ -27,7 +27,7 @@ namespace BH.Engine.TSP
         {
             List<Cell> aligned = new List<Cell>();
 
-            foreach (Cell n in field.Footprints.FindAll(x => x.Use == use))
+            foreach (Cell n in field.Cells.FindAll(x => x.Use == use))
             {
                 Vector toNeighbour = n.Centre- footprint.Centre;
                 if (Math.Abs(toNeighbour.IsParallel(direction)) == 1)

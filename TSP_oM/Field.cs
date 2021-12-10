@@ -7,6 +7,6 @@ namespace BH.oM.TSP
 {
     public class Field : BHoMObject
     {
-        public virtual List<Cell> Footprints { get; set; } = new List<Cell>();
+        public virtual List<Cell> Cells { get; set; } = new List<Cell>();
     }
 }

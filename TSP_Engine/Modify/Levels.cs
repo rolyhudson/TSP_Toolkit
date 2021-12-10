@@ -12,7 +12,7 @@ namespace BH.Engine.TSP
         public static Field Levels(this Field field, Unit unit, VerticalSettings settings)
         {
             Field fieldcopy = field.ShallowClone();
-            foreach (Cell f in fieldcopy.Footprints.FindAll(x => x.Use == Use.Occupied))
+            foreach (Cell f in fieldcopy.Cells.FindAll(x => x.Use == Use.Occupied))
             {
                 f.Levels(fieldcopy, unit, settings);
             }
