@@ -10,11 +10,11 @@ namespace BH.Engine.TSP
 {
     public static partial class Query
     {
-        public static List<Footprint> AlignedNeighbours(this Footprint footprint, Vector direction, Field field)
+        public static List<Cell> AlignedNeighbours(this Cell footprint, Vector direction, Field field)
         {
-            List<Footprint> aligned = new List<Footprint>();
+            List<Cell> aligned = new List<Cell>();
             
-            foreach(Footprint n in footprint.FourNeighbourhood)
+            foreach(Cell n in footprint.FourNeighbourhood)
             {
                 Vector toNeighbour = n.Boundary.Centroid() - footprint.Boundary.Centroid();
                 if (Math.Abs(toNeighbour.IsParallel(direction)) == 1)
@@ -23,11 +23,11 @@ namespace BH.Engine.TSP
             return aligned;
         }
 
-        public static List<Footprint> AlignedNeighbours(this Footprint footprint, Vector direction, Field field, Use use)
+        public static List<Cell> AlignedNeighbours(this Cell footprint, Vector direction, Field field, Use use)
         {
-            List<Footprint> aligned = new List<Footprint>();
+            List<Cell> aligned = new List<Cell>();
 
-            foreach (Footprint n in field.Footprints.FindAll(x => x.Use == use))
+            foreach (Cell n in field.Footprints.FindAll(x => x.Use == use))
             {
                 Vector toNeighbour = n.Centre- footprint.Centre;
                 if (Math.Abs(toNeighbour.IsParallel(direction)) == 1)

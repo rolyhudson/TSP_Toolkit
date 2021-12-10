@@ -7,11 +7,11 @@ using System.Text;
 
 namespace BH.oM.TSP
 {
-    public class Footprint : BHoMObject
+    public class Cell : BHoMObject
     {
         public virtual int Levels { get; set; } = 1;
-        public List<Footprint> FourNeighbourhood { get; set; } = new List<Footprint>();
-        public List<Footprint> EightNeighbourhood { get; set; } = new List<Footprint>();
+        public List<Cell> FourNeighbourhood { get; set; } = new List<Cell>();
+        public List<Cell> EightNeighbourhood { get; set; } = new List<Cell>();
         public Polyline Boundary { get; set; } = new Polyline();
         public virtual Cartesian CoordinateSystem { get; set; } = new Cartesian();
         public virtual Use Use { get; set; } = Use.Unoccupied;

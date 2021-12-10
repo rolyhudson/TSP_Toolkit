@@ -10,7 +10,7 @@ namespace BH.Engine.TSP
 {
     public static partial class Query
     {
-        public static Polyline Geometry(this Footprint footprint)
+        public static Polyline Geometry(this Cell footprint)
         {
             return footprint.Boundary;
         }

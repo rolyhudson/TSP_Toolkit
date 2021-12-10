@@ -23,11 +23,11 @@ namespace BH.Engine.TSP
             return fieldcopy;
         }
 
-        public static Field SetCurtilage(this Field field, Footprint footprint, PlanSettings settings, int depth)
+        public static Field SetCurtilage(this Field field, Cell footprint, PlanSettings settings, int depth)
         {
             int countOpen = field.Footprints.FindAll(x => x.Use == Use.Open).Count;
             depth++;
-            foreach (Footprint n in footprint.EightNeighbourhood.FindAll(x => x.Use == Use.Unoccupied || x.Use == Use.Circulation))
+            foreach (Cell n in footprint.EightNeighbourhood.FindAll(x => x.Use == Use.Unoccupied || x.Use == Use.Circulation))
             {
                 //no change to circulation
                 if(n.Use != Use.Circulation)

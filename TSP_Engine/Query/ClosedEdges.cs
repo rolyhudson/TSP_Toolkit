@@ -10,7 +10,7 @@ namespace BH.Engine.TSP
 {
     public static partial class Query
     {
-        public static List<Line> ClosedEdges(this Footprint footprint)
+        public static List<Line> ClosedEdges(this Cell footprint)
         {
             List<Line> edges = new List<Line>();
 

@@ -33,7 +33,7 @@ namespace BH.Engine.TSP
             TransformMatrix transform = Geometry.Create.OrientationMatrixGlobalToLocal(origin);
             boundary = boundary.Transform(transform);
 
-            Footprint basePrint = new Footprint()
+            Cell basePrint = new Cell()
             {
                 Boundary = boundary,
                 CoordinateSystem = origin
@@ -44,7 +44,7 @@ namespace BH.Engine.TSP
             {
                 for(int j = 0;j< unitsY;j++)
                 {
-                    Footprint copy = basePrint.ShallowClone();
+                    Cell copy = basePrint.ShallowClone();
                     Cartesian cartesian = origin.ShallowClone();
                     Vector v = origin.X * i * prototypeUnit.X + origin.Y * j* prototypeUnit.Y;
                     copy.Boundary = copy.Boundary.Translate(v);
@@ -59,7 +59,7 @@ namespace BH.Engine.TSP
             {
                 f.Neighbourhoods(field);
             });
-            foreach (Footprint f in field.Footprints)
+            foreach (Cell f in field.Footprints)
             {
                 if (!siteBoundary.IIsContaining(f.Boundary))
                     f.Use = Use.OutsideBoundary;

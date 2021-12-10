@@ -12,11 +12,11 @@ namespace BH.Engine.TSP
         {
             Bar bar = new Bar();
             //find a start point
-            List<Footprint> unoccupied = field.Footprints.FindAll(x => x.Use == Use.Unoccupied).ToList();
+            List<Cell> unoccupied = field.Footprints.FindAll(x => x.Use == Use.Unoccupied).ToList();
             if (unoccupied.Count == 0)
                 return bar;
             int r = m_Random.Next(0, unoccupied.Count);
-            Footprint start = unoccupied[r];
+            Cell start = unoccupied[r];
 
 
             start.Use = Use.Occupied;
@@ -39,9 +39,9 @@ namespace BH.Engine.TSP
             return bar;
         }
 
-        private static void GrowBar(Footprint start, Field field, ref Bar bar, PlanSettings settings)
+        private static void GrowBar(Cell start, Field field, ref Bar bar, PlanSettings settings)
         {
-            List<Footprint> aligned = start.AlignedNeighbours(start.CoordinateSystem.Y, field);
+            List<Cell> aligned = start.AlignedNeighbours(start.CoordinateSystem.Y, field);
             aligned = aligned.FindAll(x => x.Use == Use.Unoccupied).ToList();
             
             foreach (var f in aligned)

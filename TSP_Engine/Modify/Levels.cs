@@ -12,15 +12,15 @@ namespace BH.Engine.TSP
         public static Field Levels(this Field field, Unit unit, VerticalSettings settings)
         {
             Field fieldcopy = field.ShallowClone();
-            foreach (Footprint f in fieldcopy.Footprints.FindAll(x => x.Use == Use.Occupied))
+            foreach (Cell f in fieldcopy.Footprints.FindAll(x => x.Use == Use.Occupied))
             {
                 f.Levels(fieldcopy, unit, settings);
             }
             return fieldcopy;
         }
-        public static Footprint Levels(this Footprint footprint, Field field, Unit unit, VerticalSettings settings)
+        public static Cell Levels(this Cell footprint, Field field, Unit unit, VerticalSettings settings)
         {
-            List<Footprint> nearestOthers = Query.AlignedNeighbours(footprint, footprint.CoordinateSystem.X, field, Use.Occupied);
+            List<Cell> nearestOthers = Query.AlignedNeighbours(footprint, footprint.CoordinateSystem.X, field, Use.Occupied);
             double mindist = double.MaxValue;
             if (nearestOthers.Count == 0)
             {
@@ -28,7 +28,7 @@ namespace BH.Engine.TSP
                 return footprint;
             }
                 
-            foreach (Footprint n in nearestOthers)
+            foreach (Cell n in nearestOthers)
             {
                 double d = Math.Round(n.Centre.Distance(footprint.Centre),1);
                 if (d < mindist)

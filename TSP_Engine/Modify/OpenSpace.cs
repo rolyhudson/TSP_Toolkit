@@ -20,7 +20,7 @@ namespace BH.Engine.TSP
                     Reflection.Compute.RecordWarning("One or more of the polylines provided was not closed or not planar.");
                     continue;
                 }
-                foreach(Footprint footprint in fieldcopy.Footprints.FindAll(x => x.Use != Use.OutsideBoundary && x.Use != Use.Open))
+                foreach(Cell footprint in fieldcopy.Footprints.FindAll(x => x.Use != Use.OutsideBoundary && x.Use != Use.Open))
                 {
                     if (polyline.IIsContaining(new List<Point>() { footprint.Centre }))
                         footprint.Use = Use.Open;
