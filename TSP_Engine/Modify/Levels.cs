@@ -1,4 +1,5 @@
-﻿using BH.Engine.Geometry;
+﻿using BH.Engine.Base;
+using BH.Engine.Geometry;
 using BH.oM.TSP;
 using System;
 using System.Collections.Generic;
@@ -8,15 +9,16 @@ namespace BH.Engine.TSP
 {
     public static partial class Modify
     {
-        public static Field Levels(this Field field, Unit unit, Settings settings)
+        public static Field Levels(this Field field, Unit unit, VerticalSettings settings)
         {
-            foreach(Footprint f in field.Footprints.FindAll(x => x.Use == Use.Occupied))
+            Field fieldcopy = field.ShallowClone();
+            foreach (Footprint f in fieldcopy.Footprints.FindAll(x => x.Use == Use.Occupied))
             {
-                f.Levels(field, unit, settings);
+                f.Levels(fieldcopy, unit, settings);
             }
-            return field;
+            return fieldcopy;
         }
-        public static Footprint Levels(this Footprint footprint, Field field, Unit unit, Settings settings)
+        public static Footprint Levels(this Footprint footprint, Field field, Unit unit, VerticalSettings settings)
         {
             List<Footprint> nearestOthers = Query.AlignedNeighbours(footprint, footprint.CoordinateSystem.X, field, Use.Occupied);
             double mindist = double.MaxValue;

@@ -15,8 +15,11 @@ namespace BH.Engine.TSP
         {
             List<Bar> barsCopy = bars.ShallowClone();
             foreach (Bar b in barsCopy)
+            {
+                //reset units
+                b.Units = new List<Unit>();
                 b.Massing(field, prototypeUnit);
-
+            }
             return barsCopy;
         }
         public static Bar Massing(this Bar bar, Field field, Unit prototypeUnit)

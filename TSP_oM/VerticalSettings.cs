@@ -1,0 +1,14 @@
+﻿using BH.oM.Base;
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace BH.oM.TSP
+{
+    public class VerticalSettings : BHoMObject
+    {
+        public virtual int MaximumLevel { get; set; } = 10;
+
+        public virtual double GapToHeightRatio { get; set; } = 1.0;
+    }
+}

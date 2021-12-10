@@ -12,7 +12,7 @@ namespace BH.Engine.TSP
     {
         [MultiOutput(0, "bars", "Linear blocks.")]
         [MultiOutput(1, "field", "Updated field.")]
-        public static Output<List<Bar>, Field> Bars(Field field, Settings settings, int maxFails =10)
+        public static Output<List<Bar>, Field> Bars(Field field, PlanSettings settings, int maxFails =10)
         {
             List<Bar> bars = new List<Bar>();
             Field fieldCopy = field.ShallowClone();

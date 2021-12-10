@@ -8,7 +8,7 @@ namespace BH.Engine.TSP
 {
     public static partial class Create
     {
-        public static Bar Bar(ref Field field, Settings settings)
+        public static Bar Bar(ref Field field, PlanSettings settings)
         {
             Bar bar = new Bar();
             //find a start point
@@ -39,7 +39,7 @@ namespace BH.Engine.TSP
             return bar;
         }
 
-        private static void GrowBar(Footprint start, Field field, ref Bar bar, Settings settings)
+        private static void GrowBar(Footprint start, Field field, ref Bar bar, PlanSettings settings)
         {
             List<Footprint> aligned = start.AlignedNeighbours(start.CoordinateSystem.Y, field);
             aligned = aligned.FindAll(x => x.Use == Use.Unoccupied).ToList();
