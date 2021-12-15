@@ -14,7 +14,7 @@ namespace BH.Engine.TSP
         {
             List<Cell> aligned = new List<Cell>();
             
-            foreach(Cell n in footprint.FourNeighbourhood)
+            foreach(Cell n in footprint.EightNeighbourhood)
             {
                 Vector toNeighbour = n.Boundary.Centroid() - footprint.Boundary.Centroid();
                 if (Math.Abs(toNeighbour.IsParallel(direction)) == 1)

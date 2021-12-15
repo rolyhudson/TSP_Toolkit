@@ -14,6 +14,7 @@
           "Data_oM": "5.0.0.0",
           "Geometry_Engine": "5.0.0.0",
           "Geometry_oM": "5.0.0.0",
+          "Graphics_oM": "5.0.0.0",
           "Reflection_Engine": "5.0.0.0",
           "Reflection_oM": "5.0.0.0"
         },
@@ -54,6 +55,14 @@
       "Geometry_oM/5.0.0.0": {
         "runtime": {
           "Geometry_oM.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.0.0.0"
+          }
+        }
+      },
+      "Graphics_oM/5.0.0.0": {
+        "runtime": {
+          "Graphics_oM.dll": {
             "assemblyVersion": "5.0.0.0",
             "fileVersion": "5.0.0.0"
           }
@@ -161,6 +170,11 @@
       "sha512": ""
     },
     "Geometry_oM/5.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Graphics_oM/5.0.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""

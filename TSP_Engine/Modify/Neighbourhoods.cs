@@ -7,11 +7,11 @@ namespace BH.Engine.TSP
 {
     public static partial class Modify
     {
-        public static Cell Neighbourhoods(this Cell footprint, Field field)
+        public static Cell Neighbourhoods(this Cell cell, Field field)
         {
-            footprint.FourNeighbourhood = footprint.Neighbourhood(field.Cells, 4);
-            footprint.EightNeighbourhood = footprint.Neighbourhood(field.Cells, 8);
-            return footprint;
+            foreach (Guid guid in field.Adjacency[cell.BHoM_Guid])
+                cell.EightNeighbourhood.Add(field.Cells.Find(x => x.BHoM_Guid.Equals(guid)));
+            return cell;
         }
     }
 }

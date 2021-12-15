@@ -32,9 +32,13 @@ namespace BH.Engine.TSP
                 //no change to circulation
                 if(n.Use != Use.Circulation)
                     n.Use = Use.Open;
-                
+                Cell check = field.Cells.Find(x => x.BHoM_Guid.Equals(n.BHoM_Guid));
+                if(check!=null)
+                {
+
+                }
                 if (depth < settings.MinimumUnitsSpace)
-                    field.SetCurtilage(n, settings, depth);
+                    field = field.SetCurtilage(n, settings, depth);
             }
             return field;
         }

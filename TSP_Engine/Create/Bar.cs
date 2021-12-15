@@ -18,8 +18,13 @@ namespace BH.Engine.TSP
             int r = m_Random.Next(0, unoccupied.Count);
             Cell start = unoccupied[r];
 
-
+            
             start.Use = Use.Occupied;
+            var check = field.Cells.Find(x => x.BHoM_Guid.Equals(start.BHoM_Guid));
+            if(check.EightNeighbourhood.Any(x => x.Use == Use.Occupied))
+            {
+                return bar;
+            }
             int occupiedCount = field.Cells.FindAll(x => x.Use == Use.Occupied).Count;
             
             bar.Cells.Add(start.BHoM_Guid);
@@ -35,7 +40,7 @@ namespace BH.Engine.TSP
                 }
                 bar.Cells = new List<Guid>();
             }
-            field.SetCurtilage(bar, settings);
+            field = field.SetCurtilage(bar, settings);
             return bar;
         }
 
@@ -43,7 +48,7 @@ namespace BH.Engine.TSP
         {
             List<Cell> aligned = start.AlignedNeighbours(start.CoordinateSystem.Y, field);
             aligned = aligned.FindAll(x => x.Use == Use.Unoccupied).ToList();
-            
+            int occupied = field.Cells.FindAll(x => x.Use == Use.Occupied).Count;
             foreach (var f in aligned)
             {
                 if (bar.Cells.Count < settings.MaximumUnits)

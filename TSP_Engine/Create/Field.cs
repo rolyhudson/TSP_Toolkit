@@ -39,26 +39,61 @@ namespace BH.Engine.TSP
                 CoordinateSystem = origin
             };
             Field field = new Field();
-            
-            for(int i = 0;i <= unitsX;i++)
+            List<List<Cell>> cells2d = new List<List<Cell>>();
+            for(int i = 0; i <= unitsX; i++)
             {
-                for(int j = 0;j< unitsY;j++)
+                List<Cell> cells = new List<Cell>();
+                for (int j = 0; j < unitsY; j++)
                 {
-                    Cell copy = basePrint.ShallowClone();
-                    Cartesian cartesian = origin.ShallowClone();
+                    Cell copy = basePrint.DeepClone();
+                    
                     Vector v = origin.X * i * prototypeUnit.X + origin.Y * j* prototypeUnit.Y;
-                    copy.Boundary = copy.Boundary.Translate(v);
-                    copy.CoordinateSystem = cartesian.Translate(v);
-                    copy.Centre = Geometry.Query.Average(copy.Boundary.ControlPoints);
-                    copy.BHoM_Guid = Guid.NewGuid();
-                    field.Cells.Add(copy);
+                    Cell newCell = new Cell();
+                    newCell.Boundary = copy.Boundary.Translate(v);
+                    newCell.CoordinateSystem = copy.CoordinateSystem.Translate(v);
+                    newCell.Centre = Geometry.Query.Average(newCell.Boundary.ControlPoints);
+                    newCell.BHoM_Guid = Guid.NewGuid();
+                    field.Cells.Add(newCell);
+                    cells.Add(newCell);
+                }
+                cells2d.Add(cells);
+            }
+            //set the adjacency
+            for(int i = 0; i < cells2d.Count;i++)
+            {
+                for(int j = 0; j < cells2d[i].Count; j++)
+                {
+                    
+                    List<Guid> guids = new List<Guid>();
+                    if(i > 0 && j > 0)
+                        guids.Add(cells2d[i - 1][j - 1].BHoM_Guid);
+                    if (i > 0)
+                        guids.Add(cells2d[i - 1][j].BHoM_Guid);
+                    if (i > 0 && j < cells2d[i].Count-1)
+                        guids.Add(cells2d[i - 1][j + 1].BHoM_Guid);
+                    if(j > 0)
+                        guids.Add(cells2d[i][j - 1].BHoM_Guid);
+                    if(j < cells2d[i].Count - 1)
+                        guids.Add(cells2d[i][j + 1].BHoM_Guid);
+                    if(i < cells2d.Count-1 && j > 0)
+                        guids.Add(cells2d[i + 1][j - 1].BHoM_Guid);
+                    if (i < cells2d.Count - 1 && j < cells2d[i].Count - 1)
+                        guids.Add(cells2d[i + 1][j + 1].BHoM_Guid);
+                    if (i < cells2d.Count -1)
+                        guids.Add(cells2d[i + 1][j].BHoM_Guid);
+
+                    field.Adjacency.Add(cells2d[i][j].BHoM_Guid, guids);
                 }
             }
             //check for site containment
-            Parallel.ForEach(field.Cells, f =>
+            foreach(var cell in field.Cells)
             {
-                f.Neighbourhoods(field);
-            });
+                cell.Neighbourhoods(field);
+            }
+            //Parallel.ForEach(field.Cells, f =>
+            //{
+            //    f.Neighbourhoods(field);
+            //});
             foreach (Cell f in field.Cells)
             {
                 if (!siteBoundary.IIsContaining(f.Boundary))
