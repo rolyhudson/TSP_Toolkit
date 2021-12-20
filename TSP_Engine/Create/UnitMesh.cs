@@ -38,7 +38,7 @@ namespace BH.Engine.TSP
             return mesh;
         }
 
-        public static List<Mesh> UnitMesh(List<Bar> bars, Field field, Unit prototypeUnit)
+        public static List<Mesh> UnitMesh(List<Bar> bars, Unit prototypeUnit)
         {
             List<Mesh> meshes = new List<Mesh>();
             Mesh baseMesh = prototypeUnit.UnitMesh();
