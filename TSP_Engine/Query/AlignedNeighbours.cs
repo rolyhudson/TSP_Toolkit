@@ -38,7 +38,7 @@ namespace BH.Engine.TSP
             //remove the original
             //aligned.RemoveAt(0);
             //take nearest two
-            return aligned.Take(2).ToList();
+            return aligned;
         }
     }
 }

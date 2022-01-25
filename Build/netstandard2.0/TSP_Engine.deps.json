@@ -9,6 +9,7 @@
     ".NETStandard,Version=v2.0/": {
       "TSP_Engine/5.0.0": {
         "dependencies": {
+          "Microsoft.CSharp": "4.7.0",
           "NETStandard.Library": "2.0.3",
           "TSP_oM": "5.0.0",
           "BHoM": "5.0.0.0",
@@ -22,6 +23,14 @@
         },
         "runtime": {
           "TSP_Engine.dll": {}
+        }
+      },
+      "Microsoft.CSharp/4.7.0": {
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.CSharp.dll": {
+            "assemblyVersion": "4.0.5.0",
+            "fileVersion": "4.700.19.56404"
+          }
         }
       },
       "Microsoft.NETCore.Platforms/1.1.0": {},
@@ -138,6 +147,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "Microsoft.CSharp/4.7.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-pTj+D3uJWyN3My70i2Hqo+OXixq3Os2D1nJ2x92FFo6sk8fYS1m1WLNTs0Dc1uPaViH0YvEEwvzddQ7y4rhXmA==",
+      "path": "microsoft.csharp/4.7.0",
+      "hashPath": "microsoft.csharp.4.7.0.nupkg.sha512"
     },
     "Microsoft.NETCore.Platforms/1.1.0": {
       "type": "package",

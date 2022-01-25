@@ -9,5 +9,7 @@ namespace BH.oM.TSP
     {
         public virtual List<Cell> Cells { get; set; } = new List<Cell>();
         public virtual Dictionary<Guid, List<Guid>> Adjacency { get; set; } = new Dictionary<Guid, List<Guid>>();
+
+        public virtual ILayout Layout { get; set; }
     }
 }

@@ -18,11 +18,11 @@ namespace BH.oM.TSP
 
         public virtual Polyline SiteBoundary { get; set; } = new Polyline();
 
-        public virtual Vector PrincipleDirection { get; set; } = new Vector();
-
         public virtual List<Polyline> CirculationRoutes { get; set; } = new List<Polyline>();
 
         public virtual List<Polyline> OpenSpaces { get; set; } = new List<Polyline>();
+
+        public virtual ILayout LayoutMethod { get; set; }
 
     }
 }

@@ -3,6 +3,7 @@ using BH.Engine.Geometry;
 using BH.oM.Geometry;
 using BH.oM.Geometry.CoordinateSystem;
 using BH.oM.TSP;
+using BH.oM.Base;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,22 +13,21 @@ namespace BH.Engine.TSP
 {
     public static partial class Create
     {
-        public static Field Field(Vector principleDirection, Polyline siteBoundary, Unit prototypeUnit)
+        public static Field IField(ILayout layout, Polyline siteBoundary, Unit prototypeUnit)
+        {
+            Field field = Field(layout as dynamic, siteBoundary, prototypeUnit);
+            field.Layout = layout;
+            return field; 
+        }
+        public static Field Field(BarsLayout layout, Polyline siteBoundary, Unit prototypeUnit)
         {
             
-            Polyline alignedBoundary = Query.AlignedBoundingBox(principleDirection, siteBoundary);
-            Cartesian origin = Query.GridCartesian(principleDirection, siteBoundary);
+            Polyline alignedBoundary = Query.AlignedBoundingBox(layout.PrincipleDirection, siteBoundary);
+            Cartesian origin = Query.GridCartesian(layout.PrincipleDirection, siteBoundary);
             int unitsX = (int)Math.Ceiling(alignedBoundary.ControlPoints[0].Distance(alignedBoundary.ControlPoints[3]) / prototypeUnit.X);
             int unitsY = (int)Math.Ceiling(alignedBoundary.ControlPoints[0].Distance(alignedBoundary.ControlPoints[1]) / prototypeUnit.Y);
 
-            List<Point> points = new List<Point>()
-            {
-                new Point(),
-                Geometry.Create.Point(prototypeUnit.X,0,0),
-                Geometry.Create.Point(prototypeUnit.X,prototypeUnit.Y,0),
-                Geometry.Create.Point(0,prototypeUnit.Y,0),
-                new Point(),
-            };
+            List<Point> points = prototypeUnit.BoundaryPoints();
 
             Polyline boundary = Geometry.Create.Polyline(points);
             TransformMatrix transform = Geometry.Create.OrientationMatrixGlobalToLocal(origin);
@@ -90,10 +90,7 @@ namespace BH.Engine.TSP
             {
                 cell.Neighbourhoods(field);
             }
-            //Parallel.ForEach(field.Cells, f =>
-            //{
-            //    f.Neighbourhoods(field);
-            //});
+
             foreach (Cell f in field.Cells)
             {
                 if (!siteBoundary.IIsContaining(f.Boundary))
@@ -103,6 +100,65 @@ namespace BH.Engine.TSP
 
             //we could check for circulation + open space
             return field;
+        }
+
+        //////////////////////////////////////////////////
+
+        public static Field Field(CloisterLayout layout, Polyline siteBoundary, Unit prototypeUnit)
+        {
+            List<Point> points = prototypeUnit.BoundaryPoints();
+            
+            Field field = new Field();
+            if (siteBoundary.IsClockwise(Vector.ZAxis))
+                siteBoundary = siteBoundary.Flip();
+
+            foreach (Line line in siteBoundary.SubParts())
+            {
+                Polyline boundary = Geometry.Create.Polyline(points);
+                if (line.Length() < prototypeUnit.Y)
+                    continue;
+                Vector yaxis = line.Direction();
+                yaxis = yaxis.Normalise();
+                Vector xaxis = yaxis.CrossProduct(Vector.ZAxis);
+                Point origin = line.Start;
+                Cartesian cartesian = Geometry.Create.CartesianCoordinateSystem(origin, xaxis, yaxis);
+                TransformMatrix transform = Geometry.Create.OrientationMatrixGlobalToLocal(cartesian);
+                boundary = boundary.Transform(transform);
+
+                Cell basePrint = new Cell()
+                {
+                    Boundary = boundary,
+                    CoordinateSystem = cartesian
+                };
+
+                Cell copy = basePrint.DeepClone();
+                int cellCount = 0;
+                double shift = prototypeUnit.Y * cellCount;
+                List<Cell> cells = new List<Cell>();
+                while (shift + prototypeUnit.Y < line.Length())
+                {
+                    Cell newCell = new Cell();
+                    Vector v = cartesian.Y * shift;
+                    newCell.Boundary = copy.Boundary.Translate(v);
+                    newCell.CoordinateSystem = copy.CoordinateSystem.Translate(v);
+                    newCell.Centre = Geometry.Query.Average(newCell.Boundary.ControlPoints);
+                    newCell.BHoM_Guid = Guid.NewGuid();
+                    //check for overlap
+                    if (!newCell.Overlap(field,Math.Max(prototypeUnit.X,prototypeUnit.Y)))
+                        cells.Add(newCell);
+
+                    cellCount++;
+                    shift = prototypeUnit.Y * cellCount;
+                }
+                field.Cells.AddRange(cells);
+            }
+            return field;
+        }
+
+        /// Fall back
+        public static Field Field(ILayout layout, Polyline siteBoundary, Unit prototypeUnit)
+        {
+            return null;
         }
     }
 }
