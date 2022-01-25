@@ -18,8 +18,7 @@
           "Geometry_Engine": "5.0.0.0",
           "Geometry_oM": "5.0.0.0",
           "Graphics_oM": "5.0.0.0",
-          "Reflection_Engine": "5.0.0.0",
-          "Reflection_oM": "5.0.0.0"
+          "Reflection_Engine": "5.0.0.0"
         },
         "runtime": {
           "TSP_Engine.dll": {}
@@ -40,7 +39,7 @@
         "runtime": {
           "BHoM.dll": {
             "assemblyVersion": "5.0.0.0",
-            "fileVersion": "5.0.0.0"
+            "fileVersion": "5.1.0.0"
           }
         }
       },
@@ -48,7 +47,7 @@
         "runtime": {
           "BHoM_Engine.dll": {
             "assemblyVersion": "5.0.0.0",
-            "fileVersion": "5.0.0.0"
+            "fileVersion": "5.1.0.0"
           }
         }
       },
@@ -56,7 +55,7 @@
         "runtime": {
           "Data_oM.dll": {
             "assemblyVersion": "5.0.0.0",
-            "fileVersion": "5.0.0.0"
+            "fileVersion": "5.1.0.0"
           }
         }
       },
@@ -64,7 +63,7 @@
         "runtime": {
           "Dimensional_oM.dll": {
             "assemblyVersion": "5.0.0.0",
-            "fileVersion": "5.0.0.0"
+            "fileVersion": "5.1.0.0"
           }
         }
       },
@@ -72,7 +71,7 @@
         "runtime": {
           "Geometry_Engine.dll": {
             "assemblyVersion": "5.0.0.0",
-            "fileVersion": "5.0.0.0"
+            "fileVersion": "5.1.0.0"
           }
         }
       },
@@ -80,7 +79,7 @@
         "runtime": {
           "Geometry_oM.dll": {
             "assemblyVersion": "5.0.0.0",
-            "fileVersion": "5.0.0.0"
+            "fileVersion": "5.1.0.0"
           }
         }
       },
@@ -88,7 +87,7 @@
         "runtime": {
           "Graphics_oM.dll": {
             "assemblyVersion": "5.0.0.0",
-            "fileVersion": "5.0.0.0"
+            "fileVersion": "5.1.0.0"
           }
         }
       },
@@ -96,15 +95,7 @@
         "runtime": {
           "Reflection_Engine.dll": {
             "assemblyVersion": "5.0.0.0",
-            "fileVersion": "5.0.0.0"
-          }
-        }
-      },
-      "Reflection_oM/5.0.0.0": {
-        "runtime": {
-          "Reflection_oM.dll": {
-            "assemblyVersion": "5.0.0.0",
-            "fileVersion": "5.0.0.0"
+            "fileVersion": "5.1.0.0"
           }
         }
       },
@@ -120,7 +111,7 @@
         "runtime": {
           "Quantities_oM.dll": {
             "assemblyVersion": "5.0.0.0",
-            "fileVersion": "5.0.0.0"
+            "fileVersion": "5.1.0.0"
           }
         }
       },
@@ -128,7 +119,7 @@
         "runtime": {
           "Data_Engine.dll": {
             "assemblyVersion": "5.0.0.0",
-            "fileVersion": "5.0.0.0"
+            "fileVersion": "5.1.0.0"
           }
         }
       },
@@ -203,11 +194,6 @@
       "sha512": ""
     },
     "Reflection_Engine/5.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Reflection_oM/5.0.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""
