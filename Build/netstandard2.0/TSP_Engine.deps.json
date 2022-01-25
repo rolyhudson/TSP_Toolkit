@@ -11,15 +11,7 @@
         "dependencies": {
           "Microsoft.CSharp": "4.7.0",
           "NETStandard.Library": "2.0.3",
-          "TSP_oM": "5.0.0",
-          "BHoM": "5.0.0.0",
-          "BHoM_Engine": "5.0.0.0",
-          "Data_oM": "5.0.0.0",
-          "Dimensional_oM": "5.0.0.0",
-          "Geometry_Engine": "5.0.0.0",
-          "Geometry_oM": "5.0.0.0",
-          "Graphics_oM": "5.0.0.0",
-          "Reflection_Engine": "5.0.0.0"
+          "TSP_oM": "5.0.0"
         },
         "runtime": {
           "TSP_Engine.dll": {}
@@ -42,102 +34,6 @@
       "TSP_oM/5.0.0": {
         "runtime": {
           "TSP_oM.dll": {}
-        }
-      },
-      "BHoM/5.0.0.0": {
-        "runtime": {
-          "BHoM.dll": {
-            "assemblyVersion": "5.0.0.0",
-            "fileVersion": "5.1.0.0"
-          }
-        }
-      },
-      "BHoM_Engine/5.0.0.0": {
-        "runtime": {
-          "BHoM_Engine.dll": {
-            "assemblyVersion": "5.0.0.0",
-            "fileVersion": "5.1.0.0"
-          }
-        }
-      },
-      "Data_oM/5.0.0.0": {
-        "runtime": {
-          "Data_oM.dll": {
-            "assemblyVersion": "5.0.0.0",
-            "fileVersion": "5.1.0.0"
-          }
-        }
-      },
-      "Dimensional_oM/5.0.0.0": {
-        "runtime": {
-          "Dimensional_oM.dll": {
-            "assemblyVersion": "5.0.0.0",
-            "fileVersion": "5.1.0.0"
-          }
-        }
-      },
-      "Geometry_Engine/5.0.0.0": {
-        "runtime": {
-          "Geometry_Engine.dll": {
-            "assemblyVersion": "5.0.0.0",
-            "fileVersion": "5.1.0.0"
-          }
-        }
-      },
-      "Geometry_oM/5.0.0.0": {
-        "runtime": {
-          "Geometry_oM.dll": {
-            "assemblyVersion": "5.0.0.0",
-            "fileVersion": "5.1.0.0"
-          }
-        }
-      },
-      "Graphics_oM/5.0.0.0": {
-        "runtime": {
-          "Graphics_oM.dll": {
-            "assemblyVersion": "5.0.0.0",
-            "fileVersion": "5.1.0.0"
-          }
-        }
-      },
-      "Reflection_Engine/5.0.0.0": {
-        "runtime": {
-          "Reflection_Engine.dll": {
-            "assemblyVersion": "5.0.0.0",
-            "fileVersion": "5.1.0.0"
-          }
-        }
-      },
-      "DeepCloner/0.10.0.0": {
-        "runtime": {
-          "DeepCloner.dll": {
-            "assemblyVersion": "0.10.0.0",
-            "fileVersion": "0.10.2.0"
-          }
-        }
-      },
-      "Quantities_oM/5.0.0.0": {
-        "runtime": {
-          "Quantities_oM.dll": {
-            "assemblyVersion": "5.0.0.0",
-            "fileVersion": "5.1.0.0"
-          }
-        }
-      },
-      "Data_Engine/5.0.0.0": {
-        "runtime": {
-          "Data_Engine.dll": {
-            "assemblyVersion": "5.0.0.0",
-            "fileVersion": "5.1.0.0"
-          }
-        }
-      },
-      "Mono.Reflection/2.0.0.0": {
-        "runtime": {
-          "Mono.Reflection.dll": {
-            "assemblyVersion": "2.0.0.0",
-            "fileVersion": "2.0.0.0"
-          }
         }
       }
     }
@@ -171,66 +67,6 @@
     },
     "TSP_oM/5.0.0": {
       "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "BHoM/5.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "BHoM_Engine/5.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Data_oM/5.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Dimensional_oM/5.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Geometry_Engine/5.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Geometry_oM/5.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Graphics_oM/5.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Reflection_Engine/5.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "DeepCloner/0.10.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Quantities_oM/5.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Data_Engine/5.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Mono.Reflection/2.0.0.0": {
-      "type": "reference",
       "serviceable": false,
       "sha512": ""
     }

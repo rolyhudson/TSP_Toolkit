@@ -29,30 +29,39 @@
 <ItemGroup>
   <Reference Include="BHoM">
     <HintPath>C:\ProgramData\BHoM\Assemblies\BHoM.dll</HintPath>
+    <Private>false</Private>
   </Reference>
   <Reference Include="BHoM_Engine">
     <HintPath>C:\ProgramData\BHoM\Assemblies\BHoM_Engine.dll</HintPath>
+    <Private>false</Private>
   </Reference>
   <Reference Include="Data_oM">
     <HintPath>C:\ProgramData\BHoM\Assemblies\Data_oM.dll</HintPath>
+    <Private>false</Private>
   </Reference>
   <Reference Include="Dimensional_oM">
     <HintPath>C:\ProgramData\BHoM\Assemblies\Dimensional_oM.dll</HintPath>
+    <Private>false</Private>
   </Reference>
   <Reference Include="Geometry_Engine">
     <HintPath>C:\ProgramData\BHoM\Assemblies\Geometry_Engine.dll</HintPath>
+    <Private>false</Private>
   </Reference>
   <Reference Include="Geometry_oM">
     <HintPath>C:\ProgramData\BHoM\Assemblies\Geometry_oM.dll</HintPath>
+    <Private>false</Private>
   </Reference>
   <Reference Include="Graphics_oM">
     <HintPath>C:\ProgramData\BHoM\Assemblies\Graphics_oM.dll</HintPath>
+    <Private>false</Private>
   </Reference>
   <Reference Include="Reflection_Engine">
     <HintPath>C:\ProgramData\BHoM\Assemblies\Reflection_Engine.dll</HintPath>
+    <Private>false</Private>
   </Reference>
   <Reference Include="Reflection_oM">
     <HintPath>C:\ProgramData\BHoM\Assemblies\Reflection_oM.dll</HintPath>
+    <Private>false</Private>
   </Reference>
 </ItemGroup>
 </Project>
