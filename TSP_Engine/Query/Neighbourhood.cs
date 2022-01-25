@@ -9,9 +9,9 @@ namespace BH.Engine.TSP
 {
     public static partial class Query
     {
-        public static List<Cell> Neighbourhood(this Cell footprint, List<Cell> footprints, int num)
+        public static List<Cell> Neighbourhood(this Cell cell, List<Cell> cells, int num)
         {
-            List<Cell> ordered = footprints.OrderBy(p => p.Centre.SquareDistance(footprint.Centre)).Take(num + 1).ToList();
+            List<Cell> ordered = cells.OrderBy(p => p.Centre.SquareDistance(cell.Centre)).Take(num + 1).ToList();
             ordered.RemoveAt(0);
             return ordered;
         }

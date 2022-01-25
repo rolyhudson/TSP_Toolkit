@@ -14,20 +14,20 @@ namespace BH.Engine.TSP
             Field fieldcopy = field.ShallowClone();
             foreach (Guid f in bar.Cells)
             {
-                var refFootprint = fieldcopy.Cells.Find(x => x.BHoM_Guid.Equals(f));
+                var refcell = fieldcopy.Cells.Find(x => x.BHoM_Guid.Equals(f));
                 //get the unoccupied neighbours
-                fieldcopy = fieldcopy.SetCurtilage(refFootprint, settings, 0);
+                fieldcopy = fieldcopy.SetCurtilage(refcell, settings, 0);
                 
             }
             int countOpen = fieldcopy.Cells.FindAll(x => x.Use == Use.Open).Count;
             return fieldcopy;
         }
 
-        public static Field SetCurtilage(this Field field, Cell footprint, PlanSettings settings, int depth)
+        public static Field SetCurtilage(this Field field, Cell cell, PlanSettings settings, int depth)
         {
             int countOpen = field.Cells.FindAll(x => x.Use == Use.Open).Count;
             depth++;
-            foreach (Cell n in footprint.EightNeighbourhood.FindAll(x => x.Use == Use.Unoccupied || x.Use == Use.Circulation))
+            foreach (Cell n in cell.EightNeighbourhood.FindAll(x => x.Use == Use.Unoccupied || x.Use == Use.Circulation))
             {
                 //no change to circulation
                 if(n.Use != Use.Circulation)

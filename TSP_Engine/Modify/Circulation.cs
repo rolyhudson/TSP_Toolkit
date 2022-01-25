@@ -20,11 +20,11 @@ namespace BH.Engine.TSP
                     Base.Compute.RecordWarning("One or more of the polylines provided was not planar.");
                     continue;
                 }
-                foreach (Cell footprint in fieldcopy.Cells.FindAll(x => x.Use != Use.OutsideBoundary && x.Use != Use.Circulation))
+                foreach (Cell cell in fieldcopy.Cells.FindAll(x => x.Use != Use.OutsideBoundary && x.Use != Use.Circulation))
                 {
-                    List<Point> intersections = footprint.Boundary.LineIntersections(polyline);
+                    List<Point> intersections = cell.Boundary.LineIntersections(polyline);
                     if (intersections.Count > 0)
-                        footprint.Use = Use.Circulation;
+                        cell.Use = Use.Circulation;
                 }
             }
             return fieldcopy;

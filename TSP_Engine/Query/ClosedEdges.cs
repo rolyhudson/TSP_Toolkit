@@ -10,14 +10,14 @@ namespace BH.Engine.TSP
 {
     public static partial class Query
     {
-        public static List<Line> ClosedEdges(this Cell footprint)
+        public static List<Line> ClosedEdges(this Cell cell)
         {
             List<Line> edges = new List<Line>();
 
-            for (int i = 0; i < footprint.Boundary.ControlPoints.Count - 1; i++)
+            for (int i = 0; i < cell.Boundary.ControlPoints.Count - 1; i++)
             {
-                Line edge = BH.Engine.Geometry.Create.Line(footprint.Boundary.ControlPoints[i], footprint.Boundary.ControlPoints[i + 1]);
-                foreach (Polyline pl in footprint.FourNeighbourhood.Select(x => x.Boundary))
+                Line edge = BH.Engine.Geometry.Create.Line(cell.Boundary.ControlPoints[i], cell.Boundary.ControlPoints[i + 1]);
+                foreach (Polyline pl in cell.FourNeighbourhood.Select(x => x.Boundary))
                 {
                     for (int j = 0; j < pl.ControlPoints.Count - 1; j++)
                     {

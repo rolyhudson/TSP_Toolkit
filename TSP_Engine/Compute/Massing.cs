@@ -26,12 +26,12 @@ namespace BH.Engine.TSP
         {
             foreach (Guid f in bar.Cells)
             {
-                var refFootprint = field.Cells.Find(x => x.BHoM_Guid.Equals(f));
+                var refcell = field.Cells.Find(x => x.BHoM_Guid.Equals(f));
                 List<Cartesian> cartesians = new List<Cartesian>();
-                for(int i = 0;i< refFootprint.Levels;i++)
+                for(int i = 0;i< refcell.Levels;i++)
                 {
                     Vector up = new Vector() { X = 0, Y = 0, Z = i * prototypeUnit.Z };
-                    Cartesian cartesianCopy = refFootprint.CoordinateSystem.ShallowClone();
+                    Cartesian cartesianCopy = refcell.CoordinateSystem.ShallowClone();
                     cartesians.Add(cartesianCopy.Translate(up));
                 }
 

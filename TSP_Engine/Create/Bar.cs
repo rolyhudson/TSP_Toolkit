@@ -35,8 +35,8 @@ namespace BH.Engine.TSP
                 //reset as unoccupied
                 foreach(Guid f in bar.Cells)
                 {
-                    var refFootprint = field.Cells.Find(x => x.BHoM_Guid.Equals(f));
-                    refFootprint.Use = Use.Unoccupied;
+                    var refcell = field.Cells.Find(x => x.BHoM_Guid.Equals(f));
+                    refcell.Use = Use.Unoccupied;
                 }
                 bar.Cells = new List<Guid>();
             }

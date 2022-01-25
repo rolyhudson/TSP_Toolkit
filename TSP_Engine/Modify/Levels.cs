@@ -18,27 +18,27 @@ namespace BH.Engine.TSP
             }
             return fieldcopy;
         }
-        public static Cell Levels(this Cell footprint, Field field, Unit unit, VerticalSettings settings)
+        public static Cell Levels(this Cell cell, Field field, Unit unit, VerticalSettings settings)
         {
-            List<Cell> nearestOthers = Query.AlignedNeighbours(footprint, footprint.CoordinateSystem.X, field, Use.Occupied);
+            List<Cell> nearestOthers = Query.AlignedNeighbours(cell, cell.CoordinateSystem.X, field, Use.Occupied);
             double mindist = double.MaxValue;
             if (nearestOthers.Count == 0)
             {
-                footprint.Levels = settings.MaximumLevel;
-                return footprint;
+                cell.Levels = settings.MaximumLevel;
+                return cell;
             }
                 
             foreach (Cell n in nearestOthers)
             {
-                double d = Math.Round(n.Centre.Distance(footprint.Centre),1);
+                double d = Math.Round(n.Centre.Distance(cell.Centre),1);
                 if (d < mindist)
                     mindist = d;
             }
             double nUnitsGap = (mindist / unit.X)-1 ;
-            footprint.Levels = (int)(nUnitsGap / settings.GapToHeightRatio);
-            if (footprint.Levels > settings.MaximumLevel)
-                footprint.Levels = settings.MaximumLevel;
-            return footprint;
+            cell.Levels = (int)(nUnitsGap / settings.GapToHeightRatio);
+            if (cell.Levels > settings.MaximumLevel)
+                cell.Levels = settings.MaximumLevel;
+            return cell;
         }
     }
 }
