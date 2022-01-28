@@ -39,6 +39,7 @@ namespace BH.Engine.TSP
                 {
                     TransformMatrix transform = Geometry.Create.OrientationMatrixGlobalToLocal(cartesian);
                     Unit unit = prototypeUnit.ShallowClone();
+                    unit.BHoM_Guid = Guid.NewGuid();
                     unit.CoordinateSystem = unit.CoordinateSystem.Transform(transform);
                     bar.Units.Add(unit);
                 }

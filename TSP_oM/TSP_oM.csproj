@@ -17,6 +17,9 @@
   </Target>
 
 <ItemGroup>
+  <Reference Include="Analytical_oM">
+    <HintPath>C:\ProgramData\BHoM\Assemblies\Analytical_oM.dll</HintPath>
+  </Reference>
   <Reference Include="BHoM">
     <HintPath>C:\ProgramData\BHoM\Assemblies\BHoM.dll</HintPath>
     <Private>false</Private>

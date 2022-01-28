@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using BH.oM.Geometry.CoordinateSystem;
+using BH.Engine.Base;
 
 namespace BH.Engine.TSP
 {
@@ -30,6 +31,14 @@ namespace BH.Engine.TSP
             TransformMatrix transform = BH.Engine.Geometry.Create.OrientationMatrixGlobalToLocal(unit.CoordinateSystem);
             boundary = boundary.Transform(transform);
             return boundary;
+        }
+
+        public static CompositeGeometry Geometry(this Bar bar)
+        {
+            CompositeGeometry compositeGeometry = new CompositeGeometry();
+            foreach (Unit unit in bar.Units)
+                compositeGeometry.Elements.Add(unit.Geometry());
+            return compositeGeometry;
         }
     }
 }

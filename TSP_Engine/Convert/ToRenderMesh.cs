@@ -19,7 +19,7 @@ namespace BH.Engine.TSP
         {
             List<Mesh> meshes = new List<Mesh>();
             foreach (Bar bar in bars)
-                meshes.AddRange(Create.UnitMesh(bars, prototypeUnit));
+                meshes.AddRange(Create.UnitMesh(bars));
 
             List<RenderMesh> renderMeshes = new List<RenderMesh>();
             foreach (Mesh mesh in meshes)

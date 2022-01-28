@@ -35,6 +35,14 @@
         "runtime": {
           "TSP_oM.dll": {}
         }
+      },
+      "Analytical_oM/5.0.0.0": {
+        "runtime": {
+          "Analytical_oM.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.1.0.0"
+          }
+        }
       }
     }
   },
@@ -67,6 +75,11 @@
     },
     "TSP_oM/5.0.0": {
       "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Analytical_oM/5.0.0.0": {
+      "type": "reference",
       "serviceable": false,
       "sha512": ""
     }
