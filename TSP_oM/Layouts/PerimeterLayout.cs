@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BH.oM.TSP
 {
-    public class CloisterLayout : ILayout
+    public class PerimeterLayout : ILayout
     {
     }
 }

@@ -104,7 +104,7 @@ namespace BH.Engine.TSP
 
         //////////////////////////////////////////////////
 
-        public static Field Field(CloisterLayout layout, Polyline siteBoundary, Unit prototypeUnit)
+        public static Field Field(PerimeterLayout layout, Polyline siteBoundary, Unit prototypeUnit)
         {
             List<Point> points = prototypeUnit.BoundaryPoints();
             
