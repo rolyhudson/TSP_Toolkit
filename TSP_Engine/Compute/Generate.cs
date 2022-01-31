@@ -23,10 +23,9 @@ namespace BH.Engine.TSP
                 
             Field field = Create.IField(settings.LayoutMethod, siteLandUse as SiteLandUse, prototypeUnit);
 
-            
             foreach (var landUseGroup in settings.LandUses.GroupBy(x => x.GetType()))
             {
-                //may need ordering by use priority
+                //TODO may need ordering by use priority
                 if (landUseGroup.Key.Name == "SiteLandUse")
                     continue;
                 else
@@ -36,12 +35,6 @@ namespace BH.Engine.TSP
                 }
                 
             }
-            ////modify for open spaces
-            //if (settings.OpenSpaces.Count > 0)
-            //    field = field.OpenSpace(settings.OpenSpaces);
-            ////modify for circulation
-            //if (settings.CirculationRoutes.Count > 0)
-            //    field = field.Circulation(settings.CirculationRoutes);
 
             Output<List<Bar>, Field> results = Create.IBars(field, settings);
             return new Output<List<Bar>, Field>

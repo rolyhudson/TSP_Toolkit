@@ -11,7 +11,8 @@
         "dependencies": {
           "Microsoft.CSharp": "4.7.0",
           "NETStandard.Library": "2.0.3",
-          "TSP_oM": "5.0.0"
+          "TSP_oM": "5.0.0",
+          "Data_Engine": "5.0.0.0"
         },
         "runtime": {
           "TSP_Engine.dll": {}
@@ -34,6 +35,14 @@
       "TSP_oM/5.0.0": {
         "runtime": {
           "TSP_oM.dll": {}
+        }
+      },
+      "Data_Engine/5.0.0.0": {
+        "runtime": {
+          "Data_Engine.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.1.0.0"
+          }
         }
       },
       "Analytical_oM/5.0.0.0": {
@@ -75,6 +84,11 @@
     },
     "TSP_oM/5.0.0": {
       "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Data_Engine/5.0.0.0": {
+      "type": "reference",
       "serviceable": false,
       "sha512": ""
     },

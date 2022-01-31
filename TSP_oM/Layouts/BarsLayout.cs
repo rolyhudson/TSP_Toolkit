@@ -8,5 +8,7 @@ namespace BH.oM.TSP
     public class BarsLayout : ILayout
     {
         public virtual Vector PrincipleDirection { get; set; } = new Vector();
+
+        public virtual int MaximumPlacementAttempts { get; set; } = 10;
     }
 }

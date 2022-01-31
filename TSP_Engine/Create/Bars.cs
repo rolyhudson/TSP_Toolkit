@@ -33,7 +33,7 @@ namespace BH.Engine.TSP
             List<Bar> bars = new List<Bar>();
             Field fieldCopy = field.ShallowClone();
             int fails = 0;
-            while (fails < settings.MaximumPlacementAttempts)
+            while (fails < layout.MaximumPlacementAttempts)
             {
                 int occupied = fieldCopy.Cells.FindAll(x => x.Use is OccupiedLandUse).Count;
                 int open = fieldCopy.Cells.FindAll(x => x.Use is OpenLandUse).Count;

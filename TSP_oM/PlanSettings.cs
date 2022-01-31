@@ -14,8 +14,6 @@ namespace BH.oM.TSP
 
         public virtual double MinimumUnitsSpace { get; set; } = 2;
 
-        public virtual int MaximumPlacementAttempts{ get; set; } = 10;
-
         public List<ILandUse> LandUses { get; set; } = new List<ILandUse>();
 
         public virtual ILayout LayoutMethod { get; set; }
