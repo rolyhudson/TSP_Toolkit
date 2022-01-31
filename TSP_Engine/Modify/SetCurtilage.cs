@@ -19,19 +19,19 @@ namespace BH.Engine.TSP
                 fieldcopy = fieldcopy.SetCurtilage(refcell, settings, 0);
                 
             }
-            int countOpen = fieldcopy.Cells.FindAll(x => x.Use == Use.Open).Count;
+            int countOpen = fieldcopy.Cells.FindAll(x => x.Use is OpenLandUse).Count;
             return fieldcopy;
         }
 
         public static Field SetCurtilage(this Field field, Cell cell, PlanSettings settings, int depth)
         {
-            int countOpen = field.Cells.FindAll(x => x.Use == Use.Open).Count;
+            int countOpen = field.Cells.FindAll(x => x.Use is OpenLandUse).Count;
             depth++;
-            foreach (Cell n in cell.EightNeighbourhood.FindAll(x => x.Use == Use.Unoccupied || x.Use == Use.Circulation))
+            foreach (Cell n in cell.EightNeighbourhood.FindAll(x => x.Use is UnoccupiedLandUse || x.Use is RoadLandUse))
             {
                 //no change to circulation
-                if(n.Use != Use.Circulation)
-                    n.Use = Use.Open;
+                if(!(n.Use is RoadLandUse))
+                    n.Use = new OpenLandUse();
                 Cell check = field.Cells.Find(x => x.BHoM_Guid.Equals(n.BHoM_Guid));
                 if(check!=null)
                 {

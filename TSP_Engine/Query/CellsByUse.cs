@@ -7,9 +7,9 @@ namespace BH.Engine.TSP
 {
     public static partial class Query
     {
-        public static List<Cell> CellsByUse(this Field field, Use use)
+        public static List<Cell> CellsByUse(this Field field, Type landUse)
         {
-            return field.Cells.FindAll(c => c.Use == use);
+            return field.Cells.FindAll(c => c.Use.GetType().Equals(landUse));
         }
     }
 }

@@ -12,7 +12,7 @@ namespace BH.Engine.TSP
         public static Field Levels(PerimeterLayout layout, Field field, Unit unit, VerticalSettings settings)
         {
             Field fieldcopy = field.ShallowClone();
-            foreach (Cell f in fieldcopy.Cells.FindAll(x => x.Use == Use.Occupied))
+            foreach (Cell f in fieldcopy.Cells.FindAll(x => x.Use is OccupiedLandUse))
             {
                 f.Levels = settings.MaximumLevel;
             }
@@ -27,7 +27,7 @@ namespace BH.Engine.TSP
         public static Field Levels(BarsLayout layout, Field field, Unit unit, VerticalSettings settings)
         {
             Field fieldcopy = field.ShallowClone();
-            foreach (Cell f in fieldcopy.Cells.FindAll(x => x.Use == Use.Occupied))
+            foreach (Cell f in fieldcopy.Cells.FindAll(x => x.Use is OccupiedLandUse))
             {
                 f.Levels(fieldcopy, unit, settings);
             }
@@ -35,7 +35,7 @@ namespace BH.Engine.TSP
         }
         public static Cell Levels(this Cell cell, Field field, Unit unit, VerticalSettings settings)
         {
-            List<Cell> nearestOthers = Query.AlignedNeighbours(cell, cell.CoordinateSystem.X, field, Use.Occupied);
+            List<Cell> nearestOthers = Query.AlignedNeighbours(cell, cell.CoordinateSystem.X, field, new OccupiedLandUse());
             double mindist = double.MaxValue;
             if (nearestOthers.Count == 0)
             {

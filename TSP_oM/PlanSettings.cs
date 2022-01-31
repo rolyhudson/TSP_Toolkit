@@ -16,11 +16,7 @@ namespace BH.oM.TSP
 
         public virtual int MaximumPlacementAttempts{ get; set; } = 10;
 
-        public virtual Polyline SiteBoundary { get; set; } = new Polyline();
-
-        public virtual List<Polyline> CirculationRoutes { get; set; } = new List<Polyline>();
-
-        public virtual List<Polyline> OpenSpaces { get; set; } = new List<Polyline>();
+        public List<ILandUse> LandUses { get; set; } = new List<ILandUse>();
 
         public virtual ILayout LayoutMethod { get; set; }
 

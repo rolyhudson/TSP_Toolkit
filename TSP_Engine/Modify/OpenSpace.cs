@@ -13,19 +13,19 @@ namespace BH.Engine.TSP
         public static Field OpenSpace(this Field field, List<Polyline> openSpaces)
         {
             Field fieldcopy = field.ShallowClone();
-            foreach (Polyline polyline in openSpaces)
-            {
-                if (!polyline.IsClosed() && !polyline.IsPlanar())
-                {
-                    Base.Compute.RecordWarning("One or more of the polylines provided was not closed or not planar.");
-                    continue;
-                }
-                foreach(Cell cell in fieldcopy.Cells.FindAll(x => x.Use != Use.OutsideBoundary && x.Use != Use.Open))
-                {
-                    if (polyline.IIsContaining(new List<Point>() { cell.Centre }))
-                        cell.Use = Use.Open;
-                }
-            }
+            //foreach (Polyline polyline in openSpaces)
+            //{
+            //    if (!polyline.IsClosed() && !polyline.IsPlanar())
+            //    {
+            //        Base.Compute.RecordWarning("One or more of the polylines provided was not closed or not planar.");
+            //        continue;
+            //    }
+            //    foreach(Cell cell in fieldcopy.Cells.FindAll(x => x.Use != Use.OutsideBoundary && x.Use != Use.Open))
+            //    {
+            //        if (polyline.IIsContaining(new List<Point>() { cell.Centre }))
+            //            cell.Use = Use.Open;
+            //    }
+            //}
             return fieldcopy;
         }
     }

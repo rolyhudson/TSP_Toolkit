@@ -13,9 +13,9 @@ namespace BH.Engine.TSP
 {
     public static partial class Create
     {
-        public static Field IField(ILayout layout, Polyline siteBoundary, Unit prototypeUnit)
+        public static Field IField(ILayout layout, SiteLandUse siteLandUse, Unit prototypeUnit)
         {
-            Field field = Field(layout as dynamic, siteBoundary, prototypeUnit);
+            Field field = Field(layout as dynamic, siteLandUse.Boundary, prototypeUnit);
             field.Layout = layout;
             return field; 
         }
@@ -94,7 +94,7 @@ namespace BH.Engine.TSP
             foreach (Cell f in field.Cells)
             {
                 if (!siteBoundary.IIsContaining(f.Boundary))
-                    f.Use = Use.OutsideBoundary;
+                    f.Use = new OutsideSiteLandUse();
                 
             }
 

@@ -23,11 +23,11 @@ namespace BH.Engine.TSP
             return aligned;
         }
 
-        public static List<Cell> AlignedNeighbours(this Cell cell, Vector direction, Field field, Use use)
+        public static List<Cell> AlignedNeighbours(this Cell cell, Vector direction, Field field, ILandUse landUse)
         {
             List<Cell> aligned = new List<Cell>();
 
-            foreach (Cell n in field.Cells.FindAll(x => x.Use == use))
+            foreach (Cell n in field.Cells.FindAll(x => x.Use.GetType().Equals(landUse.GetType())))
             {
                 Vector toNeighbour = n.Centre- cell.Centre;
                 if (Math.Abs(toNeighbour.IsParallel(direction)) == 1)

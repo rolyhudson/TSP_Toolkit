@@ -14,7 +14,7 @@ namespace BH.oM.TSP
         public List<Cell> EightNeighbourhood { get; set; } = new List<Cell>();
         public Polyline Boundary { get; set; } = new Polyline();
         public virtual Cartesian CoordinateSystem { get; set; } = new Cartesian();
-        public virtual Use Use { get; set; } = Use.Unoccupied;
+        public virtual ILandUse Use { get; set; } = new UnoccupiedLandUse();
 
         public virtual Point Centre { get; set; } = new Point();
     }

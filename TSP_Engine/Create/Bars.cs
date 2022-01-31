@@ -35,8 +35,8 @@ namespace BH.Engine.TSP
             int fails = 0;
             while (fails < settings.MaximumPlacementAttempts)
             {
-                int occupied = fieldCopy.Cells.FindAll(x => x.Use == Use.Occupied).Count;
-                int open = fieldCopy.Cells.FindAll(x => x.Use == Use.Open).Count;
+                int occupied = fieldCopy.Cells.FindAll(x => x.Use is OccupiedLandUse).Count;
+                int open = fieldCopy.Cells.FindAll(x => x.Use is OpenLandUse).Count;
                 Bar bar = Create.Bar(ref fieldCopy, settings);
                 if (bar.Cells.Count == 0)
                     fails++;
@@ -54,17 +54,24 @@ namespace BH.Engine.TSP
         [MultiOutput(1, "field", "Updated field.")]
         public static Output<List<Bar>, Field> Bars(PerimeterLayout layout, Field field, PlanSettings settings)
         {
+            ILandUse landUse = settings.LandUses.Find(x => x is SiteLandUse);
+            if (landUse == null)
+            {
+                Base.Compute.RecordError("No site land use was found. A site land use is required.");
+                return new Output<List<Bar>, Field>();
+            }
+            SiteLandUse siteLandUse = landUse as SiteLandUse;
             List<Bar> bars = new List<Bar>();
             Field fieldCopy = field.ShallowClone();
-            foreach (Line line in settings.SiteBoundary.SubParts())
+            foreach (Line line in siteLandUse.Boundary.SubParts())
             {
                 Vector d = line.Direction();
-                if (settings.SiteBoundary.IsClockwise(Vector.ZAxis))
+                if (siteLandUse.Boundary.IsClockwise(Vector.ZAxis))
                     d = d.Reverse();
-                List<Cell> cells = fieldCopy.Cells.FindAll(x => x.CoordinateSystem.Y.IsParallel(d) == 1 && x.Use == Use.Unoccupied);
+                List<Cell> cells = fieldCopy.Cells.FindAll(x => x.CoordinateSystem.Y.IsParallel(d) == 1 && x.Use is UnoccupiedLandUse);
                 if(cells.Count>0)
                 {
-                    cells.ForEach(x => x.Use = Use.Occupied);
+                    cells.ForEach(x => x.Use = new OccupiedLandUse());
                     Bar bar = new Bar();
                     cells.ForEach(x => bar.Cells.Add(x.BHoM_Guid));
                     bars.Add(bar);
