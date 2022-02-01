@@ -12,7 +12,7 @@ namespace BH.Engine.TSP
         {
             Statistics statistics = new Statistics();
             double unitArea = prototypeUnit.X * prototypeUnit.Y;
-            statistics.TotalStudyArea = field.Cells.FindAll(x => x.Use is OutsideSiteLandUse).Count * unitArea;
+            statistics.TotalStudyArea = field.Cells.FindAll(x => !(x.Use is OutsideSiteLandUse)).Count * unitArea;
             statistics.OpenSpaceArea = field.Cells.FindAll(x => x.Use is OpenLandUse).Count * unitArea;
             statistics.NumberOfGroundFloorUnits = field.Cells.FindAll(x => x.Use is OccupiedLandUse).Count;
             statistics.BuiltAreaGroundFloor = statistics.NumberOfGroundFloorUnits * unitArea;

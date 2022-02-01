@@ -10,5 +10,7 @@ namespace BH.oM.TSP
         public virtual Vector PrincipleDirection { get; set; } = new Vector();
 
         public virtual int MaximumPlacementAttempts { get; set; } = 10;
+
+        public virtual double GapToHeightRatio { get; set; } = 1.0;
     }
 }

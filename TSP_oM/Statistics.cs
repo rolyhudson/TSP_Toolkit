@@ -18,5 +18,6 @@ namespace BH.oM.TSP
         public virtual double PercentOpenSpace { get; set; } = 0;
         public virtual double PercentBuiltSpace { get; set; } = 0;
         public virtual double PercentCirculationSpace { get; set; } = 0;
+
     }
 }
