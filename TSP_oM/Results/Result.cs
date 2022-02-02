@@ -6,7 +6,7 @@ using System.Text;
 
 namespace BH.oM.TSP
 {
-    public class SolarResult : IObjectIdResult, ICasedResult, ITimeStepResult, IImmutable
+    public class Result : IObjectIdResult, ICasedResult, ITimeStepResult, IImmutable
     {
         /***************************************************/
         /**** Properties                                ****/
@@ -18,21 +18,25 @@ namespace BH.oM.TSP
 
         public virtual double TimeStep { get; }
 
-        public virtual int SolarAccess { get; }
+        public virtual Field Field { get; }
 
-        public virtual Unit Unit { get; }
+        public virtual List<Bar> Bars { get; }
+
+        public virtual List<SolarResult> SolarResults { get; }
+
 
         /***************************************************/
         /**** Constructors                              ****/
         /***************************************************/
 
-        public SolarResult(IComparable objectId, IComparable resultCase, double timeStep, int solarAccess, Unit unit)
+        public Result(IComparable objectId, IComparable resultCase, double timeStep, Field field, List<Bar> bars, List<SolarResult> solarResults)
         {
             ObjectId = objectId;
             ResultCase = resultCase;
             TimeStep = timeStep;
-            SolarAccess = solarAccess;
-            Unit = unit;
+            Field = field;
+            Bars = bars;
+            SolarResults = solarResults;
         }
 
         /***************************************************/
@@ -41,7 +45,7 @@ namespace BH.oM.TSP
 
         public int CompareTo(IResult other)
         {
-            SolarResult otherRes = other as SolarResult;
+            Result otherRes = other as Result;
 
             if (otherRes == null)
                 return this.GetType().Name.CompareTo(other.GetType().Name);

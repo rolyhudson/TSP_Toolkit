@@ -6,7 +6,7 @@ using System.Text;
 
 namespace BH.oM.TSP
 {
-    public class PlanSettings : BHoMObject
+    public class PlanParameters : BHoMObject
     {
         public virtual double MinimumUnits { get; set; } = 1;
 

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace BH.oM.TSP
 {
-    public class VerticalSettings : BHoMObject
+    public class VerticalParameters : BHoMObject
     {
         public virtual int MaximumLevel { get; set; } = 10;
 

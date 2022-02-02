@@ -12,5 +12,7 @@ namespace BH.oM.TSP
         public virtual double Y { get; set; } = 15.0;
         public virtual double Z { get; set; } = 3.5;
         public virtual Cartesian CoordinateSystem { get; set; } = new Cartesian();
+
+        public virtual int NumberOfApartments { get; set; } = 4;
     }
 }

@@ -8,7 +8,11 @@ namespace BH.Engine.TSP
 {
     public static partial class Query
     {
-        public static Statistics UseSummary(Field field, List<Bar> bars, Unit prototypeUnit, int numberOfApartments)
+        public static Statistics UseSummary(Result result, Unit prototypeUnit)
+        {
+            return UseSummary(result.Field, result.Bars, prototypeUnit);
+        }
+        public static Statistics UseSummary(Field field, List<Bar> bars, Unit prototypeUnit)
         {
             Statistics statistics = new Statistics();
             double unitArea = prototypeUnit.X * prototypeUnit.Y;
@@ -18,7 +22,7 @@ namespace BH.Engine.TSP
             statistics.BuiltAreaGroundFloor = statistics.NumberOfGroundFloorUnits * unitArea;
             statistics.CirculationSpaceArea = field.Cells.FindAll(x => x.Use is RoadLandUse).Count * unitArea;
             statistics.NumberOfStructuralUnits = bars.SelectMany(x => x.Units).Count();
-            statistics.NumberOfApartments = (statistics.NumberOfStructuralUnits - statistics.NumberOfGroundFloorUnits) * numberOfApartments;
+            statistics.NumberOfApartments = (statistics.NumberOfStructuralUnits - statistics.NumberOfGroundFloorUnits) * prototypeUnit.NumberOfApartments;
             statistics.TotalFloorArea = statistics.NumberOfStructuralUnits * unitArea;
             statistics.PercentBuiltSpace = Math.Round(statistics.BuiltAreaGroundFloor / statistics.TotalStudyArea * 100);
             statistics.PercentCirculationSpace = Math.Round(statistics.CirculationSpaceArea / statistics.TotalStudyArea * 100);

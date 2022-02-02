@@ -17,7 +17,7 @@ namespace BH.Engine.TSP
         /**** Public Methods                            ****/
         /***************************************************/
 
-        public static SolarResult SolarAnalysis(this Unit unit, List<Point> observationPoints, List<Mesh> potentialObstructions)
+        public static SolarResult SolarAnalysis(this Unit unit, List<Point> sunPoints, List<Mesh> potentialObstructions)
         {
             m_MeshBoundingSpheres = new Dictionary<Sphere, Mesh>();
             foreach (Mesh m in potentialObstructions)
@@ -32,12 +32,12 @@ namespace BH.Engine.TSP
                 TransformMatrix transform = BH.Engine.Geometry.Create.OrientationMatrixGlobalToLocal(unit.CoordinateSystem);
                 // translate obs points local
                 List<Point> localPts = new List<Point>();
-                foreach (Point p in observationPoints)
+                foreach (Point p in sunPoints)
                     localPts.Add(p.Transform(transform));
 
                 List<Point> points = Query.InHalfSpace(localPts, plane, true);
 
-                foreach (Point p in localPts)
+                foreach (Point p in points)
                 {
                     //translate obs points local
 
@@ -47,7 +47,7 @@ namespace BH.Engine.TSP
                         score++;
                 }
             }
-            SolarResult solarResult = new SolarResult(unit.BHoM_Guid, 1, 1, score, unit);
+            SolarResult solarResult = new SolarResult(unit.BHoM_Guid, 1, 1, score / (double)sunPoints.Count, unit);
             return solarResult;
         }
 
@@ -93,7 +93,7 @@ namespace BH.Engine.TSP
 
                 List<Point> points = Query.InHalfSpace(localPts, plane, true);
 
-                foreach(Point p in localPts)
+                foreach(Point p in points)
                 {
                     //translate obs points local
                     
@@ -103,7 +103,7 @@ namespace BH.Engine.TSP
                         score++;
                 }
             }
-            SolarResult solarResult = new SolarResult(unit.BHoM_Guid, 1, 1, score, unit);
+            SolarResult solarResult = new SolarResult(unit.BHoM_Guid, 1, 1, score / (double)sunPoints.Count, unit);
 
             return solarResult;
         }

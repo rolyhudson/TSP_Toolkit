@@ -54,6 +54,9 @@
     <HintPath>C:\ProgramData\BHoM\Assemblies\Geometry_oM.dll</HintPath>
     <Private>false</Private>
   </Reference>
+  <Reference Include="Graphics_Engine">
+    <HintPath>C:\ProgramData\BHoM\Assemblies\Graphics_Engine.dll</HintPath>
+  </Reference>
   <Reference Include="Graphics_oM">
     <HintPath>C:\ProgramData\BHoM\Assemblies\Graphics_oM.dll</HintPath>
     <Private>false</Private>

@@ -11,11 +11,11 @@ namespace BH.Engine.TSP
 {
     public static partial class Modify
     {
-        public static Field ILevels(Field field, Unit unit, VerticalSettings settings)
+        public static Field ILevels(Field field, Unit unit, VerticalParameters parameters)
         {
-            return Levels(field.Layout as dynamic, field, unit, settings);
+            return Levels(field.Layout as dynamic, field, unit, parameters);
         }
-        public static Field Levels(PerimeterLayout layout, Field field, Unit unit, VerticalSettings settings)
+        public static Field Levels(PerimeterLayout layout, Field field, Unit unit, VerticalParameters parameters)
         {
             Field fieldcopy = field.ShallowClone();
             
@@ -25,25 +25,25 @@ namespace BH.Engine.TSP
                 switch (layout.PerimeterLevelMethod)
                 {
                     case PerimeterLevel.Random:
-                        f.Levels = m_Random.Next(layout.MinimumLevel, settings.MaximumLevel + 1);
+                        f.Levels = m_Random.Next(layout.MinimumLevel, parameters.MaximumLevel + 1);
                         break;
                     case PerimeterLevel.Maximum:
-                        f.Levels = settings.MaximumLevel;
+                        f.Levels = parameters.MaximumLevel;
                         break;
                     case PerimeterLevel.Minimum:
                         f.Levels = layout.MinimumLevel;
                         break;
                     case PerimeterLevel.MaxCentre:
-                        f.Levels = CellLevel(f, field, layout.PerimeterLevelMethod, settings.MaximumLevel , layout.MinimumLevel);
+                        f.Levels = CellLevel(f, field, layout.PerimeterLevelMethod, parameters.MaximumLevel , layout.MinimumLevel);
                         break;
                     case PerimeterLevel.MaxEnds:
-                        f.Levels = CellLevel(f, field, layout.PerimeterLevelMethod, settings.MaximumLevel , layout.MinimumLevel);
+                        f.Levels = CellLevel(f, field, layout.PerimeterLevelMethod, parameters.MaximumLevel , layout.MinimumLevel);
                         break;
                     case PerimeterLevel.StartEnd:
-                        f.Levels = CellLevel(f, field, layout.PerimeterLevelMethod, settings.MaximumLevel, layout.MinimumLevel);
+                        f.Levels = CellLevel(f, field, layout.PerimeterLevelMethod, parameters.MaximumLevel, layout.MinimumLevel);
                         break;
                     case PerimeterLevel.EndStart:
-                        f.Levels = CellLevel(f, field, layout.PerimeterLevelMethod, settings.MaximumLevel, layout.MinimumLevel);
+                        f.Levels = CellLevel(f, field, layout.PerimeterLevelMethod, parameters.MaximumLevel, layout.MinimumLevel);
                         break;
                 }
 
@@ -85,22 +85,22 @@ namespace BH.Engine.TSP
             
         }
 
-        public static Field Levels(BarsLayout layout, Field field, Unit unit, VerticalSettings settings)
+        public static Field Levels(BarsLayout layout, Field field, Unit unit, VerticalParameters parameters)
         {
             Field fieldcopy = field.ShallowClone();
             foreach (Cell f in fieldcopy.Cells.FindAll(x => x.Use is OccupiedLandUse))
             {
-                f.Levels(fieldcopy, unit, settings);
+                f.Levels(fieldcopy, unit, parameters);
             }
             return fieldcopy;
         }
-        public static Cell Levels(this Cell cell, Field field, Unit unit, VerticalSettings settings)
+        public static Cell Levels(this Cell cell, Field field, Unit unit, VerticalParameters parameters)
         {
             List<Cell> nearestOthers = Query.AlignedNeighbours(cell, cell.CoordinateSystem.X, field, new OccupiedLandUse());
             double mindist = double.MaxValue;
             if (nearestOthers.Count == 0)
             {
-                cell.Levels = settings.MaximumLevel;
+                cell.Levels = parameters.MaximumLevel;
                 return cell;
             }
                 
@@ -111,13 +111,13 @@ namespace BH.Engine.TSP
                     mindist = d;
             }
             double nUnitsGap = (mindist / unit.X)-1 ;
-            BarsLayout barsLayout = settings.LayoutMethod as BarsLayout;
+            BarsLayout barsLayout = parameters.LayoutMethod as BarsLayout;
             cell.Levels = (int)(nUnitsGap / barsLayout.GapToHeightRatio);
-            if (cell.Levels > settings.MaximumLevel)
-                cell.Levels = settings.MaximumLevel;
+            if (cell.Levels > parameters.MaximumLevel)
+                cell.Levels = parameters.MaximumLevel;
             return cell;
         }
-        public static Field ILevels(ILayout layout, Field field, Unit unit, VerticalSettings settings)
+        public static Field ILevels(ILayout layout, Field field, Unit unit, VerticalParameters parameters)
         {
             return null;
         }

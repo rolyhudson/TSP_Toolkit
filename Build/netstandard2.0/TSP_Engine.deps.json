@@ -12,7 +12,8 @@
           "Microsoft.CSharp": "4.7.0",
           "NETStandard.Library": "2.0.3",
           "TSP_oM": "5.0.0",
-          "Data_Engine": "5.0.0.0"
+          "Data_Engine": "5.0.0.0",
+          "Graphics_Engine": "5.0.0.0"
         },
         "runtime": {
           "TSP_Engine.dll": {}
@@ -45,9 +46,57 @@
           }
         }
       },
+      "Graphics_Engine/5.0.0.0": {
+        "runtime": {
+          "Graphics_Engine.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.1.0.0"
+          }
+        }
+      },
       "Analytical_oM/5.0.0.0": {
         "runtime": {
           "Analytical_oM.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.1.0.0"
+          }
+        }
+      },
+      "System.Drawing.Common/4.0.0.1": {
+        "runtime": {
+          "System.Drawing.Common.dll": {
+            "assemblyVersion": "4.0.0.1",
+            "fileVersion": "4.6.26919.2"
+          }
+        }
+      },
+      "Library_Engine/5.0.0.0": {
+        "runtime": {
+          "Library_Engine.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.1.0.0"
+          }
+        }
+      },
+      "Serialiser_Engine/5.0.0.0": {
+        "runtime": {
+          "Serialiser_Engine.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.1.0.0"
+          }
+        }
+      },
+      "Versioning_Engine/5.0.0.0": {
+        "runtime": {
+          "Versioning_Engine.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.1.0.0"
+          }
+        }
+      },
+      "Versioning_oM/5.0.0.0": {
+        "runtime": {
+          "Versioning_oM.dll": {
             "assemblyVersion": "5.0.0.0",
             "fileVersion": "5.1.0.0"
           }
@@ -92,7 +141,37 @@
       "serviceable": false,
       "sha512": ""
     },
+    "Graphics_Engine/5.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
     "Analytical_oM/5.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "System.Drawing.Common/4.0.0.1": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Library_Engine/5.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Serialiser_Engine/5.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Versioning_Engine/5.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Versioning_oM/5.0.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""

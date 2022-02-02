@@ -9,21 +9,21 @@ namespace BH.Engine.TSP
 {
     public static partial class Modify
     {
-        public static Field SetCurtilage(this Field field, Bar bar, PlanSettings settings)
+        public static Field SetCurtilage(this Field field, Bar bar, PlanParameters parameters)
         {
             Field fieldcopy = field.ShallowClone();
             foreach (Guid f in bar.Cells)
             {
                 var refcell = fieldcopy.Cells.Find(x => x.BHoM_Guid.Equals(f));
                 //get the unoccupied neighbours
-                fieldcopy = fieldcopy.SetCurtilage(refcell, settings, 0);
+                fieldcopy = fieldcopy.SetCurtilage(refcell, parameters, 0);
                 
             }
             int countOpen = fieldcopy.Cells.FindAll(x => x.Use is OpenLandUse).Count;
             return fieldcopy;
         }
 
-        public static Field SetCurtilage(this Field field, Cell cell, PlanSettings settings, int depth)
+        public static Field SetCurtilage(this Field field, Cell cell, PlanParameters parameters, int depth)
         {
             int countOpen = field.Cells.FindAll(x => x.Use is OpenLandUse).Count;
             depth++;
@@ -37,8 +37,8 @@ namespace BH.Engine.TSP
                 {
 
                 }
-                if (depth < settings.MinimumUnitsSpace)
-                    field = field.SetCurtilage(n, settings, depth);
+                if (depth < parameters.MinimumUnitsSpace)
+                    field = field.SetCurtilage(n, parameters, depth);
             }
             return field;
         }

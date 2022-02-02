@@ -14,21 +14,21 @@ namespace BH.Engine.TSP
     {
         [MultiOutput(0, "bars", "Linear blocks.")]
         [MultiOutput(1, "field", "Updated field.")]
-        public static Output<List<Bar>, Field> IBars(Field field, PlanSettings settings)
+        public static Output<List<Bar>, Field> IBars(Field field, PlanParameters parameters)
         {
-            return Bars(field.Layout as dynamic, field, settings); 
+            return Bars(field.Layout as dynamic, field, parameters); 
         }
 
         [MultiOutput(0, "bars", "Linear blocks.")]
         [MultiOutput(1, "field", "Updated field.")]
-        public static Output<List<Bar>, Field> Bars(ILayout layout, Field field, PlanSettings settings)
+        public static Output<List<Bar>, Field> Bars(ILayout layout, Field field, PlanParameters parameters)
         {
             return null;
         }
 
         [MultiOutput(0, "bars", "Linear blocks.")]
         [MultiOutput(1, "field", "Updated field.")]
-        public static Output<List<Bar>, Field> Bars(BarsLayout layout, Field field, PlanSettings settings)
+        public static Output<List<Bar>, Field> Bars(BarsLayout layout, Field field, PlanParameters parameters)
         {
             List<Bar> bars = new List<Bar>();
             Field fieldCopy = field.ShallowClone();
@@ -37,7 +37,7 @@ namespace BH.Engine.TSP
             {
                 int occupied = fieldCopy.Cells.FindAll(x => x.Use is OccupiedLandUse).Count;
                 int open = fieldCopy.Cells.FindAll(x => x.Use is OpenLandUse).Count;
-                Bar bar = Create.Bar(ref fieldCopy, settings);
+                Bar bar = Create.Bar(ref fieldCopy, parameters);
                 if (bar.Cells.Count == 0)
                     fails++;
                 else
@@ -52,9 +52,9 @@ namespace BH.Engine.TSP
 
         [MultiOutput(0, "bars", "Linear blocks.")]
         [MultiOutput(1, "field", "Updated field.")]
-        public static Output<List<Bar>, Field> Bars(PerimeterLayout layout, Field field, PlanSettings settings)
+        public static Output<List<Bar>, Field> Bars(PerimeterLayout layout, Field field, PlanParameters parameters)
         {
-            ILandUse landUse = settings.LandUses.Find(x => x is SiteLandUse);
+            ILandUse landUse = parameters.LandUses.Find(x => x is SiteLandUse);
             if (landUse == null)
             {
                 Base.Compute.RecordError("No site land use was found. A site land use is required.");

@@ -12,18 +12,18 @@ namespace BH.Engine.TSP
     {
         [MultiOutput(0, "bars", "Linear blocks.")]
         [MultiOutput(1, "field", "Field.")]
-        public static Output<List<Bar>, Field> Generate(Unit prototypeUnit, PlanSettings settings)
+        public static Output<List<Bar>, Field> Generate(Unit prototypeUnit, PlanParameters parameters)
         {
-            ILandUse siteLandUse = settings.LandUses.Find(x => x is SiteLandUse);
+            ILandUse siteLandUse = parameters.LandUses.Find(x => x is SiteLandUse);
             if(siteLandUse == null)
             {
                 Base.Compute.RecordError("No site land use was found. A site land use is required.");
                 return new Output<List<Bar>, Field>();
             }
                 
-            Field field = Create.IField(settings.LayoutMethod, siteLandUse as SiteLandUse, prototypeUnit);
+            Field field = Create.IField(parameters.LayoutMethod, siteLandUse as SiteLandUse, prototypeUnit);
 
-            foreach (var landUseGroup in settings.LandUses.GroupBy(x => x.GetType()))
+            foreach (var landUseGroup in parameters.LandUses.GroupBy(x => x.GetType()))
             {
                 //TODO may need ordering by use priority
                 if (landUseGroup.Key.Name == "SiteLandUse")
@@ -36,7 +36,7 @@ namespace BH.Engine.TSP
                 
             }
 
-            Output<List<Bar>, Field> results = Create.IBars(field, settings);
+            Output<List<Bar>, Field> results = Create.IBars(field, parameters);
             return new Output<List<Bar>, Field>
             {
                 Item1 = results.Item1,
