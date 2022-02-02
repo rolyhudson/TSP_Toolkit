@@ -16,6 +16,11 @@
     <Exec Command="xcopy &quot;$(TargetDir)$(TargetFileName)&quot;  &quot;C:\ProgramData\BHoM\Assemblies&quot; /Y" />
   </Target>
 
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="System.Text.Json" Version="6.0.1" />
+  </ItemGroup>
+
 <ItemGroup>
   <Reference Include="Analytical_oM">
     <HintPath>C:\ProgramData\BHoM\Assemblies\Analytical_oM.dll</HintPath>

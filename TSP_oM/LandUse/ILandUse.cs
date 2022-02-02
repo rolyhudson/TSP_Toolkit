@@ -3,6 +3,8 @@ using BH.oM.Geometry;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace BH.oM.TSP
 {
@@ -10,4 +12,15 @@ namespace BH.oM.TSP
     {
         
     }
+
+    
+
+    //[AttributeUsage(AttributeTargets.Interface, AllowMultiple = false)]
+    //public class JsonInterfaceConverterAttribute : JsonConverterAttribute
+    //{
+    //    public JsonInterfaceConverterAttribute(Type converterType)
+    //        : base(converterType)
+    //    {
+    //    }
+    //}
 }

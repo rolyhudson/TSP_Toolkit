@@ -42,7 +42,7 @@ namespace BH.Engine.TSP
                 Gradient gradient = new Gradient();
                 if (analysisGradient == null)
                 {
-                    gradient = Gradient(new List<Color>() { Color.DarkBlue, Color.LightBlue});
+                    gradient = Gradient(new List<Color>() { Color.FromArgb(77, 77, 255), Color.FromArgb(150, 255, 238)});
                 }
                 else
                     gradient = analysisGradient;
