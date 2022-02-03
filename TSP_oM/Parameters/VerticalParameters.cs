@@ -10,7 +10,7 @@ namespace BH.oM.TSP
     {
         public virtual int MaximumLevel { get; set; } = 10;
 
-        public virtual ILayout LayoutMethod { get; set; }
+        
     }
 
     

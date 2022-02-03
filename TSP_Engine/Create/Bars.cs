@@ -54,7 +54,7 @@ namespace BH.Engine.TSP
         [MultiOutput(1, "field", "Updated field.")]
         public static Output<List<Bar>, Field> Bars(PerimeterLayout layout, Field field, PlanParameters parameters)
         {
-            ILandUse landUse = parameters.LandUses.Find(x => x is SiteLandUse);
+            ILandUse landUse = Query.FindSiteUse(parameters.LandUses);
             if (landUse == null)
             {
                 Base.Compute.RecordError("No site land use was found. A site land use is required.");
@@ -85,6 +85,8 @@ namespace BH.Engine.TSP
                 Item2 = fieldCopy,
             };
         }
+
+        
 
     }
 }

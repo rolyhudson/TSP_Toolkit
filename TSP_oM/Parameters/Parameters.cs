@@ -12,6 +12,7 @@ namespace BH.oM.TSP
         public virtual VerticalParameters VerticalParameters { get; set; } = new VerticalParameters();
 
         public virtual SolarAccessParameters SolarAccessParameters { get; set; } = new SolarAccessParameters();
+        public virtual object LayoutMethod { get; set; }
 
     }
 }

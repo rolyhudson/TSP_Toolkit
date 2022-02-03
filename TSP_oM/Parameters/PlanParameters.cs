@@ -15,9 +15,9 @@ namespace BH.oM.TSP
 
         public virtual double MinimumUnitsSpace { get; set; } = 2;
 
-        public List<ILandUse> LandUses { get; set; } = new List<ILandUse>();
+        public List<object> LandUses { get; set; } = new List<object>();
 
-        public virtual ILayout LayoutMethod { get; set; }
+        
 
     }
 }

@@ -14,7 +14,7 @@ namespace BH.Engine.TSP
         
         public static Result Solution(Parameters parameters, bool runSolarAnalysis)
         {
-            var option = Generate(parameters.PrototypeUnit, parameters.PlanParameters);
+            var option = Generate(parameters.PrototypeUnit, parameters.PlanParameters, parameters.LayoutMethod as ILayout);
             option.Item2 = Modify.ILevels(option.Item2, parameters.PrototypeUnit, parameters.VerticalParameters);
             option.Item1 = Massing(option.Item1, option.Item2, parameters.PrototypeUnit);
             List<SolarResult> solarResults = new List<SolarResult>();

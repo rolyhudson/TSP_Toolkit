@@ -90,11 +90,11 @@ namespace BH.Engine.TSP
             Field fieldcopy = field.ShallowClone();
             foreach (Cell f in fieldcopy.Cells.FindAll(x => x.Use is OccupiedLandUse))
             {
-                f.Levels(fieldcopy, unit, parameters);
+                f.Levels(fieldcopy, unit, parameters, layout);
             }
             return fieldcopy;
         }
-        public static Cell Levels(this Cell cell, Field field, Unit unit, VerticalParameters parameters)
+        public static Cell Levels(this Cell cell, Field field, Unit unit, VerticalParameters parameters, ILayout layout)
         {
             List<Cell> nearestOthers = Query.AlignedNeighbours(cell, cell.CoordinateSystem.X, field, new OccupiedLandUse());
             double mindist = double.MaxValue;
@@ -111,7 +111,7 @@ namespace BH.Engine.TSP
                     mindist = d;
             }
             double nUnitsGap = (mindist / unit.X)-1 ;
-            BarsLayout barsLayout = parameters.LayoutMethod as BarsLayout;
+            BarsLayout barsLayout = layout as BarsLayout;
             cell.Levels = (int)(nUnitsGap / barsLayout.GapToHeightRatio);
             if (cell.Levels > parameters.MaximumLevel)
                 cell.Levels = parameters.MaximumLevel;
