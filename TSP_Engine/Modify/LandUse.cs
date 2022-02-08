@@ -30,7 +30,8 @@ namespace BH.Engine.TSP
 
         public static Field LandUse(this Field field, RoadLandUse landUse)
         {
-            
+            if (landUse.CentreLine == null)
+                return field;
             if (!landUse.CentreLine.IsPlanar())
             {
                 Base.Compute.RecordWarning("One or more of the road land use polylines provided was not planar.");
@@ -55,7 +56,8 @@ namespace BH.Engine.TSP
 
         private static Field LandUse(this Field field, Polyline polyline, ILandUse landUse)
         {
-            
+            if (polyline == null)
+                return field;
             if (!polyline.IsClosed() && !polyline.IsPlanar())
             {
                 Base.Compute.RecordWarning("One or more of the open land use polylines provided was not closed or not planar.");
