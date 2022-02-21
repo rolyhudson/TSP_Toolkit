@@ -13,8 +13,7 @@
           "NETStandard.Library": "2.0.3",
           "TSP_oM": "5.0.0",
           "Data_Engine": "5.0.0.0",
-          "Graphics_Engine": "5.0.0.0",
-          "Reflection_oM": "5.0.0.0"
+          "Graphics_Engine": "5.0.0.0"
         },
         "runtime": {
           "TSP_Engine.dll": {}
@@ -144,7 +143,7 @@
         "runtime": {
           "Data_Engine.dll": {
             "assemblyVersion": "5.0.0.0",
-            "fileVersion": "5.0.0.0"
+            "fileVersion": "5.1.0.0"
           }
         }
       },
@@ -152,15 +151,7 @@
         "runtime": {
           "Graphics_Engine.dll": {
             "assemblyVersion": "5.0.0.0",
-            "fileVersion": "5.0.0.0"
-          }
-        }
-      },
-      "Reflection_oM/5.0.0.0": {
-        "runtime": {
-          "Reflection_oM.dll": {
-            "assemblyVersion": "5.0.0.0",
-            "fileVersion": "5.0.0.0"
+            "fileVersion": "5.1.0.0"
           }
         }
       },
@@ -184,7 +175,7 @@
         "runtime": {
           "Library_Engine.dll": {
             "assemblyVersion": "5.0.0.0",
-            "fileVersion": "5.0.0.0"
+            "fileVersion": "5.1.0.0"
           }
         }
       },
@@ -192,15 +183,7 @@
         "runtime": {
           "Serialiser_Engine.dll": {
             "assemblyVersion": "5.0.0.0",
-            "fileVersion": "5.0.0.0"
-          }
-        }
-      },
-      "MongoDB.Bson/2.9.3.0": {
-        "runtime": {
-          "MongoDB.Bson.dll": {
-            "assemblyVersion": "2.9.3.0",
-            "fileVersion": "2.9.3.0"
+            "fileVersion": "5.1.0.0"
           }
         }
       },
@@ -208,7 +191,7 @@
         "runtime": {
           "Versioning_Engine.dll": {
             "assemblyVersion": "5.0.0.0",
-            "fileVersion": "5.0.0.0"
+            "fileVersion": "5.1.0.0"
           }
         }
       },
@@ -216,7 +199,7 @@
         "runtime": {
           "Versioning_oM.dll": {
             "assemblyVersion": "5.0.0.0",
-            "fileVersion": "5.0.0.0"
+            "fileVersion": "5.1.0.0"
           }
         }
       }
@@ -327,11 +310,6 @@
       "serviceable": false,
       "sha512": ""
     },
-    "Reflection_oM/5.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
     "Analytical_oM/5.0.0.0": {
       "type": "reference",
       "serviceable": false,
@@ -348,11 +326,6 @@
       "sha512": ""
     },
     "Serialiser_Engine/5.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "MongoDB.Bson/2.9.3.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""

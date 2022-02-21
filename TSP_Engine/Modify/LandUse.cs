@@ -34,7 +34,7 @@ namespace BH.Engine.TSP
                 return field;
             if (!landUse.CentreLine.IsPlanar())
             {
-                Reflection.Compute.RecordWarning("One or more of the road land use polylines provided was not planar.");
+                Base.Compute.RecordWarning("One or more of the road land use polylines provided was not planar.");
                 return null;
             }
             Field fieldcopy = field.ShallowClone();
@@ -50,7 +50,7 @@ namespace BH.Engine.TSP
 
         public static Field LandUse(this Field field, ILandUse landUse)
         {
-            Reflection.Compute.RecordError("LandUse is unknown.");
+            Base.Compute.RecordError("LandUse is unknown.");
             return null;
         }
 
@@ -60,7 +60,7 @@ namespace BH.Engine.TSP
                 return field;
             if (!polyline.IsClosed() && !polyline.IsPlanar())
             {
-                Reflection.Compute.RecordWarning("One or more of the open land use polylines provided was not closed or not planar.");
+                Base.Compute.RecordWarning("One or more of the open land use polylines provided was not closed or not planar.");
                 return null;
             }
             Field fieldcopy = field.ShallowClone();

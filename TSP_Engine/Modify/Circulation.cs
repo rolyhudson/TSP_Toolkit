@@ -17,7 +17,7 @@ namespace BH.Engine.TSP
             //{
             //    if (!polyline.IsPlanar())
             //    {
-            //        Reflection.Compute.RecordWarning("One or more of the polylines provided was not planar.");
+            //        Base.Compute.RecordWarning("One or more of the polylines provided was not planar.");
             //        continue;
             //    }
             //    foreach (Cell cell in fieldcopy.Cells.FindAll(x => x.Use != Use.OutsideBoundary && x.Use != Use.Circulation))

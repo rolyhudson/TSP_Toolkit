@@ -1,9 +1,8 @@
 ﻿using BH.Engine.Base;
 using BH.Engine.Geometry;
 using BH.oM.Base;
+using BH.oM.Base.Attributes;
 using BH.oM.Geometry;
-using BH.oM.Reflection;
-using BH.oM.Reflection.Attributes;
 using BH.oM.TSP;
 using System;
 using System.Collections.Generic;
@@ -58,7 +57,7 @@ namespace BH.Engine.TSP
             ILandUse landUse = Query.FindSiteUse(parameters.LandUses);
             if (landUse == null)
             {
-                Reflection.Compute.RecordError("No site land use was found. A site land use is required.");
+                Base.Compute.RecordError("No site land use was found. A site land use is required.");
                 return new Output<List<Bar>, Field>();
             }
             SiteLandUse siteLandUse = landUse as SiteLandUse;
