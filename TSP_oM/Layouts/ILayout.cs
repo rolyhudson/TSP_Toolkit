@@ -7,11 +7,8 @@ using System.Text.Json.Serialization;
 
 namespace BH.oM.TSP
 {
-    
+
     public interface ILayout : IObject
     {
-        
     }
-
-
 }

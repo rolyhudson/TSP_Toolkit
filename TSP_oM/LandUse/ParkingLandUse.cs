@@ -10,5 +10,7 @@ namespace BH.oM.TSP
             
     {
         public virtual Polyline Boundary { get; set; } = new Polyline();
+
+        override public string Name { get; set; } = "ParkingLandUse";
     }
 }

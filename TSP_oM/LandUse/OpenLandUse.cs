@@ -9,5 +9,7 @@ namespace BH.oM.TSP
     public class OpenLandUse : BHoMObject, ILandUse
     {
         public virtual Polyline Boundary { get; set; } = new Polyline();
+
+        override public string Name { get; set; } = "OpenLandUse";
     }
 }

@@ -9,5 +9,7 @@ namespace BH.oM.TSP
         public virtual PerimeterLevel PerimeterLevelMethod { get; set; } = PerimeterLevel.Random;
 
         public virtual int MinimumLevel { get; set; } = 1;
+
+        public virtual string Name { get; set; } = "PerimeterLayout";
     }
 }

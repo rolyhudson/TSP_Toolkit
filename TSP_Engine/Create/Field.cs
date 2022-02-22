@@ -29,7 +29,7 @@ namespace BH.Engine.TSP
         public static Field Field(BarsLayout layout, Polyline siteBoundary, Unit prototypeUnit)
         {
             List<List<Cell>> cells2d = new List<List<Cell>>();
-            Field field = Field(layout.PrincipleDirection, siteBoundary, prototypeUnit,ref cells2d);
+            Field field = Field(ToVector(layout.PrincipleDirection), siteBoundary, prototypeUnit,ref cells2d);
             SetAdjacency(cells2d, ref field);
 
             foreach (var cell in field.Cells)
@@ -205,6 +205,25 @@ namespace BH.Engine.TSP
                     field.Adjacency.Add(cells2d[i][j].BHoM_Guid, guids);
                 }
             }
+        }
+
+        /***************************************************/
+
+        private static Vector ToVector(double heading)
+        {
+            double d1 = 90 - heading;
+            if (d1 < 0)
+                d1 = d1 + 360;
+
+            double rads = d1 * Math.PI / 180;
+
+            return new Vector()
+            { 
+                X = Math.Cos(rads),
+                Y = Math.Sin(rads),
+                Z = 0
+            };
+
         }
     }
 }

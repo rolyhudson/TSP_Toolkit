@@ -7,5 +7,6 @@ namespace BH.oM.TSP
 {
     public class OutsideSiteLandUse : BHoMObject, ILandUse
     {
+        override public string Name { get; set; } = "OutsideSiteLandUse";
     }
 }
