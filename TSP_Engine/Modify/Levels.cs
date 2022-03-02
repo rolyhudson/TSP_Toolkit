@@ -11,10 +11,37 @@ namespace BH.Engine.TSP
 {
     public static partial class Modify
     {
+
+        /***************************************************/
+        /**** Public Methods                            ****/
+        /***************************************************/
+
         public static Field ILevels(Field field, Unit unit, VerticalParameters parameters)
         {
             return Levels(field.Layout as dynamic, field, unit, parameters);
         }
+
+        /***************************************************/
+
+        public static Field Levels(HybridLayout layout, Field field, Unit unit, VerticalParameters parameters)
+        {
+            Field pField = new Field();
+            pField.Cells = field.Cells.FindAll(x => x.Tags.Contains("perimeter"));
+            PerimeterLayout perimeterLayout = (PerimeterLayout)layout.Layouts.Find(x => x is PerimeterLayout);
+            pField = Levels(perimeterLayout, pField, unit, parameters);
+
+            Field bField = new Field();
+            bField.Cells = field.Cells.FindAll(x => x.Tags.Contains("internal"));
+            BarsLayout barsLayout = (BarsLayout)layout.Layouts.Find(x => x is BarsLayout);
+            bField = Levels(barsLayout, bField, unit, parameters);
+
+            bField.Cells.AddRange(pField.Cells);
+
+            return bField;
+        }
+
+        /***************************************************/
+
         public static Field Levels(PerimeterLayout layout, Field field, Unit unit, VerticalParameters parameters)
         {
             Field fieldcopy = field.ShallowClone();
@@ -52,6 +79,55 @@ namespace BH.Engine.TSP
             return fieldcopy;
         }
 
+        /***************************************************/
+
+        public static Field Levels(BarsLayout layout, Field field, Unit unit, VerticalParameters parameters)
+        {
+            Field fieldcopy = field.ShallowClone();
+            foreach (Cell f in fieldcopy.Cells.FindAll(x => x.Use is OccupiedLandUse))
+            {
+                f.Levels(fieldcopy, unit, parameters, layout);
+            }
+            return fieldcopy;
+        }
+
+        /***************************************************/
+
+        public static Cell Levels(this Cell cell, Field field, Unit unit, VerticalParameters parameters, ILayout layout)
+        {
+            List<Cell> nearestOthers = Query.AlignedNeighbours(cell, cell.CoordinateSystem.X, field, new OccupiedLandUse());
+            double mindist = double.MaxValue;
+            if (nearestOthers.Count == 0)
+            {
+                cell.Levels = parameters.MaximumLevel;
+                return cell;
+            }
+
+            foreach (Cell n in nearestOthers)
+            {
+                double d = Math.Round(n.Centre.Distance(cell.Centre), 1);
+                if (d < mindist)
+                    mindist = d;
+            }
+            double nUnitsGap = (mindist / unit.X) - 1;
+            BarsLayout barsLayout = layout as BarsLayout;
+            cell.Levels = (int)(nUnitsGap / barsLayout.GapToHeightRatio);
+            if (cell.Levels > parameters.MaximumLevel)
+                cell.Levels = parameters.MaximumLevel;
+            return cell;
+        }
+
+        /***************************************************/
+
+        public static Field ILevels(ILayout layout, Field field, Unit unit, VerticalParameters parameters)
+        {
+            return null;
+        }
+
+        /***************************************************/
+        /**** Private Methods                           ****/
+        /***************************************************/
+
         private static int CellLevel(Cell cell, Field field, PerimeterLevel method, int levelMax, int levelMin)
         {
             List<Cell> nearestOthers = Query.AlignedNeighbours(cell, cell.CoordinateSystem.Y, field, new OccupiedLandUse());
@@ -85,42 +161,7 @@ namespace BH.Engine.TSP
             
         }
 
-        public static Field Levels(BarsLayout layout, Field field, Unit unit, VerticalParameters parameters)
-        {
-            Field fieldcopy = field.ShallowClone();
-            foreach (Cell f in fieldcopy.Cells.FindAll(x => x.Use is OccupiedLandUse))
-            {
-                f.Levels(fieldcopy, unit, parameters, layout);
-            }
-            return fieldcopy;
-        }
-        public static Cell Levels(this Cell cell, Field field, Unit unit, VerticalParameters parameters, ILayout layout)
-        {
-            List<Cell> nearestOthers = Query.AlignedNeighbours(cell, cell.CoordinateSystem.X, field, new OccupiedLandUse());
-            double mindist = double.MaxValue;
-            if (nearestOthers.Count == 0)
-            {
-                cell.Levels = parameters.MaximumLevel;
-                return cell;
-            }
-                
-            foreach (Cell n in nearestOthers)
-            {
-                double d = Math.Round(n.Centre.Distance(cell.Centre),1);
-                if (d < mindist)
-                    mindist = d;
-            }
-            double nUnitsGap = (mindist / unit.X)-1 ;
-            BarsLayout barsLayout = layout as BarsLayout;
-            cell.Levels = (int)(nUnitsGap / barsLayout.GapToHeightRatio);
-            if (cell.Levels > parameters.MaximumLevel)
-                cell.Levels = parameters.MaximumLevel;
-            return cell;
-        }
-        public static Field ILevels(ILayout layout, Field field, Unit unit, VerticalParameters parameters)
-        {
-            return null;
-        }
+        /***************************************************/
 
         private static Random m_Random = new Random();
     }

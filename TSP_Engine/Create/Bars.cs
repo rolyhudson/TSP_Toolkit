@@ -28,6 +28,29 @@ namespace BH.Engine.TSP
 
         [MultiOutput(0, "bars", "Linear blocks.")]
         [MultiOutput(1, "field", "Updated field.")]
+        public static Output<List<Bar>, Field> Bars(HybridLayout layout, Field field, PlanParameters parameters)
+        {
+            Field pField= new Field();
+            pField.Cells = field.Cells.FindAll(x => x.Tags.Contains("perimeter"));
+            PerimeterLayout perimeterLayout = (PerimeterLayout)layout.Layouts.Find(x => x is PerimeterLayout);
+            Output<List<Bar>, Field> pBars = Bars(perimeterLayout, pField, parameters);
+
+            Field bField = new Field();
+            bField.Cells = field.Cells.FindAll(x => x.Tags.Contains("internal"));
+            BarsLayout barsLayout = (BarsLayout)layout.Layouts.Find(x => x is BarsLayout);
+            Output<List<Bar>, Field> bBars = Bars(barsLayout, bField, parameters);
+
+            Output<List<Bar>, Field> combined = pBars;
+            combined.Item1.AddRange(bBars.Item1);
+            combined.Item2.Cells.AddRange(bBars.Item2.Cells);
+            combined.Item2.Layout = layout;
+
+            return combined;
+
+        }
+
+        [MultiOutput(0, "bars", "Linear blocks.")]
+        [MultiOutput(1, "field", "Updated field.")]
         public static Output<List<Bar>, Field> Bars(BarsLayout layout, Field field, PlanParameters parameters)
         {
             List<Bar> bars = new List<Bar>();

@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace BH.Engine.TSP
 {
@@ -22,6 +23,30 @@ namespace BH.Engine.TSP
             Field field = Field(layout as dynamic, siteLandUse.Boundary, prototypeUnit);
             field.Layout = layout;
             return field; 
+        }
+
+        /***************************************************/
+
+        public static Field Field(HybridLayout layout, Polyline siteBoundary, Unit prototypeUnit)
+        {
+            if (layout.Layouts.Count == 2 && layout.Layouts.Any(x => x is BarsLayout) && layout.Layouts.Any(x => x is PerimeterLayout))
+            {
+                PerimeterLayout perimeterLayout = (PerimeterLayout)layout.Layouts.Find(x => x is PerimeterLayout);
+                Field pField = Field(perimeterLayout, siteBoundary, prototypeUnit);
+                //remove the inner field
+                int removed = pField.Cells.RemoveAll(x => x.Use is OpenLandUse);
+                pField.Cells.ForEach(x => x.Tags.Add("perimeter"));
+                BarsLayout barsLayout = (BarsLayout)layout.Layouts.Find(x => x is BarsLayout);
+                Polyline offset = siteBoundary.Offset(layout.PerimeterOffset, Vector.ZAxis);
+                Field bField = Field(barsLayout, offset, prototypeUnit);
+                bField.Cells.ForEach(x => x.Tags.Add("internal"));
+                bField.Cells.AddRange(pField.Cells);
+                return bField;
+            }
+            else
+                return null;
+
+            
         }
 
         /***************************************************/
@@ -211,16 +236,14 @@ namespace BH.Engine.TSP
 
         private static Vector ToVector(double heading)
         {
-            double d1 = 90 - heading;
+            double d1 = Math.PI / 2 - heading;
             if (d1 < 0)
-                d1 = d1 + 360;
-
-            double rads = d1 * Math.PI / 180;
+                d1 = d1 + 2* Math.PI;
 
             return new Vector()
             { 
-                X = Math.Cos(rads),
-                Y = Math.Sin(rads),
+                X = Math.Cos(d1),
+                Y = Math.Sin(d1),
                 Z = 0
             };
 
