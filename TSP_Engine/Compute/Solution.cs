@@ -37,7 +37,7 @@ namespace BH.Engine.TSP
                 //add the units generated to obstructions
                 List<Mesh> units = Create.UnitMesh(option.Item1);
                 copySolarParameters.Obstructions.AddRange(units);
-                copySolarParameters.Obstructions.Add(communalBlock.UniteMesh());
+                copySolarParameters.Obstructions.Add(communalBlock.UnitMesh());
 
                 solarResults = SolarAnalysis(option.Item1, copySolarParameters.SunPoints, copySolarParameters.Obstructions);
             }

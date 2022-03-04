@@ -43,7 +43,7 @@ namespace BH.Engine.TSP
             return mesh;
         }
 
-        public static Mesh UniteMesh(this CommunalBlock communalBlock)
+        public static Mesh UnitMesh(this CommunalBlock communalBlock)
         {
             Mesh m = new Mesh();
             List<oM.Geometry.Point> vertices = new List<oM.Geometry.Point>();
