@@ -37,7 +37,7 @@ namespace BH.Engine.TSP
                 int removed = pField.Cells.RemoveAll(x => x.Use is OpenLandUse);
                 pField.Cells.ForEach(x => x.Tags.Add("perimeter"));
                 BarsLayout barsLayout = (BarsLayout)layout.Layouts.Find(x => x is BarsLayout);
-                Polyline offset = siteBoundary.Offset(layout.PerimeterOffset, Vector.ZAxis);
+                Polyline offset = siteBoundary.Offset(perimeterLayout.BoundaryOffset, Vector.ZAxis);
                 Field bField = Field(barsLayout, offset, prototypeUnit);
                 bField.Cells.ForEach(x => x.Tags.Add("internal"));
                 bField.Cells.AddRange(pField.Cells);
@@ -54,7 +54,8 @@ namespace BH.Engine.TSP
         public static Field Field(BarsLayout layout, Polyline siteBoundary, Unit prototypeUnit)
         {
             List<List<Cell>> cells2d = new List<List<Cell>>();
-            Field field = Field(ToVector(layout.PrincipleDirection), siteBoundary, prototypeUnit,ref cells2d);
+            Polyline offset = siteBoundary.Offset(layout.BoundaryOffset, Vector.ZAxis);
+            Field field = Field(ToVector(layout.PrincipleDirection), offset, prototypeUnit,ref cells2d);
             SetAdjacency(cells2d, ref field);
 
             foreach (var cell in field.Cells)
@@ -70,12 +71,12 @@ namespace BH.Engine.TSP
         public static Field Field(PerimeterLayout layout, Polyline siteBoundary, Unit prototypeUnit)
         {
             List<Point> points = prototypeUnit.BoundaryPoints();
-            
+            Polyline offset = siteBoundary.Offset(layout.BoundaryOffset, Vector.ZAxis);
             Field field = new Field();
-            if (siteBoundary.IsClockwise(Vector.ZAxis))
-                siteBoundary = siteBoundary.Flip();
+            if (offset.IsClockwise(Vector.ZAxis))
+                offset = offset.Flip();
             Vector yaxis = new Vector();
-            foreach (Line line in siteBoundary.SubParts())
+            foreach (Line line in offset.SubParts())
             {
                 Polyline boundary = Geometry.Create.Polyline(points);
                 if (line.Length() < prototypeUnit.Y)

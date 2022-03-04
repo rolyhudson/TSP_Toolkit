@@ -14,5 +14,7 @@ namespace BH.oM.TSP
         public virtual double GapToHeightRatio { get; set; } = 1.0;
 
         public virtual string Name { get; set; } = "BarsLayout";
+
+        public virtual double BoundaryOffset { get; set; } = 6.0;
     }
 }

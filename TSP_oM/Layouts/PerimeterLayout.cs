@@ -11,5 +11,7 @@ namespace BH.oM.TSP
         public virtual int MinimumLevel { get; set; } = 1;
 
         public virtual string Name { get; set; } = "PerimeterLayout";
+
+        public virtual double BoundaryOffset { get; set; } = 6.0;
     }
 }

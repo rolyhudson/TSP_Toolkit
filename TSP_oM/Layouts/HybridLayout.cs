@@ -8,6 +8,6 @@ namespace BH.oM.TSP
     {
         public virtual List<ILayout> Layouts { get; set; } = new List<ILayout>();
 
-        public virtual double PerimeterOffset { get; set; } = 5.0;
+        
     }
 }
