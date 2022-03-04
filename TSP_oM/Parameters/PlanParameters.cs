@@ -17,7 +17,6 @@ namespace BH.oM.TSP
 
         public List<object> LandUses { get; set; } = new List<object>();
 
-        
 
     }
 }

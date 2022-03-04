@@ -73,8 +73,7 @@ namespace BH.Engine.TSP
             List<Point> points = prototypeUnit.BoundaryPoints();
             Polyline offset = siteBoundary.Offset(layout.BoundaryOffset, Vector.ZAxis);
             Field field = new Field();
-            if (offset.IsClockwise(Vector.ZAxis))
-                offset = offset.Flip();
+            offset = offset.ForceClockwise();
             Vector yaxis = new Vector();
             foreach (Line line in offset.SubParts())
             {

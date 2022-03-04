@@ -11,6 +11,8 @@ namespace BH.oM.TSP
         public virtual PlanParameters PlanParameters { get; set; } = new PlanParameters();
         public virtual VerticalParameters VerticalParameters { get; set; } = new VerticalParameters();
 
+        public virtual CommunalParameters CommunalParameters { get; set; } = new CommunalParameters();
+
         public virtual SolarAccessParameters SolarAccessParameters { get; set; } = new SolarAccessParameters();
         public virtual object LayoutMethod { get; set; }
 

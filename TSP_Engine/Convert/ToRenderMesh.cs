@@ -4,6 +4,7 @@ using BH.oM.TSP;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Text;
 
 namespace BH.Engine.TSP
@@ -48,6 +49,25 @@ namespace BH.Engine.TSP
             renderMesh.Vertices = renderPts;
             renderMesh.Faces = mesh.Faces;
             return renderMesh;
+        }
+
+        public static RenderMesh ToRenderMesh(this CommunalBlock communalBlock, Color color)
+        {
+            Mesh m = new Mesh();
+            List<oM.Geometry.Point> vertices = new List<oM.Geometry.Point>();
+            vertices.AddRange(communalBlock.Floors[0].ControlPoints);
+            vertices.AddRange(communalBlock.Floors.Last().ControlPoints);
+
+            List<Face> faces = new List<Face>();
+            faces.Add(Geometry.Create.Face(0, 1, 2, 3));
+            faces.Add(Geometry.Create.Face(5,6,7,8));
+            faces.Add(Geometry.Create.Face(0, 5, 6, 1));
+            faces.Add(Geometry.Create.Face(1,6,7,2));
+            faces.Add(Geometry.Create.Face(2,7,8,3));
+            faces.Add(Geometry.Create.Face(3,8,9,4));
+            m.Vertices = vertices;
+            m.Faces = faces;
+            return ToRenderMesh(m, color);
         }
     }
 }

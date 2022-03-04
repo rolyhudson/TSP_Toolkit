@@ -5,7 +5,7 @@ using System.Text;
 
 namespace BH.oM.TSP
 {
-    public class Statistics : BHoMObject
+    public class UseSummary : BHoMObject
     {
         public virtual double TotalStudyArea { get; set; } = 0;
         public virtual int NumberOfStructuralUnits { get; set; } = 0;

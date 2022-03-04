@@ -8,13 +8,13 @@ namespace BH.Engine.TSP
 {
     public static partial class Query
     {
-        public static Statistics UseSummary(Result result, Unit prototypeUnit)
+        public static UseSummary UseSummary(Result result, Unit prototypeUnit)
         {
             return UseSummary(result.Field, result.Bars, prototypeUnit);
         }
-        public static Statistics UseSummary(Field field, List<Bar> bars, Unit prototypeUnit)
+        public static UseSummary UseSummary(Field field, List<Bar> bars, Unit prototypeUnit)
         {
-            Statistics statistics = new Statistics();
+            UseSummary statistics = new UseSummary();
             double unitArea = prototypeUnit.X * prototypeUnit.Y;
             statistics.TotalStudyArea = field.Cells.FindAll(x => !(x.Use is OutsideSiteLandUse)).Count * unitArea;
             statistics.OpenSpaceArea = field.Cells.FindAll(x => x.Use is OpenLandUse).Count * unitArea;

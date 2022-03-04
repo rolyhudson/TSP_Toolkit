@@ -14,6 +14,7 @@ namespace BH.Engine.TSP
         public static List<RenderMesh> Preview(Result result, Gradient analysisGradient = null, double minimum = 0, double maximum = 1, List<ILandUse> ignore = null, Dictionary<ILandUse, Color> colourMap = null)
         {
             List<RenderMesh> renderMeshes = new List<RenderMesh>();
+            SetColours();
             if (m_LandUseColourMap.Count == 0)
                 SetColours();
 
@@ -52,20 +53,36 @@ namespace BH.Engine.TSP
             }
             else
             {
-                foreach (Mesh m in Create.UnitMesh(result.Bars))
-                    renderMeshes.Add(Convert.ToRenderMesh(m, m_LandUseColourMap[typeof(OccupiedLandUse).Name]));
+                foreach(Bar bar in result.Bars)
+                {
+                    //ground floor
+                    foreach(Unit unit in bar.Units.FindAll(x => x.CoordinateSystem.Origin.Z == 0))
+                    {
+                        Mesh m = Create.UnitMesh(unit);
+                        renderMeshes.Add(Convert.ToRenderMesh(m, m_LandUseColourMap["commercial"]));
+                    }
+                    //ground floor
+                    foreach (Unit unit in bar.Units.FindAll(x => x.CoordinateSystem.Origin.Z > 0))
+                    {
+                        Mesh m = Create.UnitMesh(unit);
+                        renderMeshes.Add(Convert.ToRenderMesh(m, m_LandUseColourMap["apartment"]));
+                    }
+                }
+                
             }
-            foreach(Cell cell in result.Field.Cells)
-            {
-                string useName = cell.Use.GetType().Name;
-                if (m_UseIgnore.Contains(useName))
-                    continue;
+            //foreach(Cell cell in result.Field.Cells)
+            //{
+            //    string useName = cell.Use.GetType().Name;
+            //    if (m_UseIgnore.Contains(useName))
+            //        continue;
 
-                if(m_LandUseColourMap.ContainsKey(useName))
-                    renderMeshes.Add(Convert.ToRenderMesh(cell, m_LandUseColourMap[useName]));
-                else
-                    renderMeshes.Add(Convert.ToRenderMesh(cell, Color.LightGray));
-            }
+            //    if(m_LandUseColourMap.ContainsKey(useName))
+            //        renderMeshes.Add(Convert.ToRenderMesh(cell, m_LandUseColourMap[useName]));
+            //    else
+            //        renderMeshes.Add(Convert.ToRenderMesh(cell, Color.LightGray));
+            //}
+
+            renderMeshes.Add(Convert.ToRenderMesh(result.CommunalBlock, m_LandUseColourMap[typeof(CommunalLandUse).Name.ToString()]));
             return renderMeshes;
         }
 
@@ -76,9 +93,12 @@ namespace BH.Engine.TSP
             m_LandUseColourMap.Add(typeof(OpenLandUse).Name, Color.FromArgb(117,234,135));
             m_LandUseColourMap.Add(typeof(UnoccupiedLandUse).Name, Color.FromArgb(0, 0, 0));
             m_LandUseColourMap.Add(typeof(OutsideSiteLandUse).Name, Color.FromArgb(0, 0, 0));
-            m_LandUseColourMap.Add(typeof(ParkingLandUse).Name, Color.FromArgb(120, 64, 64, 64));
+            m_LandUseColourMap.Add(typeof(ParkingLandUse).Name, Color.FromArgb(120, 64, 64, 250));
             m_LandUseColourMap.Add(typeof(SiteLandUse).Name, Color.FromArgb(0, 0, 0));
             m_LandUseColourMap.Add(typeof(RoadLandUse).Name, Color.FromArgb(64, 64, 64));
+            m_LandUseColourMap.Add(typeof(CommunalLandUse).Name, Color.FromArgb(64, 64, 64, 250));
+            m_LandUseColourMap.Add("apartment", Color.FromArgb(64, 64, 64, 64));
+            m_LandUseColourMap.Add("commercial", Color.FromArgb(64, 255, 53, 18));
         }
 
         private static void SetIgnore()
@@ -87,6 +107,7 @@ namespace BH.Engine.TSP
             m_UseIgnore.Add(typeof(OccupiedLandUse).Name);
             m_UseIgnore.Add(typeof(SiteLandUse).Name);
             m_UseIgnore.Add(typeof(UnoccupiedLandUse).Name);
+            m_UseIgnore.Add(typeof(RoadLandUse).Name);
         }
 
         private static Gradient Gradient(List<Color> colors)
