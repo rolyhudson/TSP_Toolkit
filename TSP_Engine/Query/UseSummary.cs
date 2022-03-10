@@ -10,7 +10,7 @@ namespace BH.Engine.TSP
     {
         public static UseSummary UseSummary(Result result, Unit prototypeUnit)
         {
-            return UseSummary(result.Field, result.Bars, prototypeUnit);
+            return UseSummary(result.Development.Field, result.Development.Bars, prototypeUnit);
         }
         public static UseSummary UseSummary(Field field, List<Bar> bars, Unit prototypeUnit)
         {

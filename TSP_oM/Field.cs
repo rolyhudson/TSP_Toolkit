@@ -1,4 +1,5 @@
 ﻿using BH.oM.Base;
+using BH.oM.Geometry;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,5 +12,7 @@ namespace BH.oM.TSP
         public virtual Dictionary<Guid, List<Guid>> Adjacency { get; set; } = new Dictionary<Guid, List<Guid>>();
 
         public virtual ILayout Layout { get; set; }
+
+        public virtual Polyline Boundary { get; set; } = new Polyline();
     }
 }

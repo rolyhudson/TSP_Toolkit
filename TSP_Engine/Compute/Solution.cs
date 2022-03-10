@@ -1,5 +1,4 @@
-﻿using BH.oM.Base.Attributes;
-using BH.oM.TSP;
+﻿using BH.oM.TSP;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,20 +12,32 @@ namespace BH.Engine.TSP
     public static partial class Compute
     {
         
-        public static Result Solution(Parameters parameters, bool runSolarAnalysis, int iterations = 1)
+        public static Result Solution(Parameters parameters, bool runSolarAnalysis, bool run)
         {
             int runs = 0;
-            Output<List<Bar>, Field> option = new Output<List<Bar>, Field>();
-            CommunalBlock communalBlock = null;
+            Development option = new Development();
+            option.CommunalBlock = null;
             Parameters parametersClone = parameters.DeepClone();
-            while (runs < iterations)
+            int bestScore = 0;
+            Development development = new Development();
+            while (runs < 10)
             {
-                option = Generate(parameters.PrototypeUnit, parametersClone.PlanParameters, parametersClone.CommunalParameters, parametersClone.LayoutMethod as ILayout, communalBlock);
-                option.Item2 = Modify.ILevels(option.Item2, parametersClone.PrototypeUnit, parametersClone.VerticalParameters);
-                option.Item1 = Massing(option.Item1, option.Item2, parametersClone.PrototypeUnit);
+                option = Generate(parameters.PrototypeUnit, parametersClone.PlanParameters, parametersClone.CommunalParameters, parametersClone.LayoutMethod as ILayout, option.CommunalBlock);
+                option.Field = Modify.ILevels(option.Field, parametersClone.PrototypeUnit, parametersClone.VerticalParameters);
+                option.Bars = Massing(option.Bars, option.Field, parametersClone.PrototypeUnit);
                 CommunalLandUse communalLand = (CommunalLandUse)parametersClone.PlanParameters.LandUses.Find(x => x is CommunalLandUse);
-                communalBlock = Create.CommunalBlock(option.Item2, option.Item1, parametersClone.PrototypeUnit, parametersClone.CommunalParameters, communalLand);
-                runs++;
+                option.CommunalBlock = Create.CommunalBlock(option.Field, option.Bars, parametersClone.PrototypeUnit, parametersClone.CommunalParameters, communalLand);
+                if(option.IsValid())
+                {
+                    int score = option.Bars.SelectMany(x => x.Units).Count();
+                    if (score > bestScore)
+                    {
+                        development = option;
+                        bestScore = score;
+                    }   
+                    runs++;
+                }
+                
             }
             
 
@@ -35,14 +46,19 @@ namespace BH.Engine.TSP
             if (runSolarAnalysis)
             {
                 //add the units generated to obstructions
-                List<Mesh> units = Create.UnitMesh(option.Item1);
+                List<Mesh> units = Create.UnitMesh(development.Bars);
                 copySolarParameters.Obstructions.AddRange(units);
-                copySolarParameters.Obstructions.Add(communalBlock.UnitMesh());
+                copySolarParameters.Obstructions.Add(development.CommunalBlock.UnitMesh());
 
-                solarResults = SolarAnalysis(option.Item1, copySolarParameters.SunPoints, copySolarParameters.Obstructions);
+                solarResults = SolarAnalysis(development.Bars, copySolarParameters.SunPoints, copySolarParameters.Obstructions);
             }
             
-            return new Result(parameters.BHoM_Guid, "", 0, option.Item2, option.Item1, communalBlock, solarResults);
+            return new Result(parameters.BHoM_Guid, "", 0, development, solarResults);
         }
+
+        //private static void CheckPlan(CommunalBlock communalBlock, List<Bar> bars, Field  Unit unit)
+        //{
+        //    double barArea = bars.Select(x => x.)
+        //}
     }
 }

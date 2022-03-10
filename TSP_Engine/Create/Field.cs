@@ -40,8 +40,8 @@ namespace BH.Engine.TSP
                 Polyline offset = siteBoundary.Offset(perimeterLayout.BoundaryOffset, Vector.ZAxis);
                 Field bField = Field(barsLayout, offset, prototypeUnit);
                 bField.Cells.ForEach(x => x.Tags.Add("internal"));
-                bField.Cells.AddRange(pField.Cells);
-                return bField;
+                pField.Cells.AddRange(bField.Cells);
+                return pField;
             }
             else
                 return null;
@@ -56,6 +56,7 @@ namespace BH.Engine.TSP
             List<List<Cell>> cells2d = new List<List<Cell>>();
             Polyline offset = siteBoundary.Offset(layout.BoundaryOffset, Vector.ZAxis);
             Field field = Field(ToVector(layout.PrincipleDirection), offset, prototypeUnit,ref cells2d);
+            field.Boundary = offset;
             SetAdjacency(cells2d, ref field);
 
             foreach (var cell in field.Cells)
@@ -74,6 +75,7 @@ namespace BH.Engine.TSP
             Polyline offset = siteBoundary.Offset(layout.BoundaryOffset, Vector.ZAxis);
             Field field = new Field();
             offset = offset.ForceClockwise();
+            field.Boundary = offset;
             Vector yaxis = new Vector();
             foreach (Line line in offset.SubParts())
             {

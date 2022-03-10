@@ -18,12 +18,7 @@ namespace BH.oM.TSP
 
         public virtual double TimeStep { get; }
 
-        public virtual Field Field { get; }
-
-        public virtual List<Bar> Bars { get; }
-
-        public virtual CommunalBlock CommunalBlock { get; }
-
+        public virtual Development Development { get; }
         public virtual List<SolarResult> SolarResults { get; }
 
 
@@ -31,14 +26,12 @@ namespace BH.oM.TSP
         /**** Constructors                              ****/
         /***************************************************/
 
-        public Result(IComparable objectId, IComparable resultCase, double timeStep, Field field, List<Bar> bars, CommunalBlock communalBlock, List<SolarResult> solarResults)
+        public Result(IComparable objectId, IComparable resultCase, double timeStep, Development development, List<SolarResult> solarResults)
         {
             ObjectId = objectId;
             ResultCase = resultCase;
             TimeStep = timeStep;
-            Field = field;
-            Bars = bars;
-            CommunalBlock = communalBlock;
+            Development = development;
             SolarResults = solarResults;
         }
 

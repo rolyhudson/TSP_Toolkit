@@ -1,5 +1,5 @@
 ﻿using BH.oM.Base;
-using BH.oM.Base.Attributes;
+
 using BH.oM.TSP;
 using System;
 using System.Collections.Generic;
@@ -10,15 +10,13 @@ namespace BH.Engine.TSP
 {
     public static partial class Compute
     {
-        [MultiOutput(0, "bars", "Linear blocks.")]
-        [MultiOutput(1, "field", "Field.")]
-        public static Output<List<Bar>, Field> Generate(Unit prototypeUnit, PlanParameters parameters, CommunalParameters communalParameters, ILayout layout, CommunalBlock communalBlock = null )
+        public static Development Generate(Unit prototypeUnit, PlanParameters parameters, CommunalParameters communalParameters, ILayout layout, CommunalBlock communalBlock = null )
         {
             ILandUse siteLandUse = Query.FindSiteUse( parameters.LandUses);
             if(siteLandUse == null)
             {
-                Base.Compute.RecordError("No site land use was found. A site land use is required.");
-                return new Output<List<Bar>, Field>();
+                //Base.Compute.RecordError("No site land use was found. A site land use is required.");
+                return new Development();
             }
             
             Field field = Create.IField(layout, siteLandUse as SiteLandUse, prototypeUnit);
@@ -51,12 +49,8 @@ namespace BH.Engine.TSP
                 
             }
 
-            Output<List<Bar>, Field> results = Create.IBars(field, parameters);
-            return new Output<List<Bar>, Field>
-            {
-                Item1 = results.Item1,
-                Item2 = results.Item2,
-            };
+            Development results = Create.IBars(field, parameters);
+            return results;
         }
     }
 }
