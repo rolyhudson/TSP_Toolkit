@@ -9,6 +9,6 @@ namespace BH.oM.TSP
     public class Option : BHoMObject
     {
         public virtual List<RenderMesh> Preview { get; set; } = new List<RenderMesh>();
-        public virtual UseSummary Statistics { get; set; } = new UseSummary();
+        public virtual UseSummary UseSummary { get; set; } = new UseSummary();
     }
 }
