@@ -34,7 +34,7 @@ namespace BH.Engine.TSP
                     {
                         development = option;
                         bestScore = score;
-                    }   
+                    }
                     runs++;
                 }
                 

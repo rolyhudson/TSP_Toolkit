@@ -29,7 +29,7 @@ namespace BH.Engine.TSP
                     gradient = solarAnalysisGradient;
               
                foreach(SolarResult solarResult in result.SolarResults)
-                    renderMeshes.Add(Convert.ToRenderMesh(solarResult.Unit.UnitMesh(), gradient.Color(solarResult.SolarAccess,minimum,maximum)));
+                    renderMeshes.Add(Convert.ToRenderMesh(solarResult.Mesh, gradient.Color(solarResult.SolarAccess,minimum,maximum)));
             }
             else
             {

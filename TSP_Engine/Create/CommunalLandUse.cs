@@ -50,6 +50,7 @@ namespace BH.Engine.TSP
 
             corners.Add(corners[0]);
             Polyline parking = new Polyline() { ControlPoints = corners };
+            parking = parking.Offset(2, Vector.ZAxis);
             CommunalLandUse parkingLand = new CommunalLandUse()
             {
                 Boundary = parking,

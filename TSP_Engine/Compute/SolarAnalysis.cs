@@ -17,7 +17,7 @@ namespace BH.Engine.TSP
         /**** Public Methods                            ****/
         /***************************************************/
 
-        public static SolarResult SolarAnalysis(this Unit unit, List<Point> sunPoints, List<Mesh> potentialObstructions)
+        public static List<SolarResult> SolarAnalysis(this Unit unit, List<Point> sunPoints, List<Mesh> potentialObstructions)
         {
             m_MeshBoundingSpheres = new Dictionary<Sphere, Mesh>();
             foreach (Mesh m in potentialObstructions)
@@ -25,9 +25,12 @@ namespace BH.Engine.TSP
 
             Point centroid = unit.UnitCentroid();
             List<Plane> planes = unit.ObservationPlanes();
-            int score = 0;
+            List<Mesh> faces = unit.UnitFaces();
+            List<SolarResult> results = new List<SolarResult>();
+            int i = 0;
             foreach (Plane plane in planes)
             {
+                int score = 0;
                 Cartesian local = Geometry.Create.CartesianCoordinateSystem(plane.Origin, Vector.XAxis, Vector.YAxis);
                 TransformMatrix transform = BH.Engine.Geometry.Create.OrientationMatrixGlobalToLocal(unit.CoordinateSystem);
                 // translate obs points local
@@ -46,9 +49,12 @@ namespace BH.Engine.TSP
                     if (!Obstructed(plane.Origin, testLine.Direction(), potentialObs.Values.ToList()))
                         score++;
                 }
+                SolarResult solarResult = new SolarResult(unit.BHoM_Guid, 1, 1, score / (double)sunPoints.Count, faces[i]);
+                results.Add(solarResult);
+                i++;
             }
-            SolarResult solarResult = new SolarResult(unit.BHoM_Guid, 1, 1, score / (double)sunPoints.Count, unit);
-            return solarResult;
+            
+            return results;
         }
 
         /***************************************************/
@@ -66,7 +72,9 @@ namespace BH.Engine.TSP
 
                 Parallel.ForEach(b.Units, unit =>
                 {
-                    scores.Add(unit.SolarAnalysis(sunPoints));
+                    List<SolarResult> results = unit.SolarAnalysis(sunPoints);
+                    foreach (SolarResult solarResult in results)
+                        scores.Add(solarResult);
                 });
 
             }
@@ -77,13 +85,16 @@ namespace BH.Engine.TSP
         /**** Private Methods                           ****/
         /***************************************************/
 
-        private static SolarResult SolarAnalysis(this Unit unit, List<Point> sunPoints)
+        private static List<SolarResult> SolarAnalysis(this Unit unit, List<Point> sunPoints)
         {
             List<Plane> planes = unit.ObservationPlanes();
-            int score = 0;
+            List<Mesh> faces = unit.UnitFaces();
+            List<SolarResult> results = new List<SolarResult>();
             Point centroid = unit.UnitCentroid();
+            int i = 0;
             foreach (Plane plane in planes)
             {
+                int score = 0;
                 Cartesian local = Geometry.Create.CartesianCoordinateSystem(plane.Origin, Vector.XAxis, Vector.YAxis);
                 TransformMatrix transform = BH.Engine.Geometry.Create.OrientationMatrixGlobalToLocal(unit.CoordinateSystem);
                 // translate obs points local
@@ -102,10 +113,13 @@ namespace BH.Engine.TSP
                     if (!Obstructed(plane.Origin,testLine.Direction(), potentialObs.Values.ToList()))
                         score++;
                 }
+                SolarResult solarResult = new SolarResult(unit.BHoM_Guid, 1, 1, score / (double)sunPoints.Count, faces[i]);
+                results.Add(solarResult);
+                i++;
             }
-            SolarResult solarResult = new SolarResult(unit.BHoM_Guid, 1, 1, score / (double)sunPoints.Count, unit);
+            
 
-            return solarResult;
+            return results;
         }
 
         /***************************************************/

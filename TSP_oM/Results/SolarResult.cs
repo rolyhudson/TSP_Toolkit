@@ -1,5 +1,6 @@
 ﻿using BH.oM.Analytical.Results;
 using BH.oM.Base;
+using BH.oM.Geometry;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -20,19 +21,19 @@ namespace BH.oM.TSP
 
         public virtual double SolarAccess { get; }
 
-        public virtual Unit Unit { get; }
+        public virtual Mesh Mesh { get; }
 
         /***************************************************/
         /**** Constructors                              ****/
         /***************************************************/
 
-        public SolarResult(IComparable objectId, IComparable resultCase, double timeStep, double solarAccess, Unit unit)
+        public SolarResult(IComparable objectId, IComparable resultCase, double timeStep, double solarAccess, Mesh mesh)
         {
             ObjectId = objectId;
             ResultCase = resultCase;
             TimeStep = timeStep;
             SolarAccess = solarAccess;
-            Unit = unit;
+            Mesh = mesh;
         }
 
         /***************************************************/

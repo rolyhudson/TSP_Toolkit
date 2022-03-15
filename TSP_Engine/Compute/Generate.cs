@@ -1,5 +1,6 @@
-﻿using BH.oM.Base;
-
+﻿using BH.Engine.Geometry;
+using BH.oM.Base;
+using BH.oM.Geometry;
 using BH.oM.TSP;
 using System;
 using System.Collections.Generic;
@@ -33,7 +34,7 @@ namespace BH.Engine.TSP
                 //replace with block
                 parameters.LandUses.Remove(communalLand);
                 CommunalLandUse communal = communalLand as CommunalLandUse;
-                communal.Boundary = communalBlock.Floors[0];
+                communal.Boundary = communalBlock.Floors[0].Offset(2,Vector.ZAxis);
                 parameters.LandUses.Add(communal);
             }
             foreach (var landUseGroup in parameters.LandUses.GroupBy(x => x.GetType()))
