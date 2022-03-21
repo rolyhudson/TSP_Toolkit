@@ -25,7 +25,9 @@ namespace BH.Engine.TSP
 
             Point centroid = unit.UnitCentroid();
             List<Plane> planes = unit.ObservationPlanes();
-            List<Mesh> faces = unit.UnitFaces();
+            List<Mesh> faces = new List<Mesh>();
+            faces.Add(unit.UnitMesh(true, 0));
+            faces.Add(unit.UnitMesh(true, 1));
             List<SolarResult> results = new List<SolarResult>();
             int i = 0;
             foreach (Plane plane in planes)
@@ -49,7 +51,7 @@ namespace BH.Engine.TSP
                     if (!Obstructed(plane.Origin, testLine.Direction(), potentialObs.Values.ToList()))
                         score++;
                 }
-                SolarResult solarResult = new SolarResult(unit.BHoM_Guid, 1, 1, score / (double)sunPoints.Count, faces[i]);
+                SolarResult solarResult = new SolarResult(unit.BHoM_Guid, 1, 1, score , faces[i]);
                 results.Add(solarResult);
                 i++;
             }
@@ -88,7 +90,9 @@ namespace BH.Engine.TSP
         private static List<SolarResult> SolarAnalysis(this Unit unit, List<Point> sunPoints)
         {
             List<Plane> planes = unit.ObservationPlanes();
-            List<Mesh> faces = unit.UnitFaces();
+            List<Mesh> faces = new List<Mesh>();
+            faces.Add(unit.UnitMesh(true, 0));
+            faces.Add(unit.UnitMesh(true, 1));
             List<SolarResult> results = new List<SolarResult>();
             Point centroid = unit.UnitCentroid();
             int i = 0;
@@ -113,7 +117,7 @@ namespace BH.Engine.TSP
                     if (!Obstructed(plane.Origin,testLine.Direction(), potentialObs.Values.ToList()))
                         score++;
                 }
-                SolarResult solarResult = new SolarResult(unit.BHoM_Guid, 1, 1, score / (double)sunPoints.Count, faces[i]);
+                SolarResult solarResult = new SolarResult(unit.BHoM_Guid, 1, 1, score , faces[i]);
                 results.Add(solarResult);
                 i++;
             }

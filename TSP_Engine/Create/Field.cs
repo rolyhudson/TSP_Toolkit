@@ -29,24 +29,18 @@ namespace BH.Engine.TSP
 
         public static Field Field(HybridLayout layout, Polyline siteBoundary, Unit prototypeUnit)
         {
-            if (layout.Layouts.Count == 2 && layout.Layouts.Any(x => x is BarsLayout) && layout.Layouts.Any(x => x is PerimeterLayout))
-            {
-                PerimeterLayout perimeterLayout = (PerimeterLayout)layout.Layouts.Find(x => x is PerimeterLayout);
-                Field pField = Field(perimeterLayout, siteBoundary, prototypeUnit);
-                //remove the inner field
-                int removed = pField.Cells.RemoveAll(x => x.Use is OpenLandUse);
-                pField.Cells.ForEach(x => x.Tags.Add("perimeter"));
-                BarsLayout barsLayout = (BarsLayout)layout.Layouts.Find(x => x is BarsLayout);
-                Polyline offset = siteBoundary.Offset(perimeterLayout.BoundaryOffset, Vector.ZAxis);
-                Field bField = Field(barsLayout, offset, prototypeUnit);
-                bField.Cells.ForEach(x => x.Tags.Add("internal"));
-                pField.Cells.AddRange(bField.Cells);
-                return pField;
-            }
-            else
-                return null;
-
             
+            Field pField = Field(layout.PerimeterLayout, siteBoundary, prototypeUnit);
+            //remove the inner field
+            int removed = pField.Cells.RemoveAll(x => x.Use is OpenLandUse);
+            pField.Cells.ForEach(x => x.Tags.Add("perimeter"));
+            
+            Polyline offset = siteBoundary.Offset(layout.PerimeterLayout.BoundaryOffset, Vector.ZAxis);
+            Field bField = Field(layout.BarsLayout, offset, prototypeUnit);
+            bField.Cells.ForEach(x => x.Tags.Add("internal"));
+            pField.Cells.AddRange(bField.Cells);
+            return pField;
+
         }
 
         /***************************************************/

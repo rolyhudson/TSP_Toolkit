@@ -11,7 +11,7 @@ namespace BH.Engine.TSP
 {
     public static partial class Create
     {
-        public static List<RenderMesh> Preview(Result result,  PreviewColourMap colourMap = null, Gradient solarAnalysisGradient = null, double minimum = 0, double maximum = 1)
+        public static List<RenderMesh> Preview(Result result,  PreviewColourMap colourMap = null, Gradient solarAnalysisGradient = null, double minimum = 0, double maximum = 24)
         {
             List<RenderMesh> renderMeshes = new List<RenderMesh>();
             if (colourMap == null)

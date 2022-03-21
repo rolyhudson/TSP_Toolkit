@@ -11,18 +11,26 @@ namespace BH.Engine.TSP
 {
     public static partial class Create
     {
-        public static Mesh UnitMesh(this Unit unit)
+        public static Mesh UnitMesh(this Unit unit, bool halfUnit = false, int side = 0)
         {
             Mesh mesh = new Mesh();
             List<Point> points = new List<Point>();
-            points.Add(new Point() { X = 0, Y = 0 });
-            points.Add(new Point() { X = unit.X, Y = 0 });
-            points.Add(new Point() { X = unit.X, Y = unit.Y });
-            points.Add(new Point() { X = 0, Y = unit.Y });
-            points.Add(new Point() { X = 0, Y = 0,  Z = unit.Z});
-            points.Add(new Point() { X = unit.X, Y = 0, Z = unit.Z });
-            points.Add(new Point() { X = unit.X, Y = unit.Y, Z = unit.Z });
-            points.Add(new Point() { X = 0, Y = unit.Y, Z = unit.Z });
+            double xDim = unit.X;
+            double xStart = 0;
+            if (halfUnit)
+                xDim = xDim / 2;
+
+            if (side == 1 && halfUnit)
+                xStart = xDim;
+
+            points.Add(new Point() { X = xStart, Y = 0 });
+            points.Add(new Point() { X = xStart + xDim, Y = 0 });
+            points.Add(new Point() { X = xStart + xDim, Y = unit.Y });
+            points.Add(new Point() { X = xStart, Y = unit.Y });
+            points.Add(new Point() { X = xStart, Y = 0,  Z = unit.Z});
+            points.Add(new Point() { X = xStart + xDim, Y = 0, Z = unit.Z });
+            points.Add(new Point() { X = xStart + xDim, Y = unit.Y, Z = unit.Z });
+            points.Add(new Point() { X = xStart, Y = unit.Y, Z = unit.Z });
             TransformMatrix transform = BH.Engine.Geometry.Create.OrientationMatrixGlobalToLocal(unit.CoordinateSystem);
             List<Point> mapped = new List<Point>();
             foreach(Point point in points)

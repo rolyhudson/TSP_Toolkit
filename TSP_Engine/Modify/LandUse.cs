@@ -38,8 +38,8 @@ namespace BH.Engine.TSP
 
         public static Field LandUse(this Field field, OpenLandUse landUse)
         {
-            
-            return LandUse(field, landUse.Boundary, landUse);
+
+            return LandUseCrossing(field, landUse.Boundary, landUse);
         }
 
         /***************************************************/

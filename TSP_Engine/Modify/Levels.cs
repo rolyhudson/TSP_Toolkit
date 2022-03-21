@@ -27,13 +27,13 @@ namespace BH.Engine.TSP
         {
             Field pField = new Field();
             pField.Cells = field.Cells.FindAll(x => x.Tags.Contains("perimeter"));
-            PerimeterLayout perimeterLayout = (PerimeterLayout)layout.Layouts.Find(x => x is PerimeterLayout);
-            pField = Levels(perimeterLayout, pField, unit, parameters);
+            
+            pField = Levels(layout.PerimeterLayout, pField, unit, parameters);
 
             Field bField = new Field();
             bField.Cells = field.Cells.FindAll(x => x.Tags.Contains("internal"));
-            BarsLayout barsLayout = (BarsLayout)layout.Layouts.Find(x => x is BarsLayout);
-            bField = Levels(barsLayout, bField, unit, parameters);
+            
+            bField = Levels(layout.BarsLayout, bField, unit, parameters);
 
             bField.Cells.AddRange(pField.Cells);
 

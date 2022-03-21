@@ -12,7 +12,7 @@ namespace BH.Engine.TSP
     public static partial class Compute
     {
         
-        public static Result Solution(Parameters parameters, bool runSolarAnalysis, bool run)
+        public static Result Solution(Parameters parameters, bool runSolarAnalysis, bool run, int maxIterations = 10)
         {
             int runs = 0;
             Development option = new Development();
@@ -20,7 +20,7 @@ namespace BH.Engine.TSP
             Parameters parametersClone = parameters.DeepClone();
             int bestScore = 0;
             Development development = new Development();
-            while (runs < 10)
+            while (runs < maxIterations)
             {
                 option = Generate(parameters.PrototypeUnit, parametersClone.PlanParameters, parametersClone.CommunalParameters, parametersClone.LayoutMethod as ILayout, option.CommunalBlock);
                 option.Field = Modify.ILevels(option.Field, parametersClone.PrototypeUnit, parametersClone.VerticalParameters);

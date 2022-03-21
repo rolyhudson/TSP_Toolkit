@@ -81,8 +81,8 @@ namespace BH.Engine.TSP
 
         public static CommunalLandUse CommunalLandUse(HybridLayout layout, CommunalParameters parameters, SiteLandUse siteLand)
         {
-            PerimeterLayout perimeterLayout = (PerimeterLayout)layout.Layouts.Find(x => x is PerimeterLayout);
-            return CommunalLandUse(siteLand.Boundary, perimeterLayout.BoundaryOffset, parameters.Depth);
+            
+            return CommunalLandUse(siteLand.Boundary, layout.PerimeterLayout.BoundaryOffset, parameters.Depth);
         }
     }
 }

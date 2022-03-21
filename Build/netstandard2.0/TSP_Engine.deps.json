@@ -187,6 +187,14 @@
           }
         }
       },
+      "MongoDB.Bson/2.9.3.0": {
+        "runtime": {
+          "MongoDB.Bson.dll": {
+            "assemblyVersion": "2.9.3.0",
+            "fileVersion": "2.9.3.0"
+          }
+        }
+      },
       "Versioning_Engine/5.0.0.0": {
         "runtime": {
           "Versioning_Engine.dll": {
@@ -326,6 +334,11 @@
       "sha512": ""
     },
     "Serialiser_Engine/5.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "MongoDB.Bson/2.9.3.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""
