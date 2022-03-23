@@ -65,5 +65,8 @@
     <HintPath>C:\ProgramData\BHoM\Assemblies\Reflection_Engine.dll</HintPath>
     <Private>false</Private>
   </Reference>
+  <Reference Include="TriangleNet_Engine">
+    <HintPath>C:\ProgramData\BHoM\Assemblies\TriangleNet_Engine.dll</HintPath>
+  </Reference>
 </ItemGroup>
 </Project>

@@ -36,9 +36,9 @@ namespace BH.Engine.TSP
 
             List<Color> colors = new List<Color>()
             {
-                 Color.FromArgb(64, 64, 64, 64),
-                 Color.FromArgb(64, 255, 53, 18),
-                 Color.FromArgb(64, 64, 64, 250)
+                 Color.FromArgb(196, 55, 150, 188),
+                 Color.FromArgb(167, 0, 255, 21),
+                 Color.FromArgb(125, 125, 125, 125)
             };
             return colors;
         }

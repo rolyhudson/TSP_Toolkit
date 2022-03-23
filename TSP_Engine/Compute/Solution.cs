@@ -12,8 +12,10 @@ namespace BH.Engine.TSP
     public static partial class Compute
     {
         
-        public static Result Solution(Parameters parameters, bool runSolarAnalysis, bool run, int maxIterations = 10)
+        public static Result Solution(Parameters parameters, bool run, int maxIterations = 10)
         {
+            if (!run)
+                return null;
             int runs = 0;
             Development option = new Development();
             option.CommunalBlock = null;
@@ -42,9 +44,10 @@ namespace BH.Engine.TSP
             
 
             List<SolarResult> solarResults = new List<SolarResult>();
-            SolarAccessParameters copySolarParameters = parameters.SolarAccessParameters.DeepClone();
-            if (runSolarAnalysis)
+            
+            if (parameters.SolarAccessParameters.Run)
             {
+                SolarAccessParameters copySolarParameters = parameters.SolarAccessParameters.DeepClone();
                 //add the units generated to obstructions
                 List<Mesh> units = Create.UnitMesh(development.Bars);
                 copySolarParameters.Obstructions.AddRange(units);

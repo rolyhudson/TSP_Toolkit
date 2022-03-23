@@ -13,7 +13,8 @@
           "NETStandard.Library": "2.0.3",
           "TSP_oM": "5.0.0",
           "Data_Engine": "5.0.0.0",
-          "Graphics_Engine": "5.0.0.0"
+          "Graphics_Engine": "5.0.0.0",
+          "TriangleNet_Engine": "5.0.0.0"
         },
         "runtime": {
           "TSP_Engine.dll": {}
@@ -155,6 +156,14 @@
           }
         }
       },
+      "TriangleNet_Engine/5.0.0.0": {
+        "runtime": {
+          "TriangleNet_Engine.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.1.0.0"
+          }
+        }
+      },
       "Analytical_oM/5.0.0.0": {
         "runtime": {
           "Analytical_oM.dll": {
@@ -179,9 +188,113 @@
           }
         }
       },
+      "Triangle/0.0.6.0": {
+        "runtime": {
+          "Triangle.dll": {
+            "assemblyVersion": "0.0.6.0",
+            "fileVersion": "0.0.6.0"
+          }
+        }
+      },
+      "Structure_oM/5.0.0.0": {
+        "runtime": {
+          "Structure_oM.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.1.0.0"
+          }
+        }
+      },
+      "Environment_oM/5.0.0.0": {
+        "runtime": {
+          "Environment_oM.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.1.0.0"
+          }
+        }
+      },
+      "Environment_Engine/5.0.0.0": {
+        "runtime": {
+          "Environment_Engine.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.1.0.0"
+          }
+        }
+      },
+      "Structure_Engine/5.0.0.0": {
+        "runtime": {
+          "Structure_Engine.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.1.0.0"
+          }
+        }
+      },
+      "Spatial_Engine/5.0.0.0": {
+        "runtime": {
+          "Spatial_Engine.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.1.0.0"
+          }
+        }
+      },
       "Serialiser_Engine/5.0.0.0": {
         "runtime": {
           "Serialiser_Engine.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.1.0.0"
+          }
+        }
+      },
+      "Spatial_oM/5.0.0.0": {
+        "runtime": {
+          "Spatial_oM.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.1.0.0"
+          }
+        }
+      },
+      "Physical_oM/5.0.0.0": {
+        "runtime": {
+          "Physical_oM.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.1.0.0"
+          }
+        }
+      },
+      "Architecture_oM/5.0.0.0": {
+        "runtime": {
+          "Architecture_oM.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.1.0.0"
+          }
+        }
+      },
+      "Physical_Engine/5.0.0.0": {
+        "runtime": {
+          "Physical_Engine.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.1.0.0"
+          }
+        }
+      },
+      "Diffing_Engine/5.0.0.0": {
+        "runtime": {
+          "Diffing_Engine.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.1.0.0"
+          }
+        }
+      },
+      "Matter_Engine/5.0.0.0": {
+        "runtime": {
+          "Matter_Engine.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.1.0.0"
+          }
+        }
+      },
+      "Analytical_Engine/5.0.0.0": {
+        "runtime": {
+          "Analytical_Engine.dll": {
             "assemblyVersion": "5.0.0.0",
             "fileVersion": "5.1.0.0"
           }
@@ -200,6 +313,30 @@
           "Versioning_Engine.dll": {
             "assemblyVersion": "5.0.0.0",
             "fileVersion": "5.1.0.0"
+          }
+        }
+      },
+      "Humans_oM/5.0.0.0": {
+        "runtime": {
+          "Humans_oM.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.1.0.0"
+          }
+        }
+      },
+      "Diffing_oM/5.0.0.0": {
+        "runtime": {
+          "Diffing_oM.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.1.0.0"
+          }
+        }
+      },
+      "KellermanSoftware.Compare-NET-Objects/4.67.0.0": {
+        "runtime": {
+          "KellermanSoftware.Compare-NET-Objects.dll": {
+            "assemblyVersion": "4.67.0.0",
+            "fileVersion": "4.67.0.0"
           }
         }
       },
@@ -318,6 +455,11 @@
       "serviceable": false,
       "sha512": ""
     },
+    "TriangleNet_Engine/5.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
     "Analytical_oM/5.0.0.0": {
       "type": "reference",
       "serviceable": false,
@@ -333,7 +475,72 @@
       "serviceable": false,
       "sha512": ""
     },
+    "Triangle/0.0.6.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Structure_oM/5.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Environment_oM/5.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Environment_Engine/5.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Structure_Engine/5.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Spatial_Engine/5.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
     "Serialiser_Engine/5.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Spatial_oM/5.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Physical_oM/5.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Architecture_oM/5.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Physical_Engine/5.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Diffing_Engine/5.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Matter_Engine/5.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Analytical_Engine/5.0.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""
@@ -344,6 +551,21 @@
       "sha512": ""
     },
     "Versioning_Engine/5.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Humans_oM/5.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Diffing_oM/5.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "KellermanSoftware.Compare-NET-Objects/4.67.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""

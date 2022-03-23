@@ -21,5 +21,7 @@ namespace BH.oM.TSP
         public virtual int SpacesPerFloorForMinimumLength { get; set; } = 32;
 
         public virtual double FloorToFloor { get; set; } = 4.5;
+
+        public virtual double BaseOffset { get; set; } = 4.5;
     }
 }

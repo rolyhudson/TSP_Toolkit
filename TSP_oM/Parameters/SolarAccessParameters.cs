@@ -11,5 +11,7 @@ namespace BH.oM.TSP
         public virtual List<Point> SunPoints { get; set; } = new List<Point>();
 
         public virtual List<Mesh> Obstructions { get; set; } = new List<Mesh>();
+
+        public virtual bool Run { get; set; } = false;
     }
 }

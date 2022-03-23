@@ -34,7 +34,7 @@ namespace BH.Engine.TSP
                 //replace with block
                 parameters.LandUses.Remove(communalLand);
                 CommunalLandUse communal = communalLand as CommunalLandUse;
-                communal.Boundary = communalBlock.Floors[0].Offset(2,Vector.ZAxis);
+                communal.Boundary = communalBlock.Floors[0].Offset(communalParameters.BaseOffset, Vector.ZAxis);
                 parameters.LandUses.Add(communal);
             }
             foreach (var landUseGroup in parameters.LandUses.GroupBy(x => x.GetType()))

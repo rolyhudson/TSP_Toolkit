@@ -11,7 +11,7 @@ namespace BH.Engine.TSP
 {
     public static partial class Create
     {
-        public static List<RenderMesh> Preview(Result result,  PreviewColourMap colourMap = null, Gradient solarAnalysisGradient = null, double minimum = 0, double maximum = 24)
+        public static List<RenderMesh> Preview(Result result,  PreviewColourMap colourMap = null, Gradient solarAnalysisGradient = null, double minimum = 0, double maximum = 12)
         {
             List<RenderMesh> renderMeshes = new List<RenderMesh>();
             if (colourMap == null)
@@ -23,7 +23,7 @@ namespace BH.Engine.TSP
                 Gradient gradient = new Gradient();
                 if (solarAnalysisGradient == null)
                 {
-                    gradient = Gradient(new List<Color>() { Color.FromArgb(77, 77, 255), Color.FromArgb(150, 255, 238)});
+                    gradient = Gradient(new List<Color>() { Color.FromArgb(0, 150, 0), Color.FromArgb(255, 255, 0)});
                 }
                 else
                     gradient = solarAnalysisGradient;
