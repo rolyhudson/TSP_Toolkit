@@ -50,19 +50,8 @@ namespace BH.Engine.TSP
                 }
                 
             }
-            //foreach(Cell cell in result.Field.Cells)
-            //{
-            //    string useName = cell.Use.GetType().Name;
-            //    if (m_UseIgnore.Contains(useName))
-            //        continue;
 
-            //    if(colourMap.ContainsKey(useName))
-            //        renderMeshes.Add(Convert.ToRenderMesh(cell, colourMap[useName]));
-            //    else
-            //        renderMeshes.Add(Convert.ToRenderMesh(cell, Color.LightGray));
-            //}
-
-            renderMeshes.Add(Convert.ToRenderMesh(result.Development.CommunalBlock, colourMap.Colour("Communal")));
+            renderMeshes.AddRange(Convert.ToRenderMesh(result.Development.CommunalBlock, colourMap));
             return renderMeshes;
         }
 

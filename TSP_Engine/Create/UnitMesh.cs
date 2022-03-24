@@ -55,8 +55,11 @@ namespace BH.Engine.TSP
         {
             Mesh m = new Mesh();
             List<oM.Geometry.Point> vertices = new List<oM.Geometry.Point>();
-            vertices.AddRange(communalBlock.Floors[0].ControlPoints);
-            vertices.AddRange(communalBlock.Floors.Last().ControlPoints);
+            vertices.AddRange(communalBlock.Boundary.ControlPoints);
+            double floorToFloor = (communalBlock.Parking.Last().ControlPoints[0].Z - communalBlock.Parking.First().ControlPoints[0].Z) / communalBlock.Parking.Count();
+
+            Polyline roof = communalBlock.Boundary.Translate(new Vector() { X = 0, Y = 0, Z = floorToFloor * (communalBlock.Parking.Count() + 1) });
+            vertices.AddRange(roof.ControlPoints);
 
             List<Face> faces = new List<Face>();
             faces.Add(Geometry.Create.Face(0, 1, 2, 3));
@@ -69,6 +72,7 @@ namespace BH.Engine.TSP
             m.Faces = faces;
 
             return m;
+            
         }
 
         public static List<Mesh> UnitMesh(List<Bar> bars)

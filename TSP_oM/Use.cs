@@ -8,7 +8,8 @@ namespace BH.oM.TSP
     {
         Apartment,
         Commercial,
-        Communal
+        Parking,
+        Social
 
     }
 }

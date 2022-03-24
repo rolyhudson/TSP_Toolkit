@@ -51,23 +51,54 @@ namespace BH.Engine.TSP
             return renderMesh;
         }
 
-        public static RenderMesh ToRenderMesh(this CommunalBlock communalBlock, Color color)
+        public static List<RenderMesh> ToRenderMesh(this CommunalBlock communalBlock, PreviewColourMap previewColourMap)
         {
+            List<RenderMesh> renderMeshes = new List<RenderMesh>();
             Mesh m = new Mesh();
             List<oM.Geometry.Point> vertices = new List<oM.Geometry.Point>();
-            vertices.AddRange(communalBlock.Floors[0].ControlPoints);
-            vertices.AddRange(communalBlock.Floors.Last().ControlPoints);
-
             List<Face> faces = new List<Face>();
-            faces.Add(Geometry.Create.Face(0, 1, 2, 3));
-            faces.Add(Geometry.Create.Face(5,6,7,8));
-            faces.Add(Geometry.Create.Face(0, 5, 6, 1));
-            faces.Add(Geometry.Create.Face(1,6,7,2));
-            faces.Add(Geometry.Create.Face(2,7,8,3));
-            faces.Add(Geometry.Create.Face(3,8,9,4));
+            int v = 0;
+
+            foreach (Polyline floor in communalBlock.Parking)
+            {
+                vertices.AddRange(floor.ControlPoints);
+                faces.Add(Geometry.Create.Face(v, v + 1, v + 2, v + 3));
+                v += 5;
+            }
             m.Vertices = vertices;
             m.Faces = faces;
-            return ToRenderMesh(m, color);
+            renderMeshes.Add(ToRenderMesh(m, previewColourMap.Map["Parking"]));
+
+            m = new Mesh();
+            vertices = new List<oM.Geometry.Point>();
+            faces = new List<Face>();
+            v = 0;
+            foreach (Polyline floor in communalBlock.Social)
+            {
+                vertices.AddRange(floor.ControlPoints);
+                faces.Add(Geometry.Create.Face(v, v + 1, v + 2, v + 3));
+                v += 5;
+            }
+            m.Vertices = vertices;
+            m.Faces = faces;
+            renderMeshes.Add(ToRenderMesh(m, previewColourMap.Map["Social"]));
+
+            m = new Mesh();
+            vertices = new List<oM.Geometry.Point>();
+            faces = new List<Face>();
+            v = 0;
+            foreach (Polyline floor in communalBlock.Commercial)
+            {
+                vertices.AddRange(floor.ControlPoints);
+                faces.Add(Geometry.Create.Face(v, v + 1, v + 2, v + 3));
+                v += 5;
+            }
+            m.Vertices = vertices;
+            m.Faces = faces;
+            renderMeshes.Add(ToRenderMesh(m, previewColourMap.Map["Commercial"]));
+            
+
+            return renderMeshes;
         }
     }
 }

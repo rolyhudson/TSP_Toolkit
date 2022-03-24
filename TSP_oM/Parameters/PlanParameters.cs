@@ -17,6 +17,6 @@ namespace BH.oM.TSP
 
         public List<object> LandUses { get; set; } = new List<object>();
 
-
+        public virtual double FootprintOffset { get; set; } = 1.5;
     }
 }

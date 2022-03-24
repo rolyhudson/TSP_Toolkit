@@ -18,7 +18,7 @@ namespace BH.Engine.TSP
             {
                 //check each cell for intersect
                 Cell cell = development.Field.Cells.Find(x => x.BHoM_Guid.Equals(guid));
-                if (cell.Boundary.ICurveIntersections(development.CommunalBlock.Floors[0]).Count > 0)
+                if (cell.Boundary.ICurveIntersections(development.CommunalBlock.Boundary).Count > 0)
                     return false;
             }
             return true;
