@@ -21,18 +21,21 @@ namespace BH.oM.TSP
         public virtual Development Development { get; }
         public virtual List<SolarResult> SolarResults { get; }
 
+        public virtual UseSummary UseSummary { get; set; } = new UseSummary();
+
 
         /***************************************************/
         /**** Constructors                              ****/
         /***************************************************/
 
-        public Result(IComparable objectId, IComparable resultCase, double timeStep, Development development, List<SolarResult> solarResults)
+        public Result(IComparable objectId, IComparable resultCase, double timeStep, Development development, List<SolarResult> solarResults, UseSummary useSummary)
         {
             ObjectId = objectId;
             ResultCase = resultCase;
             TimeStep = timeStep;
             Development = development;
             SolarResults = solarResults;
+            UseSummary = useSummary;
         }
 
         /***************************************************/

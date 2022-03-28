@@ -8,8 +8,11 @@ namespace BH.oM.TSP
     public class Development : BHoMObject
     {
         public virtual List<Bar> Bars { get; set; } = new List<Bar>();
+
         public virtual Field Field { get; set;  }
 
         public virtual CommunalBlock CommunalBlock { get; set; } = null;
+
+        
     }
 }

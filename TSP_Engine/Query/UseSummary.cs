@@ -3,31 +3,68 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using BH.Engine.Geometry;
 
 namespace BH.Engine.TSP
 {
     public static partial class Query
     {
-        public static UseSummary UseSummary(Result result, Unit prototypeUnit)
+        public static UseSummary UseSummary(Development development, Parameters parameters)
         {
-            return UseSummary(result.Development.Field, result.Development.Bars, prototypeUnit);
-        }
-        public static UseSummary UseSummary(Field field, List<Bar> bars, Unit prototypeUnit)
-        {
-            UseSummary statistics = new UseSummary();
-            double unitArea = prototypeUnit.X * prototypeUnit.Y;
-            statistics.TotalStudyArea = field.Cells.FindAll(x => !(x.Use is OutsideSiteLandUse)).Count * unitArea;
-            statistics.OpenSpaceArea = field.Cells.FindAll(x => x.Use is OpenLandUse).Count * unitArea;
-            statistics.NumberOfGroundFloorUnits = field.Cells.FindAll(x => x.Use is OccupiedLandUse).Count;
-            statistics.BuiltAreaGroundFloor = statistics.NumberOfGroundFloorUnits * unitArea;
-            //statistics.CirculationSpaceArea = field.Cells.FindAll(x => x.Use is RoadLandUse).Count * unitArea;
-            statistics.NumberOfStructuralUnits = bars.SelectMany(x => x.Units).Count();
-            statistics.NumberOfApartments = (statistics.NumberOfStructuralUnits - statistics.NumberOfGroundFloorUnits) * prototypeUnit.NumberOfApartments;
-            statistics.TotalFloorArea = statistics.NumberOfStructuralUnits * unitArea;
-            statistics.PercentBuiltSpace = Math.Round(statistics.BuiltAreaGroundFloor / statistics.TotalStudyArea * 100);
-            //statistics.PercentCirculationSpace = Math.Round(statistics.CirculationSpaceArea / statistics.TotalStudyArea * 100);
-            statistics.PercentOpenSpace= Math.Round(statistics.OpenSpaceArea/ statistics.TotalStudyArea * 100);
-            return statistics;
+            UseSummary summary = new UseSummary();
+
+            SiteLandUse siteland = (SiteLandUse)parameters.PlanParameters.LandUses.Find(x => x is SiteLandUse);
+            summary.PlotArea = siteland.Boundary.Area();
+            double offsetArea = summary.PlotArea - development.Field.Boundary.Area();
+            summary.NetPlotArea = summary.PlotArea - offsetArea;
+
+            double blocksCirculation = 0;
+            development.Bars.ForEach(x => blocksCirculation += x.ExternalCirculation.Area());
+            double unitArea = parameters.PrototypeUnit.X * parameters.PrototypeUnit.Y;
+            double blocksFootprint = development.Bars.NumberOfGroundFloorUnits() * unitArea;
+
+            summary.UsedArea = blocksFootprint + blocksCirculation + development.CommunalBlock.Boundary.Area();
+            summary.Occupation = summary.UsedArea / summary.NetPlotArea *100;
+
+            summary.InternalCirculation = development.Bars.NumberOfUnits() * parameters.PrototypeUnit.CirculationArea;
+
+            double openSpaceArea = 0;
+            foreach(ILandUse landUse in parameters.PlanParameters.LandUses)
+            {
+                if(landUse is OpenLandUse)
+                {
+                    OpenLandUse openLandUse = landUse as OpenLandUse;
+                    if(openLandUse.Boundary!=null)
+                        openSpaceArea += openLandUse.Boundary.Area();
+                }
+            }
+
+            summary.ExternalCirculation = openSpaceArea + blocksCirculation;
+            summary.TotalCirculation = summary.ExternalCirculation + summary.InternalCirculation;
+
+            summary.HousingUnitsNumber = development.Bars.NumberOfApartments(parameters.PrototypeUnit);
+            summary.HousingArea = summary.HousingUnitsNumber * parameters.PrototypeUnit.ApartmentArea;
+
+            
+            summary.ParkingSpaces = development.CommunalBlock.ParkingSpaces;
+
+            summary.InternalCommercialArea = development.Bars.NumberOfGroundFloorUnits() * unitArea;
+            development.CommunalBlock.Commercial.ForEach(x => summary.ExternalCirculation += x.Area());
+            development.CommunalBlock.Social.ForEach(x => summary.CommunalArea += x.Area());
+
+            summary.TotalCommercialArea = summary.InternalCommercialArea + summary.ExternalCommercialArea;
+
+            summary.GreenArea = summary.NetPlotArea - summary.UsedArea;
+            summary.SellableArea = summary.HousingArea + summary.InternalCommercialArea + summary.ExternalCommercialArea;
+
+            summary.EstimatedConstructionCost = summary.HousingArea * parameters.CostParameters.HousingMetreSquared +
+                                                summary.ParkingArea * parameters.CostParameters.ParkingMetreSquared +
+                                                summary.TotalCommercialArea * parameters.CostParameters.CommercialMetreSquared +
+                                                summary.GreenArea * parameters.CostParameters.GreenAreaMetreSquared +
+                                                summary.InternalCirculation * parameters.CostParameters.InternalCirculationMetreSquared +
+                                                summary.ExternalCirculation * parameters.CostParameters.ExternalCirculationMetreSquared;
+
+            return summary;
         }
     }
 }

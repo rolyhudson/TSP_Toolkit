@@ -15,5 +15,9 @@ namespace BH.oM.TSP
 
         public virtual int NumberOfApartments { get; set; } = 4;
 
+        public virtual double ApartmentArea { get; set; } = 65;
+
+        public virtual double CirculationArea { get; set; } = 4;
+
     }
 }

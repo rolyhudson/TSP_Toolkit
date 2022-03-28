@@ -26,11 +26,13 @@ namespace BH.Engine.TSP
         public static Field Levels(HybridLayout layout, Field field, Unit unit, VerticalParameters parameters)
         {
             Field pField = new Field();
+            pField.Boundary = field.Boundary;
             pField.Cells = field.Cells.FindAll(x => x.Tags.Contains("perimeter"));
             
             pField = Levels(layout.PerimeterLayout, pField, unit, parameters);
 
             Field bField = new Field();
+            bField.Boundary = field.Boundary;
             bField.Cells = field.Cells.FindAll(x => x.Tags.Contains("internal"));
             
             bField = Levels(layout.BarsLayout, bField, unit, parameters);

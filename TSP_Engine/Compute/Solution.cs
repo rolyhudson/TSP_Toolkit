@@ -41,7 +41,7 @@ namespace BH.Engine.TSP
                 }
                 
             }
-            
+            UseSummary useSummary = Query.UseSummary(development, parameters);
 
             List<SolarResult> solarResults = new List<SolarResult>();
             
@@ -56,12 +56,8 @@ namespace BH.Engine.TSP
                 solarResults = SolarAnalysis(development.Bars, copySolarParameters.SunPoints, copySolarParameters.Obstructions);
             }
             
-            return new Result(parameters.BHoM_Guid, "", 0, development, solarResults);
+            return new Result(parameters.BHoM_Guid, "", 0, development, solarResults, useSummary);
         }
 
-        //private static void CheckPlan(CommunalBlock communalBlock, List<Bar> bars, Field  Unit unit)
-        //{
-        //    double barArea = bars.Select(x => x.)
-        //}
     }
 }

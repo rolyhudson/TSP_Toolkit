@@ -25,6 +25,7 @@ namespace BH.Engine.TSP
         public static Development Bars(HybridLayout layout, Field field, PlanParameters parameters)
         {
             Field pField= new Field();
+            pField.Boundary = field.Boundary;
             pField.Cells = field.Cells.FindAll(x => x.Tags.Contains("perimeter"));
             
             Development pBars = Bars(layout.PerimeterLayout, pField, parameters);
@@ -65,13 +66,13 @@ namespace BH.Engine.TSP
         }
         public static Development Bars(PerimeterLayout layout, Field field, PlanParameters parameters)
         {
-            ILandUse landUse = Query.FindSiteUse(parameters.LandUses);
-            if (landUse == null)
+            SiteLandUse siteLandUse = Query.FindSiteUse(parameters.LandUses);
+            if (siteLandUse == null)
             {
                 //Base.Compute.RecordError("No site land use was found. A site land use is required.");
                 return new Development();
             }
-            SiteLandUse siteLandUse = landUse as SiteLandUse;
+            
             List<Bar> bars = new List<Bar>();
             Field fieldCopy = field.ShallowClone();
             foreach (Line line in siteLandUse.Boundary.SubParts())

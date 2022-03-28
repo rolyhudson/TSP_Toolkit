@@ -12,20 +12,20 @@ namespace BH.Engine.TSP
     {
         public static CommunalBlock CommunalBlock(Field field, List<Bar> bars, Unit prototypeUnit, CommunalParameters communalParameters, CommunalLandUse communalLand)
         {
-            UseSummary summary = Query.UseSummary(field, bars, prototypeUnit);
-            double unitArea = prototypeUnit.X * prototypeUnit.Y;
+            int numberApartments = bars.NumberOfApartments(prototypeUnit);
+            double areaApartments = numberApartments * prototypeUnit.ApartmentArea;
             
             double lengthParking = communalParameters.MinimumLength;
-            double totalSocialArea = summary.NumberOfApartments * unitArea * communalParameters.SocialAreaAsPercentOfTotalAparmentsArea / 100;
+            double totalSocialArea = areaApartments * communalParameters.SocialAreaAsPercentOfTotalAparmentsArea / 100;
             double socialAreaPerFloor = totalSocialArea / communalParameters.TotalStories;
             double lengthSocial = socialAreaPerFloor / communalParameters.Depth;
 
 
-            double totalCommercialArea = summary.NumberOfApartments * unitArea * communalParameters.CommercialAreaAsPercentOfTotalApartmentsArea / 100;
+            double totalCommercialArea = areaApartments * communalParameters.CommercialAreaAsPercentOfTotalApartmentsArea / 100;
             double commercialAreaPerFloor = totalCommercialArea / communalParameters.TotalStories;
             double lengthCommercial = commercialAreaPerFloor / communalParameters.Depth;
 
-            int parkingSpacesRequired = (int)Math.Ceiling(summary.NumberOfApartments * communalParameters.ParkingSpacesPerApartment);
+            int parkingSpacesRequired = (int)Math.Ceiling(numberApartments * communalParameters.ParkingSpacesPerApartment);
             int spacesInBuilidng = communalParameters.SpacesPerFloorForMinimumLength * communalParameters.TotalStories;
             int addtionalSpaces = parkingSpacesRequired - spacesInBuilidng;
             
@@ -33,7 +33,7 @@ namespace BH.Engine.TSP
             {
                 int additionalSpacesPerFloor = (int)Math.Ceiling(addtionalSpaces / communalParameters.TotalStories * 1.0);
                 int addtionalBaysPerFloor = (int)Math.Ceiling(additionalSpacesPerFloor / 4.0);
-                lengthParking = addtionalBaysPerFloor * 2.5;
+                lengthParking += addtionalBaysPerFloor * 2.5;
             }
             List<Point> cornersSocial = new List<Point>()
             { 
@@ -78,7 +78,7 @@ namespace BH.Engine.TSP
             TransformMatrix transform = Geometry.Create.OrientationMatrix(cartesian, communalLand.CoordinateSystem);
 
             Polyline boundary = new Polyline() { ControlPoints = corners};
-            boundary = boundary.Transform(transform);
+            boundary = boundary.Transform(transform).Offset(communalParameters.BaseOffset);
 
             Polyline parkingBoundary = new Polyline(){ ControlPoints = cornersParking};
             parkingBoundary = parkingBoundary.Transform(transform);
