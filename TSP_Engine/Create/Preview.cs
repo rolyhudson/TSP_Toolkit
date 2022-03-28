@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
 using BH.Engine.Graphics;
+using BH.Engine.Geometry;
 
 namespace BH.Engine.TSP
 {
@@ -50,7 +51,9 @@ namespace BH.Engine.TSP
                 }
                 
             }
-
+            result.Development.Bars.ForEach(x => renderMeshes.Add(Convert.ToRenderMesh(x.ExternalCirculation, colourMap.Colour("Circulation"))));
+            renderMeshes.Add(Convert.ToRenderMesh(result.Development.Boundary.Translate(Vector.ZAxis*-0.1), colourMap.Colour("Site")));
+            renderMeshes.Add(Convert.ToRenderMesh(result.Development.FacilitiesBlock.Boundary.Translate(Vector.ZAxis * -0.05), colourMap.Colour("Circulation")));
             renderMeshes.AddRange(Convert.ToRenderMesh(result.Development.FacilitiesBlock, colourMap));
             return renderMeshes;
         }

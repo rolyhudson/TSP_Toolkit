@@ -14,7 +14,8 @@ namespace BH.Engine.TSP
     {
         public static Development IBars(Field field, PlanParameters parameters)
         {
-            return Bars(field.Layout as dynamic, field, parameters); 
+            Development development = Bars(field.Layout as dynamic, field, parameters);
+            return development;
         }
 
         public static Development Bars(ILayout layout, Field field, PlanParameters parameters)

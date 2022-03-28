@@ -41,6 +41,10 @@ namespace BH.Engine.TSP
                 }
                 
             }
+
+            SiteLandUse siteLandUse = Query.FindSiteUse(parameters.PlanParameters.LandUses);
+            development.Boundary = siteLandUse.Boundary;
+            development.BarBaseOffset(parameters.PlanParameters.FootprintOffset);
             UseSummary useSummary = Query.UseSummary(development, parameters);
 
             List<SolarResult> solarResults = new List<SolarResult>();

@@ -100,5 +100,15 @@ namespace BH.Engine.TSP
 
             return renderMeshes;
         }
+
+        public static RenderMesh ToRenderMesh(this Polyline polyline, Color color)
+        {
+            PlanarSurface planarSurface = BH.Engine.Geometry.Create.PlanarSurface(polyline);
+            RenderMesh mesh = BH.Engine.Representation.Compute.RenderMesh(planarSurface);
+            foreach (RenderPoint point in mesh.Vertices)
+                point.Colour = color;
+
+            return mesh;
+        }
     }
 }

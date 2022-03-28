@@ -1,4 +1,5 @@
 ﻿using BH.oM.Base;
+using BH.oM.Geometry;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,6 +14,6 @@ namespace BH.oM.TSP
 
         public virtual FacilitiesBlock FacilitiesBlock { get; set; } = null;
 
-        
+        public virtual Polyline Boundary { get; set; } = new Polyline();
     }
 }

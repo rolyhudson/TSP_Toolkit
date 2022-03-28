@@ -9,7 +9,9 @@ namespace BH.oM.TSP
         Apartment,
         Commercial,
         Parking,
-        Communal
+        Communal,
+        Circulation,
+        Site
 
     }
 }
