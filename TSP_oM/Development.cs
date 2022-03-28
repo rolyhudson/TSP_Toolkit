@@ -11,7 +11,7 @@ namespace BH.oM.TSP
 
         public virtual Field Field { get; set;  }
 
-        public virtual CommunalBlock CommunalBlock { get; set; } = null;
+        public virtual FacilitiesBlock CommunalBlock { get; set; } = null;
 
         
     }

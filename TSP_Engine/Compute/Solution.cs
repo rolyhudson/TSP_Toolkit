@@ -27,8 +27,8 @@ namespace BH.Engine.TSP
                 option = Generate(parameters.PrototypeUnit, parametersClone.PlanParameters, parametersClone.CommunalParameters, parametersClone.LayoutMethod as ILayout, option.CommunalBlock);
                 option.Field = Modify.ILevels(option.Field, parametersClone.PrototypeUnit, parametersClone.VerticalParameters);
                 option.Bars = Massing(option.Bars, option.Field, parametersClone.PrototypeUnit);
-                CommunalLandUse communalLand = (CommunalLandUse)parametersClone.PlanParameters.LandUses.Find(x => x is CommunalLandUse);
-                option.CommunalBlock = Create.CommunalBlock(option.Field, option.Bars, parametersClone.PrototypeUnit, parametersClone.CommunalParameters, communalLand);
+                FacilitiesLandUse communalLand = (FacilitiesLandUse)parametersClone.PlanParameters.LandUses.Find(x => x is FacilitiesLandUse);
+                option.CommunalBlock = Create.FacilitiesBlock(option.Field, option.Bars, parametersClone.PrototypeUnit, parametersClone.CommunalParameters, communalLand);
                 if(option.IsValid())
                 {
                     int score = option.Bars.SelectMany(x => x.Units).Count();

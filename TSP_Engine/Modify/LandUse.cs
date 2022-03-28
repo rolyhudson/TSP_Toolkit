@@ -21,7 +21,7 @@ namespace BH.Engine.TSP
 
         /***************************************************/
 
-        public static Field LandUse(this Field field, CommunalLandUse landUse)
+        public static Field LandUse(this Field field, FacilitiesLandUse landUse)
         {
             return LandUseCrossing(field, landUse.Boundary, landUse);
         }

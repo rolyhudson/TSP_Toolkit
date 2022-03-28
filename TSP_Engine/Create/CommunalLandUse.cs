@@ -11,7 +11,7 @@ namespace BH.Engine.TSP
 {
     public static partial class Create 
     {
-        public static CommunalLandUse CommunalLandUse(Polyline boundary, double boundaryOffset, double communalDepth)
+        public static FacilitiesLandUse FacilitiesLandUse(Polyline boundary, double boundaryOffset, double communalDepth)
         {
             Polyline offsetA = boundary.Offset(boundaryOffset, Vector.ZAxis);
             offsetA = offsetA.ForceClockwise();
@@ -51,7 +51,7 @@ namespace BH.Engine.TSP
             corners.Add(corners[0]);
             Polyline parking = new Polyline() { ControlPoints = corners };
             parking = parking.Offset(2, Vector.ZAxis);
-            CommunalLandUse parkingLand = new CommunalLandUse()
+            FacilitiesLandUse parkingLand = new FacilitiesLandUse()
             {
                 Boundary = parking,
                 CoordinateSystem = cartesian
@@ -59,30 +59,30 @@ namespace BH.Engine.TSP
             return parkingLand;
         }
 
-        public static CommunalLandUse ICommunalLandUse(ILayout layout, CommunalParameters parameters, SiteLandUse siteLand)
+        public static FacilitiesLandUse IFacilitiesLandUse(ILayout layout, CommunalParameters parameters, SiteLandUse siteLand)
         {
-            return CommunalLandUse(layout as dynamic, parameters, siteLand);
+            return FacilitiesLandUse(layout as dynamic, parameters, siteLand);
         }
 
-        public static CommunalLandUse CommunalLandUse(ILayout layout, CommunalParameters parameters, SiteLandUse siteLand)
+        public static FacilitiesLandUse FacilitiesLandUse(ILayout layout, CommunalParameters parameters, SiteLandUse siteLand)
         {
             return null;
         }
 
-        public static CommunalLandUse CommunalLandUse(BarsLayout layout, CommunalParameters parameters, SiteLandUse siteLand)
+        public static FacilitiesLandUse FacilitiesLandUse(BarsLayout layout, CommunalParameters parameters, SiteLandUse siteLand)
         {
-            return CommunalLandUse(siteLand.Boundary, layout.BoundaryOffset, parameters.Depth);
+            return FacilitiesLandUse(siteLand.Boundary, layout.BoundaryOffset, parameters.Depth);
         }
 
-        public static CommunalLandUse CommunalLandUse(PerimeterLayout layout, CommunalParameters parameters, SiteLandUse siteLand)
+        public static FacilitiesLandUse FacilitiesLandUse(PerimeterLayout layout, CommunalParameters parameters, SiteLandUse siteLand)
         {
-            return CommunalLandUse(siteLand.Boundary, layout.BoundaryOffset, parameters.Depth);
+            return FacilitiesLandUse(siteLand.Boundary, layout.BoundaryOffset, parameters.Depth);
         }
 
-        public static CommunalLandUse CommunalLandUse(HybridLayout layout, CommunalParameters parameters, SiteLandUse siteLand)
+        public static FacilitiesLandUse FacilitiesLandUse(HybridLayout layout, CommunalParameters parameters, SiteLandUse siteLand)
         {
             
-            return CommunalLandUse(siteLand.Boundary, layout.PerimeterLayout.BoundaryOffset, parameters.Depth);
+            return FacilitiesLandUse(siteLand.Boundary, layout.PerimeterLayout.BoundaryOffset, parameters.Depth);
         }
     }
 }

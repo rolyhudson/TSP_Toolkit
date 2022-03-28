@@ -50,7 +50,7 @@ namespace BH.Engine.TSP
 
             summary.InternalCommercialArea = development.Bars.NumberOfGroundFloorUnits() * unitArea;
             development.CommunalBlock.Commercial.ForEach(x => summary.ExternalCirculation += x.Area());
-            development.CommunalBlock.Social.ForEach(x => summary.CommunalArea += x.Area());
+            development.CommunalBlock.Communal.ForEach(x => summary.CommunalArea += x.Area());
 
             summary.TotalCommercialArea = summary.InternalCommercialArea + summary.ExternalCommercialArea;
 

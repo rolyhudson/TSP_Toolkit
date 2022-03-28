@@ -10,15 +10,15 @@ namespace BH.Engine.TSP
 {
     public static partial class Create 
     {
-        public static CommunalBlock CommunalBlock(Field field, List<Bar> bars, Unit prototypeUnit, CommunalParameters communalParameters, CommunalLandUse communalLand)
+        public static FacilitiesBlock FacilitiesBlock(Field field, List<Bar> bars, Unit prototypeUnit, CommunalParameters communalParameters, FacilitiesLandUse communalLand)
         {
             int numberApartments = bars.NumberOfApartments(prototypeUnit);
             double areaApartments = numberApartments * prototypeUnit.ApartmentArea;
             
             double lengthParking = communalParameters.MinimumLength;
-            double totalSocialArea = areaApartments * communalParameters.SocialAreaAsPercentOfTotalAparmentsArea / 100;
-            double socialAreaPerFloor = totalSocialArea / communalParameters.TotalStories;
-            double lengthSocial = socialAreaPerFloor / communalParameters.Depth;
+            double totalCommunalArea = areaApartments * communalParameters.SocialAreaAsPercentOfTotalAparmentsArea / 100;
+            double socialAreaPerFloor = totalCommunalArea / communalParameters.TotalStories;
+            double lengthCommunal = socialAreaPerFloor / communalParameters.Depth;
 
 
             double totalCommercialArea = areaApartments * communalParameters.CommercialAreaAsPercentOfTotalApartmentsArea / 100;
@@ -38,34 +38,34 @@ namespace BH.Engine.TSP
             List<Point> cornersSocial = new List<Point>()
             { 
                 Geometry.Create.Point(0,0,0),
-                Geometry.Create.Point(lengthSocial,0,0),
-                Geometry.Create.Point(lengthSocial,communalParameters.Depth,0),
+                Geometry.Create.Point(lengthCommunal,0,0),
+                Geometry.Create.Point(lengthCommunal,communalParameters.Depth,0),
                 Geometry.Create.Point(0,communalParameters.Depth,0),
                 Geometry.Create.Point(0,0,0),
 
             };
             List<Point> cornersCommercial = new List<Point>()
             {
-                Geometry.Create.Point(lengthSocial,0,0),
-                Geometry.Create.Point(lengthSocial+lengthCommercial,0,0),
-                Geometry.Create.Point(lengthSocial+lengthCommercial,communalParameters.Depth,0),
-                Geometry.Create.Point(lengthSocial,communalParameters.Depth,0),
-                Geometry.Create.Point(lengthSocial,0,0),
+                Geometry.Create.Point(lengthCommunal,0,0),
+                Geometry.Create.Point(lengthCommunal+lengthCommercial,0,0),
+                Geometry.Create.Point(lengthCommunal+lengthCommercial,communalParameters.Depth,0),
+                Geometry.Create.Point(lengthCommunal,communalParameters.Depth,0),
+                Geometry.Create.Point(lengthCommunal,0,0),
 
             };
             List<Point> cornersParking = new List<Point>()
             {
-                Geometry.Create.Point(lengthSocial+lengthCommercial,0,0),
-                Geometry.Create.Point(lengthSocial+lengthCommercial+lengthParking,0,0),
-                Geometry.Create.Point(lengthSocial+lengthCommercial+lengthParking,communalParameters.Depth,0),
-                Geometry.Create.Point(lengthSocial+lengthCommercial,communalParameters.Depth,0),
-                 Geometry.Create.Point(lengthSocial+lengthCommercial,0,0),
+                Geometry.Create.Point(lengthCommunal+lengthCommercial,0,0),
+                Geometry.Create.Point(lengthCommunal+lengthCommercial+lengthParking,0,0),
+                Geometry.Create.Point(lengthCommunal+lengthCommercial+lengthParking,communalParameters.Depth,0),
+                Geometry.Create.Point(lengthCommunal+lengthCommercial,communalParameters.Depth,0),
+                 Geometry.Create.Point(lengthCommunal+lengthCommercial,0,0),
             };
             List<Point> corners = new List<Point>()
             {
                 Geometry.Create.Point(0,0,0),
-                Geometry.Create.Point(lengthSocial+lengthCommercial+lengthParking,0,0),
-                Geometry.Create.Point(lengthSocial+lengthCommercial+lengthParking,communalParameters.Depth,0),
+                Geometry.Create.Point(lengthCommunal+lengthCommercial+lengthParking,0,0),
+                Geometry.Create.Point(lengthCommunal+lengthCommercial+lengthParking,communalParameters.Depth,0),
                 Geometry.Create.Point(0,communalParameters.Depth,0),
                 Geometry.Create.Point(0,0,0),
 
@@ -83,20 +83,20 @@ namespace BH.Engine.TSP
             Polyline parkingBoundary = new Polyline(){ ControlPoints = cornersParking};
             parkingBoundary = parkingBoundary.Transform(transform);
 
-            Polyline socialBoundary = new Polyline() { ControlPoints = cornersSocial };
-            socialBoundary = socialBoundary.Transform(transform);
+            Polyline communalBoundary = new Polyline() { ControlPoints = cornersSocial };
+            communalBoundary = communalBoundary.Transform(transform);
 
             Polyline commercialBoundary = new Polyline() { ControlPoints = cornersCommercial };
             commercialBoundary = commercialBoundary.Transform(transform);
 
-            CommunalBlock communalBlock = new CommunalBlock();
+            FacilitiesBlock communalBlock = new FacilitiesBlock();
             for(int i = 0;i< communalParameters.TotalStories;i++)
             {
                 Polyline floor = parkingBoundary.Translate(Vector.ZAxis * i * communalParameters.FloorToFloor);
                 communalBlock.Parking.Add(floor);
 
-                floor = socialBoundary.Translate(Vector.ZAxis * i * communalParameters.FloorToFloor);
-                communalBlock.Social.Add(floor);
+                floor = communalBoundary.Translate(Vector.ZAxis * i * communalParameters.FloorToFloor);
+                communalBlock.Communal.Add(floor);
 
                 floor = commercialBoundary.Translate(Vector.ZAxis * i * communalParameters.FloorToFloor);
                 communalBlock.Commercial.Add(floor);
@@ -104,7 +104,7 @@ namespace BH.Engine.TSP
             communalBlock.Boundary = boundary;
             communalBlock.ParkingSpaces = parkingSpacesRequired;
             communalBlock.CommercialArea = totalCommercialArea;
-            communalBlock.SocialArea = totalSocialArea;
+            communalBlock.CommunalArea = totalCommunalArea;
             return communalBlock;
         }
     }

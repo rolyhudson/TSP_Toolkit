@@ -6,17 +6,18 @@ using System.Text;
 
 namespace BH.oM.TSP
 {
-    public class CommunalBlock : BHoMObject
+    public class FacilitiesBlock : BHoMObject
     {
         public List<Polyline> Parking { get; set; } = new List<Polyline>();
 
         public virtual List<Polyline> Commercial { get; set; } = new List<Polyline>();
 
-        public virtual List<Polyline> Social { get; set; } = new List<Polyline>();
+        public virtual List<Polyline> Communal { get; set; } = new List<Polyline>();
 
         public virtual Polyline Boundary { get; set; } = new Polyline();
 
-        public virtual double SocialArea { get; set; } = 0;
+        public virtual double CommunalArea { get; set; } = 0;
+
         public virtual double CommercialArea { get; set; } = 0;
 
         public virtual int ParkingSpaces { get; set; } = 0;

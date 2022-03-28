@@ -51,7 +51,7 @@ namespace BH.Engine.TSP
             return renderMesh;
         }
 
-        public static List<RenderMesh> ToRenderMesh(this CommunalBlock communalBlock, PreviewColourMap previewColourMap)
+        public static List<RenderMesh> ToRenderMesh(this FacilitiesBlock communalBlock, PreviewColourMap previewColourMap)
         {
             List<RenderMesh> renderMeshes = new List<RenderMesh>();
             Mesh m = new Mesh();
@@ -73,7 +73,7 @@ namespace BH.Engine.TSP
             vertices = new List<oM.Geometry.Point>();
             faces = new List<Face>();
             v = 0;
-            foreach (Polyline floor in communalBlock.Social)
+            foreach (Polyline floor in communalBlock.Communal)
             {
                 vertices.AddRange(floor.ControlPoints);
                 faces.Add(Geometry.Create.Face(v, v + 1, v + 2, v + 3));
@@ -81,7 +81,7 @@ namespace BH.Engine.TSP
             }
             m.Vertices = vertices;
             m.Faces = faces;
-            renderMeshes.Add(ToRenderMesh(m, previewColourMap.Map["Social"]));
+            renderMeshes.Add(ToRenderMesh(m, previewColourMap.Map["Communal"]));
 
             m = new Mesh();
             vertices = new List<oM.Geometry.Point>();

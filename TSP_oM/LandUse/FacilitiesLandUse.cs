@@ -7,11 +7,11 @@ using System.Text;
 
 namespace BH.oM.TSP
 {
-    public class CommunalLandUse : BHoMObject, ILandUse
+    public class FacilitiesLandUse : BHoMObject, ILandUse
     {
         public virtual Polyline Boundary { get; set; } = new Polyline();
 
-        override public string Name { get; set; } = "CommunalLandUse";
+        override public string Name { get; set; } = "FacilitiesLandUse";
 
         public virtual Cartesian CoordinateSystem { get; set; } = new Cartesian();
     }
