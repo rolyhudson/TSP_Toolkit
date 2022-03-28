@@ -5,7 +5,7 @@ using System.Text;
 
 namespace BH.oM.TSP
 {
-    public class CommunalParameters : BHoMObject
+    public class FacilitiesParameters : BHoMObject
     {
         public virtual double ParkingSpacesPerApartment { get; set; } = 1;
         public virtual double Depth { get; set; } = 30;
@@ -14,7 +14,7 @@ namespace BH.oM.TSP
 
         public virtual double CommercialAreaAsPercentOfTotalApartmentsArea { get; set; } = 5;
 
-        public virtual double SocialAreaAsPercentOfTotalAparmentsArea { get; set; } = 5;
+        public virtual double CommunalAreaAsPercentOfTotalApartmentsArea { get; set; } = 5;
 
         public virtual double MinimumLength { get; set; } = 40;
 

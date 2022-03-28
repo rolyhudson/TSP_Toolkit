@@ -10,13 +10,13 @@ namespace BH.Engine.TSP
 {
     public static partial class Create 
     {
-        public static FacilitiesBlock FacilitiesBlock(Field field, List<Bar> bars, Unit prototypeUnit, CommunalParameters communalParameters, FacilitiesLandUse communalLand)
+        public static FacilitiesBlock FacilitiesBlock(Field field, List<Bar> bars, Unit prototypeUnit, FacilitiesParameters communalParameters, FacilitiesLandUse communalLand)
         {
             int numberApartments = bars.NumberOfApartments(prototypeUnit);
             double areaApartments = numberApartments * prototypeUnit.ApartmentArea;
             
             double lengthParking = communalParameters.MinimumLength;
-            double totalCommunalArea = areaApartments * communalParameters.SocialAreaAsPercentOfTotalAparmentsArea / 100;
+            double totalCommunalArea = areaApartments * communalParameters.CommunalAreaAsPercentOfTotalApartmentsArea / 100;
             double socialAreaPerFloor = totalCommunalArea / communalParameters.TotalStories;
             double lengthCommunal = socialAreaPerFloor / communalParameters.Depth;
 

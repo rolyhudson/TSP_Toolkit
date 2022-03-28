@@ -59,27 +59,27 @@ namespace BH.Engine.TSP
             return parkingLand;
         }
 
-        public static FacilitiesLandUse IFacilitiesLandUse(ILayout layout, CommunalParameters parameters, SiteLandUse siteLand)
+        public static FacilitiesLandUse IFacilitiesLandUse(ILayout layout, FacilitiesParameters parameters, SiteLandUse siteLand)
         {
             return FacilitiesLandUse(layout as dynamic, parameters, siteLand);
         }
 
-        public static FacilitiesLandUse FacilitiesLandUse(ILayout layout, CommunalParameters parameters, SiteLandUse siteLand)
+        public static FacilitiesLandUse FacilitiesLandUse(ILayout layout, FacilitiesParameters parameters, SiteLandUse siteLand)
         {
             return null;
         }
 
-        public static FacilitiesLandUse FacilitiesLandUse(BarsLayout layout, CommunalParameters parameters, SiteLandUse siteLand)
+        public static FacilitiesLandUse FacilitiesLandUse(BarsLayout layout, FacilitiesParameters parameters, SiteLandUse siteLand)
         {
             return FacilitiesLandUse(siteLand.Boundary, layout.BoundaryOffset, parameters.Depth);
         }
 
-        public static FacilitiesLandUse FacilitiesLandUse(PerimeterLayout layout, CommunalParameters parameters, SiteLandUse siteLand)
+        public static FacilitiesLandUse FacilitiesLandUse(PerimeterLayout layout, FacilitiesParameters parameters, SiteLandUse siteLand)
         {
             return FacilitiesLandUse(siteLand.Boundary, layout.BoundaryOffset, parameters.Depth);
         }
 
-        public static FacilitiesLandUse FacilitiesLandUse(HybridLayout layout, CommunalParameters parameters, SiteLandUse siteLand)
+        public static FacilitiesLandUse FacilitiesLandUse(HybridLayout layout, FacilitiesParameters parameters, SiteLandUse siteLand)
         {
             
             return FacilitiesLandUse(siteLand.Boundary, layout.PerimeterLayout.BoundaryOffset, parameters.Depth);

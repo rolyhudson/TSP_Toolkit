@@ -11,7 +11,7 @@ namespace BH.Engine.TSP
 {
     public static partial class Compute
     {
-        public static Development Generate(Unit prototypeUnit, PlanParameters parameters, CommunalParameters communalParameters, ILayout layout, FacilitiesBlock communalBlock = null )
+        public static Development Generate(Unit prototypeUnit, PlanParameters parameters, FacilitiesParameters communalParameters, ILayout layout, FacilitiesBlock communalBlock = null )
         {
             SiteLandUse siteLandUse = Query.FindSiteUse( parameters.LandUses);
             if(siteLandUse == null)
