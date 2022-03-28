@@ -9,7 +9,7 @@ namespace BH.oM.TSP
         Apartment,
         Commercial,
         Parking,
-        Social
+        Communal
 
     }
 }

@@ -23,7 +23,7 @@ namespace BH.Engine.TSP
             double unitArea = parameters.PrototypeUnit.X * parameters.PrototypeUnit.Y;
             double blocksFootprint = development.Bars.NumberOfGroundFloorUnits() * unitArea;
 
-            summary.UsedArea = blocksFootprint + blocksCirculation + development.CommunalBlock.Boundary.Area();
+            summary.UsedArea = blocksFootprint + blocksCirculation + development.FacilitiesBlock.Boundary.Area();
             summary.Occupation = summary.UsedArea / summary.NetPlotArea *100;
 
             summary.InternalCirculation = development.Bars.NumberOfUnits() * parameters.PrototypeUnit.CirculationArea;
@@ -46,11 +46,11 @@ namespace BH.Engine.TSP
             summary.HousingArea = summary.HousingUnitsNumber * parameters.PrototypeUnit.ApartmentArea;
 
             
-            summary.ParkingSpaces = development.CommunalBlock.ParkingSpaces;
+            summary.ParkingSpaces = development.FacilitiesBlock.ParkingSpaces;
 
             summary.InternalCommercialArea = development.Bars.NumberOfGroundFloorUnits() * unitArea;
-            development.CommunalBlock.Commercial.ForEach(x => summary.ExternalCirculation += x.Area());
-            development.CommunalBlock.Communal.ForEach(x => summary.CommunalArea += x.Area());
+            development.FacilitiesBlock.Commercial.ForEach(x => summary.ExternalCirculation += x.Area());
+            development.FacilitiesBlock.Communal.ForEach(x => summary.CommunalArea += x.Area());
 
             summary.TotalCommercialArea = summary.InternalCommercialArea + summary.ExternalCommercialArea;
 

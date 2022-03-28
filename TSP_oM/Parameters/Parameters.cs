@@ -13,13 +13,13 @@ namespace BH.oM.TSP
 
         public virtual VerticalParameters VerticalParameters { get; set; } = new VerticalParameters();
 
-        public virtual FacilitiesParameters CommunalParameters { get; set; } = new FacilitiesParameters();
+        public virtual FacilitiesParameters FacilitiesParameters { get; set; } = new FacilitiesParameters();
 
         public virtual SolarAccessParameters SolarAccessParameters { get; set; } = new SolarAccessParameters();
 
-        public virtual object LayoutMethod { get; set; }
-
         public virtual CostParameters CostParameters { get; set; } = new CostParameters();
+
+        public virtual object LayoutMethod { get; set; }
 
     }
 }

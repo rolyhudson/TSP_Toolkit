@@ -11,7 +11,7 @@ namespace BH.Engine.TSP
 {
     public static partial class Compute
     {
-        public static Development Generate(Unit prototypeUnit, PlanParameters parameters, FacilitiesParameters communalParameters, ILayout layout, FacilitiesBlock communalBlock = null )
+        public static Development Generate(Unit prototypeUnit, PlanParameters parameters, FacilitiesParameters communalParameters, ILayout layout, FacilitiesBlock FacilitiesBlock = null )
         {
             SiteLandUse siteLandUse = Query.FindSiteUse( parameters.LandUses);
             if(siteLandUse == null)
@@ -24,7 +24,7 @@ namespace BH.Engine.TSP
 
             object communalLand = parameters.LandUses.Find(x => x is FacilitiesLandUse);
             //Add communal use
-            if(communalLand == null && communalBlock == null)
+            if(communalLand == null && FacilitiesBlock == null)
             {
                 communalLand = Create.IFacilitiesLandUse(layout, communalParameters, siteLandUse as SiteLandUse);
                 parameters.LandUses.Add(communalLand);
@@ -34,7 +34,7 @@ namespace BH.Engine.TSP
                 //replace with block
                 parameters.LandUses.Remove(communalLand);
                 FacilitiesLandUse communal = communalLand as FacilitiesLandUse;
-                communal.Boundary = communalBlock.Boundary.Offset(communalParameters.BaseOffset, Vector.ZAxis);
+                communal.Boundary = FacilitiesBlock.Boundary.Offset(communalParameters.BaseOffset, Vector.ZAxis);
                 parameters.LandUses.Add(communal);
             }
             foreach (var landUseGroup in parameters.LandUses.GroupBy(x => x.GetType()))

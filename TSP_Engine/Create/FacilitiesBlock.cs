@@ -89,23 +89,23 @@ namespace BH.Engine.TSP
             Polyline commercialBoundary = new Polyline() { ControlPoints = cornersCommercial };
             commercialBoundary = commercialBoundary.Transform(transform);
 
-            FacilitiesBlock communalBlock = new FacilitiesBlock();
+            FacilitiesBlock FacilitiesBlock = new FacilitiesBlock();
             for(int i = 0;i< communalParameters.TotalStories;i++)
             {
                 Polyline floor = parkingBoundary.Translate(Vector.ZAxis * i * communalParameters.FloorToFloor);
-                communalBlock.Parking.Add(floor);
+                FacilitiesBlock.Parking.Add(floor);
 
                 floor = communalBoundary.Translate(Vector.ZAxis * i * communalParameters.FloorToFloor);
-                communalBlock.Communal.Add(floor);
+                FacilitiesBlock.Communal.Add(floor);
 
                 floor = commercialBoundary.Translate(Vector.ZAxis * i * communalParameters.FloorToFloor);
-                communalBlock.Commercial.Add(floor);
+                FacilitiesBlock.Commercial.Add(floor);
             }
-            communalBlock.Boundary = boundary;
-            communalBlock.ParkingSpaces = parkingSpacesRequired;
-            communalBlock.CommercialArea = totalCommercialArea;
-            communalBlock.CommunalArea = totalCommunalArea;
-            return communalBlock;
+            FacilitiesBlock.Boundary = boundary;
+            FacilitiesBlock.ParkingSpaces = parkingSpacesRequired;
+            FacilitiesBlock.CommercialArea = totalCommercialArea;
+            FacilitiesBlock.CommunalArea = totalCommunalArea;
+            return FacilitiesBlock;
         }
     }
 }

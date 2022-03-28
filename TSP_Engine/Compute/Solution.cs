@@ -18,17 +18,17 @@ namespace BH.Engine.TSP
                 return null;
             int runs = 0;
             Development option = new Development();
-            option.CommunalBlock = null;
+            option.FacilitiesBlock = null;
             Parameters parametersClone = parameters.DeepClone();
             int bestScore = 0;
             Development development = new Development();
             while (runs < maxIterations)
             {
-                option = Generate(parameters.PrototypeUnit, parametersClone.PlanParameters, parametersClone.CommunalParameters, parametersClone.LayoutMethod as ILayout, option.CommunalBlock);
+                option = Generate(parameters.PrototypeUnit, parametersClone.PlanParameters, parametersClone.FacilitiesParameters, parametersClone.LayoutMethod as ILayout, option.FacilitiesBlock);
                 option.Field = Modify.ILevels(option.Field, parametersClone.PrototypeUnit, parametersClone.VerticalParameters);
                 option.Bars = Massing(option.Bars, option.Field, parametersClone.PrototypeUnit);
                 FacilitiesLandUse communalLand = (FacilitiesLandUse)parametersClone.PlanParameters.LandUses.Find(x => x is FacilitiesLandUse);
-                option.CommunalBlock = Create.FacilitiesBlock(option.Field, option.Bars, parametersClone.PrototypeUnit, parametersClone.CommunalParameters, communalLand);
+                option.FacilitiesBlock = Create.FacilitiesBlock(option.Field, option.Bars, parametersClone.PrototypeUnit, parametersClone.FacilitiesParameters, communalLand);
                 if(option.IsValid())
                 {
                     int score = option.Bars.SelectMany(x => x.Units).Count();
@@ -51,7 +51,7 @@ namespace BH.Engine.TSP
                 //add the units generated to obstructions
                 List<Mesh> units = Create.UnitMesh(development.Bars);
                 copySolarParameters.Obstructions.AddRange(units);
-                copySolarParameters.Obstructions.Add(development.CommunalBlock.UnitMesh());
+                copySolarParameters.Obstructions.Add(development.FacilitiesBlock.UnitMesh());
 
                 solarResults = SolarAnalysis(development.Bars, copySolarParameters.SunPoints, copySolarParameters.Obstructions);
             }

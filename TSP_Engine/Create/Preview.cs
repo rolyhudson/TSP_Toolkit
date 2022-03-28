@@ -51,7 +51,7 @@ namespace BH.Engine.TSP
                 
             }
 
-            renderMeshes.AddRange(Convert.ToRenderMesh(result.Development.CommunalBlock, colourMap));
+            renderMeshes.AddRange(Convert.ToRenderMesh(result.Development.FacilitiesBlock, colourMap));
             return renderMeshes;
         }
 

@@ -12,13 +12,13 @@ namespace BH.Engine.TSP
         public static bool IsValid(this Development development)
         {
             //is the communal inside the boundary
-            //if (development.Field.Boundary.ICurveIntersections(development.CommunalBlock.Floors[0]).Count > 0)
+            //if (development.Field.Boundary.ICurveIntersections(development.FacilitiesBlock.Floors[0]).Count > 0)
             //    return false;
             foreach (Guid guid in development.Bars.SelectMany(x => x.Cells))
             {
                 //check each cell for intersect
                 Cell cell = development.Field.Cells.Find(x => x.BHoM_Guid.Equals(guid));
-                if (cell.Boundary.ICurveIntersections(development.CommunalBlock.Boundary).Count > 0)
+                if (cell.Boundary.ICurveIntersections(development.FacilitiesBlock.Boundary).Count > 0)
                     return false;
             }
             return true;
