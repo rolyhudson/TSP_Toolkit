@@ -41,6 +41,7 @@ namespace BH.Engine.TSP
                 }
                 
             }
+            
             development.AddLandUseBoundaries(parameters.PlanParameters.LandUses);
             SiteLandUse siteLandUse = Query.FindSiteUse(parameters.PlanParameters.LandUses);
             development.Boundary = siteLandUse.Boundary;
@@ -51,6 +52,7 @@ namespace BH.Engine.TSP
             
             if (parameters.SolarAccessParameters.Run)
             {
+                development.Sunpoints = parameters.SolarAccessParameters.SunPoints;
                 SolarAccessParameters copySolarParameters = parameters.SolarAccessParameters.DeepClone();
                 //add the units generated to obstructions
                 List<Mesh> units = Create.UnitMesh(development.Bars);

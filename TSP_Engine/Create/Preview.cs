@@ -12,7 +12,7 @@ namespace BH.Engine.TSP
 {
     public static partial class Create
     {
-        public static List<RenderMesh> Preview(Result result,  PreviewColourMap colourMap = null, Gradient solarAnalysisGradient = null, double minimum = 0, double maximum = 12)
+        public static List<RenderMesh> Preview(Result result, PreviewColourMap colourMap = null, Gradient solarAnalysisGradient = null, double minimum = 0, double maximum = 12)
         {
             List<RenderMesh> renderMeshes = new List<RenderMesh>();
             if (colourMap == null)
@@ -57,6 +57,7 @@ namespace BH.Engine.TSP
             renderMeshes.Add(Convert.ToRenderMesh(result.Development.Boundary.Translate(Vector.ZAxis*-0.1), colourMap.Colour("Site")));
             renderMeshes.Add(Convert.ToRenderMesh(result.Development.FacilitiesBlock.Boundary.Translate(Vector.ZAxis * -0.05), colourMap.Colour("Circulation")));
             renderMeshes.AddRange(Convert.ToRenderMesh(result.Development.FacilitiesBlock, colourMap));
+            result.Development.Sunpoints.ForEach(x => renderMeshes.Add(Convert.ToRenderMesh(x, Color.Black)));
             return renderMeshes;
         }
 

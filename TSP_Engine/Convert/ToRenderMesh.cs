@@ -1,4 +1,5 @@
-﻿using BH.oM.Geometry;
+﻿using BH.Engine.Geometry;
+using BH.oM.Geometry;
 using BH.oM.Graphics;
 using BH.oM.TSP;
 using System;
@@ -109,6 +110,26 @@ namespace BH.Engine.TSP
                 point.Colour = color;
 
             return mesh;
+        }
+
+        public static RenderMesh ToRenderMesh(this BH.oM.Geometry.Point point, Color color)
+        {
+            //convert solar point to a mesh
+            Vector vector = BH.Engine.Geometry.Create.Vector(point);
+            vector = vector.Normalise();
+            vector = vector.Reverse();
+            Mesh mesh = new Mesh();
+            Circle circle = Geometry.Create.Circle(point, vector, 1);
+            mesh .Vertices.Add(circle.PointAtParameter(0));
+            mesh.Vertices.Add(circle.PointAtParameter(0.33));
+            mesh.Vertices.Add(circle.PointAtParameter(0.67));
+            mesh.Vertices.Add(point + vector * 20);
+
+            mesh.Faces.Add(Geometry.Create.Face(0, 1, 3));
+            mesh.Faces.Add(Geometry.Create.Face(1, 2, 3));
+            mesh.Faces.Add(Geometry.Create.Face(2, 0, 3));
+
+            return ToRenderMesh(mesh, Color.Black);
         }
     }
 }

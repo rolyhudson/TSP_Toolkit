@@ -19,5 +19,7 @@ namespace BH.oM.TSP
         public virtual List<Polyline> OpenSpace { get; set; } = new List<Polyline>();
 
         public virtual List<Polyline> Roads { get; set; } = new List<Polyline>();
+
+        public virtual List<Point> Sunpoints { get; set; } = new List<Point>();
     }
 }
