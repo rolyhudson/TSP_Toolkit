@@ -17,6 +17,8 @@ namespace BH.Engine.TSP
                 if(landUse is OpenLandUse)
                 {
                     OpenLandUse openLandUse = landUse as OpenLandUse;
+                    if (openLandUse.Boundary == null)
+                        continue;
                     if (openLandUse.Boundary.IsClosed() && openLandUse.Boundary.IsPlanar())
                         clone.OpenSpace.Add(openLandUse.Boundary);
                   
@@ -24,6 +26,8 @@ namespace BH.Engine.TSP
                 if (landUse is RoadLandUse)
                 {
                     RoadLandUse roadLandUse = landUse as RoadLandUse;
+                    if (roadLandUse.Boundary == null)
+                        continue;
                     if (roadLandUse.Boundary.IsClosed() && roadLandUse.Boundary.IsPlanar())
                         clone.Roads.Add(roadLandUse.Boundary);
 
