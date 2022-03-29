@@ -41,7 +41,7 @@ namespace BH.Engine.TSP
                 }
                 
             }
-
+            development.AddLandUseBoundaries(parameters.PlanParameters.LandUses);
             SiteLandUse siteLandUse = Query.FindSiteUse(parameters.PlanParameters.LandUses);
             development.Boundary = siteLandUse.Boundary;
             development.BarBaseOffset(parameters.PlanParameters.FootprintOffset);

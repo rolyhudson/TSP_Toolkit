@@ -10,6 +10,8 @@ namespace BH.Engine.TSP
     {
         public static Sphere BoundingSphere(this Mesh mesh)
         {
+            if (mesh == null)
+                return null;
             double rMaxSq = double.MinValue;
             Sphere sphere = new Sphere();
             sphere.Centre = mesh.Vertices.Average();

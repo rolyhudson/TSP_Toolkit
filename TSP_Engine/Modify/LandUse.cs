@@ -46,22 +46,7 @@ namespace BH.Engine.TSP
 
         public static Field LandUse(this Field field, RoadLandUse landUse)
         {
-            if (landUse.CentreLine == null)
-                return field;
-            if (!landUse.CentreLine.IsPlanar())
-            {
-                //Base.Compute.RecordWarning("One or more of the road land use polylines provided was not planar.");
-                return null;
-            }
-            Field fieldcopy = field.ShallowClone();
-            String currentUse = landUse.GetType().ToString();
-            foreach (Cell cell in fieldcopy.Cells.FindAll(x => !(x.Use is OutsideSiteLandUse) && !(x.Use is RoadLandUse)))
-            {
-                List<Point> intersections = cell.Boundary.LineIntersections(landUse.CentreLine);
-                if (intersections.Count > 0)
-                    cell.Use = landUse;
-            }
-            return fieldcopy;
+            return LandUseCrossing(field, landUse.Boundary, landUse);
         }
 
         /***************************************************/
@@ -69,7 +54,7 @@ namespace BH.Engine.TSP
         public static Field LandUse(this Field field, ILandUse landUse)
         {
             //Base.Compute.RecordError("LandUse is unknown.");
-            return null;
+            return field;
         }
 
         /***************************************************/
@@ -81,7 +66,7 @@ namespace BH.Engine.TSP
             if (!polyline.IsClosed() && !polyline.IsPlanar())
             {
                 //Base.Compute.RecordWarning("One or more of the open land use polylines provided was not closed or not planar.");
-                return null;
+                return field;
             }
             Field fieldcopy = field.ShallowClone();
             Type currentUse = landUse.GetType();
@@ -103,7 +88,7 @@ namespace BH.Engine.TSP
             if (!polyline.IsClosed() && !polyline.IsPlanar())
             {
                 //Base.Compute.RecordWarning("One or more of the open land use polylines provided was not closed or not planar.");
-                return null;
+                return field;
             }
             Field fieldcopy = field.ShallowClone();
             Type currentUse = landUse.GetType();

@@ -52,6 +52,8 @@ namespace BH.Engine.TSP
                 
             }
             result.Development.Bars.ForEach(x => renderMeshes.Add(Convert.ToRenderMesh(x.ExternalCirculation, colourMap.Colour("Circulation"))));
+            result.Development.OpenSpace.ForEach(x => renderMeshes.Add(Convert.ToRenderMesh(x, colourMap.Colour("Open"))));
+            result.Development.Roads.ForEach(x => renderMeshes.Add(Convert.ToRenderMesh(x, colourMap.Colour("Circulation"))));
             renderMeshes.Add(Convert.ToRenderMesh(result.Development.Boundary.Translate(Vector.ZAxis*-0.1), colourMap.Colour("Site")));
             renderMeshes.Add(Convert.ToRenderMesh(result.Development.FacilitiesBlock.Boundary.Translate(Vector.ZAxis * -0.05), colourMap.Colour("Circulation")));
             renderMeshes.AddRange(Convert.ToRenderMesh(result.Development.FacilitiesBlock, colourMap));

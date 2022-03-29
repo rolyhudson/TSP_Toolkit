@@ -7,7 +7,7 @@ namespace BH.oM.TSP
 {
     public class RoadLandUse : BHoMObject, ILandUse 
     {
-        public virtual Polyline CentreLine { get; set; } = new Polyline();
+        public virtual Polyline Boundary { get; set; } = new Polyline();
 
         override public string Name { get; set; } = "RoadLandUse";
     }

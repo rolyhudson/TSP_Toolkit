@@ -15,5 +15,9 @@ namespace BH.oM.TSP
         public virtual FacilitiesBlock FacilitiesBlock { get; set; } = null;
 
         public virtual Polyline Boundary { get; set; } = new Polyline();
+
+        public virtual List<Polyline> OpenSpace { get; set; } = new List<Polyline>();
+
+        public virtual List<Polyline> Roads { get; set; } = new List<Polyline>();
     }
 }

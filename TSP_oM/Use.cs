@@ -11,7 +11,8 @@ namespace BH.oM.TSP
         Parking,
         Communal,
         Circulation,
-        Site
+        Site,
+        Open
 
     }
 }

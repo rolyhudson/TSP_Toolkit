@@ -41,7 +41,8 @@ namespace BH.Engine.TSP
                  Color.FromArgb(125, 125, 125, 125),
                  Color.FromArgb(190,255, 152, 206),
                  Color.FromArgb(165, 165, 165, 165),
-                 Color.FromArgb(167, 152, 251, 152)
+                 Color.FromArgb(167, 152, 251, 152),
+                 Color.FromArgb(165, 165, 165, 165),
             };
             return colors;
         }

@@ -21,7 +21,11 @@ namespace BH.Engine.TSP
         {
             m_MeshBoundingSpheres = new Dictionary<Sphere, Mesh>();
             foreach (Mesh m in potentialObstructions)
-                m_MeshBoundingSpheres.Add(m.BoundingSphere(), m);
+            {
+                Sphere sphere = m.BoundingSphere();
+                if (sphere != null)
+                    m_MeshBoundingSpheres.Add(sphere, m);
+            }
 
             Point centroid = unit.UnitCentroid();
             List<Plane> planes = unit.ObservationPlanes();
@@ -65,8 +69,13 @@ namespace BH.Engine.TSP
         {
             m_MeshBoundingSpheres = new Dictionary<Sphere, Mesh>();
             foreach (Mesh m in potentialObstructions)
-                m_MeshBoundingSpheres.Add(m.BoundingSphere(), m);
-            ;
+            {
+                Sphere sphere = m.BoundingSphere();
+                if(sphere!=null)
+                    m_MeshBoundingSpheres.Add(sphere, m);
+            }
+                
+            
             ConcurrentBag<SolarResult> scores = new ConcurrentBag<SolarResult>();
 
             foreach (Bar b in bars)
@@ -152,7 +161,11 @@ namespace BH.Engine.TSP
         {
             m_MeshBoundingSpheres = new Dictionary<Sphere, Mesh>();
             foreach (Mesh m in potentialObstructions)
-                m_MeshBoundingSpheres.Add(m.BoundingSphere(), m);
+            {
+                Sphere sphere = m.BoundingSphere();
+                if (sphere != null)
+                    m_MeshBoundingSpheres.Add(sphere, m);
+            }
 
             Dictionary<Sphere, Mesh> obstructing = new Dictionary<Sphere, Mesh>();
             foreach (KeyValuePair<Sphere, Mesh> kvp in m_MeshBoundingSpheres)
