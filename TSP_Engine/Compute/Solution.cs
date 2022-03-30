@@ -22,14 +22,21 @@ namespace BH.Engine.TSP
             Parameters parametersClone = parameters.DeepClone();
             int bestScore = 0;
             Development development = new Development();
+            SiteLandUse siteLandUse = Query.FindSiteUse(parameters.PlanParameters.LandUses);
+            
+
             while (runs < maxIterations)
             {
                 option = Generate(parameters.PrototypeUnit, parametersClone.PlanParameters, parametersClone.FacilitiesParameters, parametersClone.LayoutMethod as ILayout, option.FacilitiesBlock);
                 option.Field = Modify.ILevels(option.Field, parametersClone.PrototypeUnit, parametersClone.VerticalParameters);
                 option.Bars = Massing(option.Bars, option.Field, parametersClone.PrototypeUnit);
+                option.Boundary = siteLandUse.Boundary;
                 FacilitiesLandUse communalLand = (FacilitiesLandUse)parametersClone.PlanParameters.LandUses.Find(x => x is FacilitiesLandUse);
                 option.FacilitiesBlock = Create.FacilitiesBlock(option.Field, option.Bars, parametersClone.PrototypeUnit, parametersClone.FacilitiesParameters, communalLand);
-                if(option.IsValid())
+
+                
+
+                if (option.IsValid())
                 {
                     int score = option.Bars.SelectMany(x => x.Units).Count();
                     if (score > bestScore)
@@ -43,8 +50,7 @@ namespace BH.Engine.TSP
             }
             
             development.AddLandUseBoundaries(parameters.PlanParameters.LandUses);
-            SiteLandUse siteLandUse = Query.FindSiteUse(parameters.PlanParameters.LandUses);
-            development.Boundary = siteLandUse.Boundary;
+            
             development.BarBaseOffset(parameters.PlanParameters.FootprintOffset);
             UseSummary useSummary = Query.UseSummary(development, parameters);
 

@@ -8,17 +8,18 @@ namespace BH.oM.TSP
     public class FacilitiesParameters : BHoMObject
     {
         public virtual double ParkingSpacesPerApartment { get; set; } = 1;
-        public virtual double Depth { get; set; } = 30;
 
-        public virtual int TotalStories { get; set; } = 5;
+        public virtual double RowDepth { get; set; } = 15;
+
+        public virtual double NumberOfRows { get; set; } = 2;
+
+        public virtual int TargetStories { get; set; } = 5;
 
         public virtual double CommercialAreaAsPercentOfTotalApartmentsArea { get; set; } = 5;
 
         public virtual double CommunalAreaAsPercentOfTotalApartmentsArea { get; set; } = 5;
 
         public virtual double MinimumLength { get; set; } = 40;
-
-        public virtual int SpacesPerFloorForMinimumLength { get; set; } = 32;
 
         public virtual double FloorToFloor { get; set; } = 4.5;
 

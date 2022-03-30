@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using BH.oM.Geometry;
 
 namespace BH.Engine.TSP
 {
@@ -12,7 +13,7 @@ namespace BH.Engine.TSP
         public static bool IsValid(this Development development)
         {
             //is the communal inside the boundary
-            //if (development.Field.Boundary.ICurveIntersections(development.FacilitiesBlock.Floors[0]).Count > 0)
+            //if (development.Boundary.ICurveIntersections(development.FacilitiesBlock.Boundary).Count > 0)
             //    return false;
             foreach (Guid guid in development.Bars.SelectMany(x => x.Cells))
             {
@@ -22,6 +23,15 @@ namespace BH.Engine.TSP
                     return false;
             }
             return true;
+        }
+
+        public static bool IsValid(this FacilitiesBlock facilitiesBlock, Polyline boundary)
+        {
+            //is the communal inside the boundary
+            if (boundary.IsContaining(facilitiesBlock.Boundary))
+                return true;
+
+            return false;
         }
     }
 }
