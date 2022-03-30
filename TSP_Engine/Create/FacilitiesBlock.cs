@@ -11,7 +11,7 @@ namespace BH.Engine.TSP
 {
     public static partial class Create 
     {
-        public static FacilitiesBlock FacilitiesBlock(Field field, List<Bar> bars, Unit prototypeUnit, FacilitiesParameters facilitiesParameters, FacilitiesLandUse facilitiesLand)
+        public static FacilitiesBlock FacilitiesBlock(Field field, List<Bar> bars, Unit prototypeUnit, FacilitiesParameters facilitiesParameters, FacilitiesLandUse facilitiesLand, int maxFloors)
         {
             int numberApartments = bars.NumberOfApartments(prototypeUnit);
             double areaApartments = numberApartments * prototypeUnit.ApartmentArea;
@@ -26,7 +26,7 @@ namespace BH.Engine.TSP
             while (!validFacilities)
             {
                 double lengthParking = facilitiesParameters.MinimumLength;
-                int spacesPerFloor = (int)(Math.Floor(lengthParking / 2.5) * facilitiesParameters.NumberOfRows * 2);
+                int spacesPerFloor = (int)(Math.Floor(lengthParking / facilitiesParameters.ParkingBayWidth) * facilitiesParameters.NumberOfRows * 2);
                 double totalCommunalArea = areaApartments * facilitiesParameters.CommunalAreaAsPercentOfTotalApartmentsArea / 100;
                 double socialAreaPerFloor = totalCommunalArea / facilitiesParameters.TargetStories;
                 double lengthCommunal = socialAreaPerFloor / depth;
@@ -37,12 +37,26 @@ namespace BH.Engine.TSP
 
                 int parkingSpacesRequired = (int)Math.Ceiling(numberApartments * facilitiesParameters.ParkingSpacesPerApartment);
                 int spacesInBuilidng = spacesPerFloor * facilitiesParameters.TargetStories;
-                int addtionalSpaces = parkingSpacesRequired - spacesInBuilidng;
+                
 
-
-                int additionalSpacesPerFloor = (int)Math.Ceiling(addtionalSpaces / facilitiesParameters.TargetStories * 1.0);
-                int addtionalBaysPerFloor = (int)Math.Ceiling(additionalSpacesPerFloor / facilitiesParameters.NumberOfRows * 2);
-                lengthParking += addtionalBaysPerFloor * 2.5;
+                if(parkingSpacesRequired < spacesInBuilidng)
+                {
+                    //reduce from minimum
+                    int spacesReqPerFloor = (int)Math.Ceiling(parkingSpacesRequired / facilitiesParameters.TargetStories * 1.0);
+                    int baysPerFloor = (int)Math.Ceiling(spacesReqPerFloor / (facilitiesParameters.NumberOfRows * 2.0));
+                    lengthParking = baysPerFloor * facilitiesParameters.ParkingBayWidth;
+                }
+                else
+                {
+                    //increase from minimum
+                    int addtionalSpaces = parkingSpacesRequired - spacesInBuilidng;
+                    int additionalSpacesPerFloor = (int)Math.Ceiling(addtionalSpaces / facilitiesParameters.TargetStories * 1.0);
+                    int addtionalBaysPerFloor = (int)Math.Ceiling(additionalSpacesPerFloor / facilitiesParameters.NumberOfRows * 2);
+                    lengthParking += addtionalBaysPerFloor * facilitiesParameters.ParkingBayWidth;
+                }
+                
+                
+                
 
                 List<Point> corners = new List<Point>()
                 {
@@ -82,10 +96,8 @@ namespace BH.Engine.TSP
                 };
                 
                 Point average = Geometry.Query.Average(new List<Point>() { corners[1], corners[0] });
-                Polyline bound = field.Boundary.ForceClockwise();
-                List<Line> edges = bound.SubParts().OrderByDescending(x => x.Length()).ToList();
-
-                Vector xvect = corners[0] - corners[1];
+                
+                Vector xvect = Vector.XAxis*-1;
                 xvect = xvect.Normalise();
                 Vector yvect = Geometry.Query.CrossProduct(Vector.ZAxis, xvect);
                 Cartesian cartesian = Geometry.Create.CartesianCoordinateSystem(average, xvect, yvect);
@@ -108,6 +120,9 @@ namespace BH.Engine.TSP
                 //if not valid add another floor
                 if (!validFacilities)
                     facilitiesParameters.TargetStories++;
+
+                if (facilitiesParameters.TargetStories >= maxFloors)
+                    break;
             }
             FacilitiesBlock.Boundary = FacilitiesBlock.Boundary.Offset(facilitiesParameters.BaseOffset);
             return FacilitiesBlock;

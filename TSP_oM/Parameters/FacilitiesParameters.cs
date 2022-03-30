@@ -13,6 +13,8 @@ namespace BH.oM.TSP
 
         public virtual double NumberOfRows { get; set; } = 2;
 
+        public virtual double ParkingBayWidth { get; set; } = 2.5;
+
         public virtual int TargetStories { get; set; } = 5;
 
         public virtual double CommercialAreaAsPercentOfTotalApartmentsArea { get; set; } = 5;

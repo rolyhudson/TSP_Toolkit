@@ -11,14 +11,14 @@ namespace BH.Engine.TSP
 {
     public static partial class Create 
     {
-        public static FacilitiesLandUse FacilitiesLandUse(Polyline boundary, double boundaryOffset, double communalDepth)
+        public static FacilitiesLandUse FacilitiesLandUse(Polyline boundary, double boundaryOffset, double facilitiesDepth)
         {
             boundary = boundary.ForceClockwise();
             Polyline offsetA = boundary.Offset(boundaryOffset+0.1, Vector.ZAxis);
             offsetA = offsetA.ForceClockwise();
             List<Line> outeredges = offsetA.SubParts().OrderByDescending(x => x.Length()).ToList();
 
-            Polyline offsetB = offsetA.Offset(communalDepth, Vector.ZAxis);
+            Polyline offsetB = offsetA.Offset(facilitiesDepth, Vector.ZAxis);
             List<Line> inneredges = offsetB.SubParts().OrderByDescending(x => x.Length()).ToList();
 
             int imax = 0;

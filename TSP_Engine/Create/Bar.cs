@@ -8,7 +8,7 @@ namespace BH.Engine.TSP
 {
     public static partial class Create
     {
-        public static Bar Bar(ref Field field, PlanParameters parameters)
+        public static Bar Bar(ref Field field, BarsLayout barsLayout)
         {
             Bar bar = new Bar();
             //find a start point
@@ -29,8 +29,8 @@ namespace BH.Engine.TSP
             
             bar.Cells.Add(start.BHoM_Guid);
             //get aligned neighbours
-            GrowBar(start, field, ref bar, parameters);
-            if (bar.Cells.Count < parameters.MinimumUnits)
+            GrowBar(start, field, ref bar, barsLayout);
+            if (bar.Cells.Count < barsLayout.MinimumUnits)
             {
                 //reset as unoccupied
                 foreach(Guid f in bar.Cells)
@@ -40,22 +40,22 @@ namespace BH.Engine.TSP
                 }
                 bar.Cells = new List<Guid>();
             }
-            field = field.SetCurtilage(bar, parameters);
+            field = field.SetCurtilage(bar, barsLayout);
             return bar;
         }
 
-        private static void GrowBar(Cell start, Field field, ref Bar bar, PlanParameters parameters)
+        private static void GrowBar(Cell start, Field field, ref Bar bar, BarsLayout barsLayout)
         {
             List<Cell> aligned = start.AlignedNeighbours(start.CoordinateSystem.Y, field);
             aligned = aligned.FindAll(x => x.Use is UnoccupiedLandUse).ToList();
             int occupied = field.Cells.FindAll(x => x.Use is OccupiedLandUse).Count;
             foreach (var f in aligned)
             {
-                if (bar.Cells.Count < parameters.MaximumUnits)
+                if (bar.Cells.Count < barsLayout.MaximumUnits)
                 {
                     bar.Cells.Add(f.BHoM_Guid);
                     f.Use = new OccupiedLandUse();
-                    GrowBar(f, field, ref bar, parameters);
+                    GrowBar(f, field, ref bar, barsLayout);
                 }
             } 
             

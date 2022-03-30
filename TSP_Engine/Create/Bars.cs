@@ -53,7 +53,7 @@ namespace BH.Engine.TSP
             {
                 int occupied = fieldCopy.Cells.FindAll(x => x.Use is OccupiedLandUse).Count;
                 int open = fieldCopy.Cells.FindAll(x => x.Use is OpenLandUse).Count;
-                Bar bar = Create.Bar(ref fieldCopy, parameters);
+                Bar bar = Create.Bar(ref fieldCopy, layout);
                 if (bar.Cells.Count == 0)
                     fails++;
                 else

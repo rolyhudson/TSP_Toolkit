@@ -12,7 +12,7 @@ namespace BH.Engine.TSP
     {
         public static bool IsValid(this Development development)
         {
-            //is the communal inside the boundary
+            //is the facilities inside the boundary
             //if (development.Boundary.ICurveIntersections(development.FacilitiesBlock.Boundary).Count > 0)
             //    return false;
             foreach (Guid guid in development.Bars.SelectMany(x => x.Cells))
@@ -27,7 +27,7 @@ namespace BH.Engine.TSP
 
         public static bool IsValid(this FacilitiesBlock facilitiesBlock, Polyline boundary)
         {
-            //is the communal inside the boundary
+            //is the facilities inside the boundary
             if (boundary.IsContaining(facilitiesBlock.Boundary))
                 return true;
 

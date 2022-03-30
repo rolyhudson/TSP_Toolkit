@@ -31,11 +31,10 @@ namespace BH.Engine.TSP
                 option.Field = Modify.ILevels(option.Field, parametersClone.PrototypeUnit, parametersClone.VerticalParameters);
                 option.Bars = Massing(option.Bars, option.Field, parametersClone.PrototypeUnit);
                 option.Boundary = siteLandUse.Boundary;
-                FacilitiesLandUse communalLand = (FacilitiesLandUse)parametersClone.PlanParameters.LandUses.Find(x => x is FacilitiesLandUse);
-                option.FacilitiesBlock = Create.FacilitiesBlock(option.Field, option.Bars, parametersClone.PrototypeUnit, parametersClone.FacilitiesParameters, communalLand);
+                FacilitiesLandUse facilitiesLand = (FacilitiesLandUse)parametersClone.PlanParameters.LandUses.Find(x => x is FacilitiesLandUse);
+                option.FacilitiesBlock = Create.FacilitiesBlock(option.Field, option.Bars, parametersClone.PrototypeUnit, parametersClone.FacilitiesParameters, facilitiesLand, parameters.VerticalParameters.MaximumLevel);
 
                 
-
                 if (option.IsValid())
                 {
                     int score = option.Bars.SelectMany(x => x.Units).Count();
